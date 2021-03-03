@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Default</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" th:fragment="header">
+            <a class="navbar-brand" href="/">VUE Reader Simulator</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/dashboard">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" th:if="${currentUser == null}"><a class="nav-link" th:href="@{/login}">Log in</a></li>
+                    <li class="nav-item" th:if="${currentUser}">
+                        <a class="nav-link" th:text="${currentUser.fullName}"></a>
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" value="Sign Out"/>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div layout:fragment="content"></div>
+        </div>
+        <!-- /.container -->
+
+       
+    </body>
+</html>

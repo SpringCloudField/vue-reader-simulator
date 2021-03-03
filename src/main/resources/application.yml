@@ -1,0 +1,8 @@
+server:
+   port: 8085
+spring:
+   data:
+      mongodb:
+         database: vue-simulator-db
+         host: localhost
+         port: 27017

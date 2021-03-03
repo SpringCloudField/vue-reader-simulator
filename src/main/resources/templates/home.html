@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Spring Security Example</title>
+        <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
+    	<link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
+    </head>
+    <body>
+        <div class="container" layout:fragment="content">
+            <h1>Welcome!</h1>
+
+        <p>Click <a th:href="@{/login}">here</a> to see a greeting.</p>
+        </div>
+    </body>
+</html>

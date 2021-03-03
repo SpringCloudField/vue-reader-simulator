@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Dashboard</title>
+        <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
+    	<link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
+    </head>
+    <body>
+    	<div th:replace="fragments/header :: header"></div>
+        <div class="container" layout:fragment="content">
+            <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+            <h2>This is your Simulator Dashboard</h2>
+            <p><a th:href="@{/simulator}">Configure simulator</a></p>
+        </div>
+        <div th:replace="fragments/footer :: footer"></div>
+    </body>
+</html>
