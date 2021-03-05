@@ -11,9 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-
 import net.opentrends.vue.simulator.model.User;
-import net.opentrends.vue.simulator.service.impl.CustomUserDetailsService;
+import net.opentrends.vue.simulator.service.CustomUserDetailsService;
 
 @Controller
 public class LoginController {

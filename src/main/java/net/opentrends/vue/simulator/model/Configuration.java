@@ -1,5 +1,8 @@
 package net.opentrends.vue.simulator.model;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,25 +13,40 @@ public class Configuration {
 	private String id;
 
 	// Config
+	@NotNull
+	@NotEmpty
 	private String serialNumber;
+	@NotNull
+	@NotEmpty
 	private String ethernetIp;
 	
 	// Status
+	@NotNull
+	@NotEmpty
 	private Boolean busyState;
+	@NotNull
+	@NotEmpty
 	private Integer cassetteIn;
+	@NotNull
+	@NotEmpty
 	private Double cassetteTime;
+	@NotNull
+	@NotEmpty
 	private String settingsVersion;
+	@NotNull
+	@NotEmpty
 	private String releaseVersion;
 	
 	// Scan
-	private String cassetteType; // TODO: id?
-	private String cassetteTypeId; // TODO: id?
-	
+	@NotNull
+	@NotEmpty
+	private String cassetteTypeId;
+		
 	private Boolean timed;
 	private Boolean quick;
 	private Integer cassetteErrorCode;
 	private Integer processId;
-	private Integer previousProcessId;	
+	private Integer previousProcessId;
 	private ScanSingle scanSingle;
 	private ScanMultiple scanMultiple;
 	private ScanDouble scanDouble;
@@ -80,12 +98,6 @@ public class Configuration {
 	}
 	public void setReleaseVersion(String releaseVersion) {
 		this.releaseVersion = releaseVersion;
-	}
-	public String getCassetteType() {
-		return cassetteType;
-	}
-	public void setCassetteType(String cassetteType) {
-		this.cassetteType = cassetteType;
 	}
 	public Boolean getTimed() {
 		return timed;

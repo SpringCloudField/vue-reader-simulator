@@ -1,5 +1,5 @@
 package net.opentrends.vue.simulator.dto;
 
-public class ResultResponseTO {
+public class StatusResponseTO {
 
 }

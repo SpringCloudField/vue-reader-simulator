@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Saved</title>
+        <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
+    	<link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
+    </head>
+    <body>
+    	<div th:replace="fragments/header :: header"></div>
+        <div class="container" layout:fragment="content">        	
+            <h2><img class="mb-4" th:src="@{/images/green-check-mark.png}" alt="" width="80" height="70" />VUE Reader Simulator ready to be used!</h2>
+            <p><a th:href="@{/dashboard}">Back to dashboard</a></p>
+        </div>
+        <div th:replace="fragments/footer :: footer"></div>
+    </body>
+</html>

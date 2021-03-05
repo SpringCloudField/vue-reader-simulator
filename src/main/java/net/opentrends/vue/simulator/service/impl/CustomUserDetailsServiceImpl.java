@@ -19,9 +19,10 @@ import net.opentrends.vue.simulator.model.Role;
 import net.opentrends.vue.simulator.model.User;
 import net.opentrends.vue.simulator.repository.RoleRepository;
 import net.opentrends.vue.simulator.repository.UserRepository;
+import net.opentrends.vue.simulator.service.CustomUserDetailsService;
 
 @Service
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsServiceImpl implements UserDetailsService, CustomUserDetailsService {
 
 	@Autowired
 	private UserRepository userRepository;

@@ -4,6 +4,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import net.opentrends.vue.simulator.model.Configuration;
 
-public interface ConfigurationRespository extends MongoRepository<Configuration, String> {
+public interface ConfigurationRepository extends MongoRepository<Configuration, String> {
 
 }

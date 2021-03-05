@@ -10,10 +10,12 @@
         <div class="container" layout:fragment="content">
             <form class="form-signin" th:action="@{/login}" method="post">
                 <img class="mb-4" th:src="@{/images/ot2.png}" alt="" width="250" height="75" />
+                <h1 class="h3 mb-3 font-weight-bold">VUE Reader Simulator</h1>
                 <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
                 <div th:if="${param.error}">
                     Invalid email and password.
                 </div>
+                <p th:text="${successMessage}"></p>
                 <div th:if="${param.logout}">
                     You have been logged out.
                 </div>

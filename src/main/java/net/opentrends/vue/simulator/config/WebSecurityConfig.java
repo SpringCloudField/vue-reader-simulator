@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import net.opentrends.vue.simulator.service.impl.CustomUserDetailsService;
+import net.opentrends.vue.simulator.service.impl.CustomUserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Bean
 	public UserDetailsService mongoUserDetails() {
-	    return new CustomUserDetailsService();
+	    return new CustomUserDetailsServiceImpl();
 	}
 	
 	@Override
@@ -41,7 +41,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	    http.authorizeRequests()
             .antMatchers("/").permitAll()
             .antMatchers("/login").permitAll()
-            .antMatchers("/signup").permitAll()
             .antMatchers("/signup").permitAll()
             .antMatchers("/dashboard/**").hasAuthority("ADMIN")
             .antMatchers("/simulator/**").hasAuthority("ADMIN")

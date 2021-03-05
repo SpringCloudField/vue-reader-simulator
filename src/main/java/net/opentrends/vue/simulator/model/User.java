@@ -23,6 +23,15 @@ public class User {
 	@DBRef
 	private Set<Role> roles;
 	
+	@DBRef
+	private Set<Configuration> configs;
+	
+	public Set<Configuration> getConfigs() {
+		return configs;
+	}
+	public void setConfigs(Set<Configuration> configs) {
+		this.configs = configs;
+	}
 	public Set<Role> getRoles() {
 		return roles;
 	}
