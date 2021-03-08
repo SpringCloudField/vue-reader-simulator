@@ -3,6 +3,14 @@ function showSameCassette(chBox) {
 	div.style.display = chBox.checked ? "block" : "none";
 }
 
+function toggleProcessId(id) {
+    if (id == "Quick") {
+    	document.getElementById("processIdDiv").style.display = "none";
+    } else if (id == "Timed") {
+    	document.getElementById("processIdDiv").style.display = "block";
+    }
+}
+
 
 // Self-executing function
 (function() {

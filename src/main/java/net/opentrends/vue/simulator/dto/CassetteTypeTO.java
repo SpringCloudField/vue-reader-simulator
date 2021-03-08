@@ -1,13 +1,8 @@
-package net.opentrends.vue.simulator.model;
+package net.opentrends.vue.simulator.dto;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
-@Document(collection = "cassetteType")
-public class CassetteType {
-
-	@Id
-	private String id;
+public class CassetteTypeTO {
+	
+	private String id;	
 	private String type;	
 	private Integer code;
 
@@ -34,4 +29,5 @@ public class CassetteType {
 	public void setCode(Integer code) {
 		this.code = code;
 	}
+
 }

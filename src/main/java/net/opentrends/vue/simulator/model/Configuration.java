@@ -11,6 +11,8 @@ public class Configuration {
 
 	@Id
 	private String id;
+	
+	private String userId;
 
 	// Config
 	@NotNull
@@ -40,10 +42,10 @@ public class Configuration {
 	// Scan
 	@NotNull
 	@NotEmpty
-	private String cassetteTypeId;
-		
-	private Boolean timed;
-	private Boolean quick;
+	private String cassetteTypeId;		
+	@NotNull
+	@NotEmpty
+	private String testType;
 	private Integer cassetteErrorCode;
 	private Integer processId;
 	private Integer previousProcessId;
@@ -99,18 +101,6 @@ public class Configuration {
 	public void setReleaseVersion(String releaseVersion) {
 		this.releaseVersion = releaseVersion;
 	}
-	public Boolean getTimed() {
-		return timed;
-	}
-	public void setTimed(Boolean timed) {
-		this.timed = timed;
-	}
-	public Boolean getQuick() {
-		return quick;
-	}
-	public void setQuick(Boolean quick) {
-		this.quick = quick;
-	}
 	public Integer getCassetteErrorCode() {
 		return cassetteErrorCode;
 	}
@@ -152,6 +142,18 @@ public class Configuration {
 	}
 	public void setCassetteTypeId(String cassetteTypeId) {
 		this.cassetteTypeId = cassetteTypeId;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getTestType() {
+		return testType;
+	}
+	public void setTestType(String testType) {
+		this.testType = testType;
 	}
 
 }

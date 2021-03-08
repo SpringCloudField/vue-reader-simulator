@@ -7,10 +7,15 @@
     </head>
     <body>
     	<div th:replace="fragments/header :: header"></div>
-        <div class="container" layout:fragment="content">
+        <div class="container" >
             <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
             <h2>This is your Simulator Dashboard</h2>
-            <p><a th:href="@{/simulator}">Configure simulator</a></p>
+            <p th:if="${configs == null}"><a th:href="@{/simulator}">Add new configuration</a></p>
+            <p th:if="${configs}">Your configurations: </p>
+            <div th:each="config : ${configs}" th:attr="data-value=${config.id}">
+            	<img th:src="@{/images/vue.png}" alt="" width="250" height="200" />
+			    <a th:href="@{/simulator/} + ${config.id}" th:text="${config.serialNumber}"></a>
+			</div>            
         </div>
         <div th:replace="fragments/footer :: footer"></div>
     </body>

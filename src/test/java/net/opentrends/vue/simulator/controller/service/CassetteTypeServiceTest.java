@@ -10,8 +10,10 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.modelmapper.ModelMapper;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import net.opentrends.vue.simulator.dto.CassetteTypeTO;
 import net.opentrends.vue.simulator.model.CassetteType;
 import net.opentrends.vue.simulator.repository.CassetteTypeRepository;
 import net.opentrends.vue.simulator.service.impl.CassetteTypeServiceImpl;
@@ -23,7 +25,8 @@ public class CassetteTypeServiceTest {
 	
 	@Mock
 	private CassetteTypeRepository cassetteTypeRepository;
-	
+	@Mock
+	private ModelMapper mapper;
 	@InjectMocks
 	private CassetteTypeServiceImpl cassetteTypeService;
 	
@@ -32,8 +35,8 @@ public class CassetteTypeServiceTest {
 	public void test001_retrieveCassetteTypeList() {
 		final List<CassetteType> cassetteList = createCassetteTypeList();		
 		when(cassetteTypeRepository.findByOrderByCodeAsc()).thenReturn(cassetteList);		
-		List<CassetteType> list = cassetteTypeService.getAllCassetteType();
-		assertEquals(2, list.size());		
+		List<CassetteTypeTO> dtoList = cassetteTypeService.getAllCassetteType();
+		assertEquals(2, dtoList.size());		
 	}
 
 	private List<CassetteType> createCassetteTypeList() {

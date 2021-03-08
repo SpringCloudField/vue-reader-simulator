@@ -3,8 +3,6 @@ package net.opentrends.vue.simulator.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,21 +49,11 @@ public class LoginController {
 	        modelAndView.addObject("successMessage", "User has been registered successfully");
 	        modelAndView.addObject("user", new User());
 	        modelAndView.setViewName("login");
-
 	    }
 	    return modelAndView;
 	}
 	
-	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
-	public ModelAndView dashboard() {
-	    ModelAndView modelAndView = new ModelAndView();
-	    Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	    User user = userService.findUserByEmail(auth.getName());
-	    modelAndView.addObject("currentUser", user);
-	    modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
-	    modelAndView.setViewName("dashboard");
-	    return modelAndView;
-	}
+	
 	
 	@RequestMapping(value = {"/","/home"}, method = RequestMethod.GET)
 	public ModelAndView home() {
