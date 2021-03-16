@@ -4,12 +4,13 @@
         <title>Simulator config</title>
         <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
     	<link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
+    	<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
     	<script type="text/javascript" th:src="@{/js/main.js}"></script>
     </head>
     <body>
     	<div th:replace="fragments/header :: header"></div>
         <div class="container simulator-form" layout:fragment="content">            
-            <form method="post" class="needs-validation" th:action="@{/saveConfig}" th:object="${config}" novalidate>
+            <form method="post" id="config-form" class="needs-validation" th:object="${config}" novalidate>
             
             	<input type="hidden" th:field="*{id}" id="configId">
             	<h3 th:inline="text">Configuration</h3>
@@ -56,7 +57,7 @@
              	<div class="form-row">
 			        <div class="col-md-3 form-group">
 			            <label>cassette_type</label>
-			            <select class="form-control" th:field="*{cassetteTypeId}" required>
+			            <select class="form-control" th:field="*{cassetteTypeId}" onchange="selectedCassetteType(this.value)" required>
 					    	<option value="0">Select cassette type</option>
 						    <option th:each="cassetteType:${cassetteTypes}"
 			                    th:value="${cassetteType.code}"
@@ -89,41 +90,43 @@
 			        </div>
 			        <div class="col-md-3 form-group">
 			            <label>test_line_value</label>
-			            <input type="text" class="form-control" th:field="*{scanSingle.testLineValue}" required >
+			            <input type="text" class="form-control" th:field="*{scanSingle.testLineValue}" required>
 			        </div>
 			    </div>
 			    <div id="processIdDiv" style="display:none;">
 				    <div class="form-row">				       
 			            <div class="col-md-3 form-group">
 				            <label>process_id</label>
-				            <input type="text" class="form-control" th:field="*{processId}" required>
+				            <input type="text" class="form-control" th:field="*{processId}" id="processIdInput">
 				        </div>
 				        <div class="col-md-3 form-group">
 				            <label>previous_process_id</label>
-				            <input type="text" class="form-control" th:field="*{previousProcessId}" required>
+				            <input type="text" class="form-control" th:field="*{previousProcessId}" id="prevousProcessIdInput">
+				        </div>
+				    </div>
+			    </div>
+			    
+			    <div id="cplScanDiv" style="display:none;">
+				    <div class="form-row">				       
+			            <div class="col-md-3 form-group">
+				            <label>lot_number</label>
+				            <input type="text" class="form-control" th:field="*{scanSingle.lotNumber}" id="lotNumberInput">
+				        </div>
+				        <div class="col-md-3 form-group">
+				            <label>scaled_result</label>
+				            <input type="text" class="form-control" th:field="*{scanSingle.scaledResult}" id="scaledResult">
 				        </div>
 				    </div>
 			    </div>
 			    
 			    <div class="form-row">				       
 		            <div class="col-md-3 form-group">
-			            <label>lot_number</label>
-			            <input type="text" class="form-control" th:field="*{scanSingle.lotNumber}" required>
-			        </div>
-			        <div class="col-md-3 form-group">
-			            <label>scaled_result</label>
-			            <input type="text" class="form-control" th:field="*{scanSingle.scaledResult}" required>
-			        </div>
-			    </div>
-			    
-			    <div class="form-row">				       
-		            <div class="col-md-3 form-group">
 			            <label>cassette_error_code</label>
-			            <input type="text" class="form-control" th:field="*{cassetteErrorCode}" required>
+			            <input type="text" class="form-control" th:field="*{cassetteErrorCode}" >
 			        </div>
 			        <div class="col-md-3 form-group">
 			            <label>test_error_code</label>
-			            <input type="text" class="form-control" th:field="*{scanSingle.testErrorCode}" required>
+			            <input type="text" class="form-control" th:field="*{scanSingle.testErrorCode}" >
 			        </div>
 			    </div>
 			    

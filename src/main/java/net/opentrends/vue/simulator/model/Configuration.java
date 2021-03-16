@@ -42,7 +42,7 @@ public class Configuration {
 	// Scan
 	@NotNull
 	@NotEmpty
-	private String cassetteTypeId;		
+	private Integer cassetteTypeId;		
 	@NotNull
 	@NotEmpty
 	private String testType;
@@ -137,10 +137,10 @@ public class Configuration {
 	public void setScanDouble(ScanDouble scanDouble) {
 		this.scanDouble = scanDouble;
 	}
-	public String getCassetteTypeId() {
+	public Integer getCassetteTypeId() {
 		return cassetteTypeId;
 	}
-	public void setCassetteTypeId(String cassetteTypeId) {
+	public void setCassetteTypeId(Integer cassetteTypeId) {
 		this.cassetteTypeId = cassetteTypeId;
 	}
 	public String getUserId() {

@@ -57,6 +57,10 @@ public class ConfiguratorController {
 	
 	@RequestMapping(value = "/saveConfig", method = RequestMethod.POST)
 	public ModelAndView saveConfig(ConfigurationTO config, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			// Validation in backend
+	    }
+		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    User user = userService.findUserByEmail(auth.getName());
 		configurationService.saveConfig(config, user.getId());

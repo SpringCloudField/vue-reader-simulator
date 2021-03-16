@@ -2,17 +2,8 @@ package net.opentrends.vue.simulator.dto;
 
 public class CassetteTypeTO {
 	
-	private String id;	
 	private String type;	
 	private Integer code;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getType() {
 		return type;
