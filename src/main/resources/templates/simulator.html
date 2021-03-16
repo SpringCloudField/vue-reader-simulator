@@ -2,61 +2,66 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Simulator config</title>
+        <meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
         <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
     	<link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
+    	
     	<script type="text/javascript" th:src="@{/js/main.js}"></script>
     </head>
     <body>
     	<div th:replace="fragments/header :: header"></div>
-        <div class="container simulator-form" layout:fragment="content">            
-            <form method="post" class="needs-validation" th:action="@{/saveConfig}" th:object="${config}" novalidate>
-            
+        <div class="container simulator-form mt-6" layout:fragment="content">            
+            <form method="post" class="needs-validation p-5" th:action="@{/saveConfig}" th:object="${config}" novalidate>
+            	<div class="jumbotron p-4 shadow">
             	<input type="hidden" th:field="*{id}" id="configId">
-            	<h3 th:inline="text">Configuration</h3>
-            	<hr class="solid">
+            	<h4 th:inline="text">Configuration</h4>
+<!--             	<hr class="solid"> -->
              	<div class="form-row">
 			        <div class="col-md-3 form-group">
 			            <label>serial_number</label>
-			            <input type="text" class="form-control" th:field="*{serialNumber}" required>
+			            <input type="text" class="form-control form-control-sm" th:field="*{serialNumber}" required>
 			        </div>
 			        <div class="col-md-3 form-group">
 			            <label>ethernet_ip</label>
-			            <input type="text" class="form-control" th:field="*{ethernetIp}" required>
+			            <input type="text" class="form-control form-control-sm" th:field="*{ethernetIp}" required>
 			            <div class="invalid-feedback">Required field.</div>
 			        </div>
 			    </div>
-			    
-			    <h3 th:inline="text">Status</h3>
-			    <hr class="solid">
+			    </div>
+			    <div class="jumbotron p-4 shadow">
+			    <h4 th:inline="text">Status</h4>
+<!-- 			    <hr class="solid"> -->
              	<div class="form-row">
-			        <div class="col-md-3 form-group">
+			        <div class="col-md-1 form-group">
 			            <label>busy_state</label>
-			            <input type="checkbox" class="form-control" th:field="*{busyState}" >
+			            <input type="checkbox" class="form-check" th:field="*{busyState}" >
 			        </div>
-			        <div class="col-md-3 form-group">
+			        <div class="col-md-2 form-group">
 			            <label>cassette_in</label>
-			            <input type="text" class="form-control" th:field="*{cassetteIn}" required>
+			            <input type="text" class="form-control form-control-sm" th:field="*{cassetteIn}" required>
 			        </div>
 			        <div class="col-md-3 form-group">
 			            <label>settings_version</label>
-			            <input type="text" class="form-control" th:field="*{settingsVersion}" required>
+			            <input type="text" class="form-control form-control-sm" th:field="*{settingsVersion}" required>
 			        </div>
 			        <div class="col-md-3 form-group">
 			            <label>realease_version</label>
-			            <input type="text" class="form-control" th:field="*{releaseVersion}" required>
+			            <input type="text" class="form-control form-control-sm" th:field="*{releaseVersion}" required>
 			        </div>
-			        <div class="col-md-3 form-group">
+			        <div class="col-md-2 form-group">
 			            <label>cassette_time</label>
-			            <input type="text" class="form-control" th:field="*{cassetteTime}" required>
+			            <input type="text" class="form-control form-control-sm" th:field="*{cassetteTime}" required>
 			        </div>
 			    </div>
-			    
-			    <h3 th:inline="text">Scan</h3>
-			    <hr class="solid">
+			    </div>
+			    <div class="jumbotron p-4 shadow">
+			    <h4 th:inline="text">Scan</h4>
+<!-- 			    <hr class="solid"> -->
              	<div class="form-row">
 			        <div class="col-md-3 form-group">
 			            <label>cassette_type</label>
-			            <select class="form-control" th:field="*{cassetteTypeId}" required>
+			            <select class="custom-select" th:field="*{cassetteTypeId}" required>
 					    	<option value="0">Select cassette type</option>
 						    <option th:each="cassetteType:${cassetteTypes}"
 			                    th:value="${cassetteType.code}"
@@ -66,7 +71,7 @@
 			        </div>
 			        <div class="col-md-3 form-group">
 			            <label>test_type</label>
-			            <select class="form-control" th:field="*{testType}" onchange="toggleProcessId(this.value)" required>
+			            <select class="custom-select" th:field="*{testType}" onchange="toggleProcessId(this.value)" required>
 			            	<option value="0">Select test type</option>
 			            	<option value="Quick">Quick</option>
 			            	<option value="Timed">Timed</option>
@@ -75,32 +80,32 @@
 			    </div>
 			    
 			    <div class="form-row">				       
-		            <div class="col-md-3 form-group">
+		            <div class="col-md-1 form-group">
 			            <label>positive</label>
-			            <input type="checkbox" class="form-control" th:field="*{scanSingle.positive}" >
+			            <input type="checkbox" class="form-check" th:field="*{scanSingle.positive}" >
 			        </div>
-			        <div class="col-md-3 form-group">
+			        <div class="col-md-2 form-group">
 			            <label>control</label>
-			            <input type="text" class="form-control" th:field="*{scanSingle.control}" required>
+			            <input type="text" class="form-control form-control-sm" th:field="*{scanSingle.control}" required>
 			        </div>
 			        <div class="col-md-3 form-group">
 			            <label>noise</label>
-			            <input type="text" class="form-control" th:field="*{scanSingle.noise}" required>
+			            <input type="text" class="form-control form-control-sm" th:field="*{scanSingle.noise}" required>
 			        </div>
 			        <div class="col-md-3 form-group">
 			            <label>test_line_value</label>
-			            <input type="text" class="form-control" th:field="*{scanSingle.testLineValue}" required >
+			            <input type="text" class="form-control form-control-sm" th:field="*{scanSingle.testLineValue}" required >
 			        </div>
 			    </div>
 			    <div id="processIdDiv" style="display:none;">
 				    <div class="form-row">				       
 			            <div class="col-md-3 form-group">
 				            <label>process_id</label>
-				            <input type="text" class="form-control" th:field="*{processId}" required>
+				            <input type="text" class="form-control form-control-sm" th:field="*{processId}" required>
 				        </div>
 				        <div class="col-md-3 form-group">
 				            <label>previous_process_id</label>
-				            <input type="text" class="form-control" th:field="*{previousProcessId}" required>
+				            <input type="text" class="form-control form-control-sm" th:field="*{previousProcessId}" required>
 				        </div>
 				    </div>
 			    </div>
@@ -108,87 +113,87 @@
 			    <div class="form-row">				       
 		            <div class="col-md-3 form-group">
 			            <label>lot_number</label>
-			            <input type="text" class="form-control" th:field="*{scanSingle.lotNumber}" required>
+			            <input type="text" class="form-control form-control-sm" th:field="*{scanSingle.lotNumber}" required>
 			        </div>
 			        <div class="col-md-3 form-group">
 			            <label>scaled_result</label>
-			            <input type="text" class="form-control" th:field="*{scanSingle.scaledResult}" required>
+			            <input type="text" class="form-control form-control-sm" th:field="*{scanSingle.scaledResult}" required>
 			        </div>
 			    </div>
 			    
 			    <div class="form-row">				       
 		            <div class="col-md-3 form-group">
 			            <label>cassette_error_code</label>
-			            <input type="text" class="form-control" th:field="*{cassetteErrorCode}" required>
+			            <input type="text" class="form-control form-control-sm" th:field="*{cassetteErrorCode}" required>
 			        </div>
 			        <div class="col-md-3 form-group">
 			            <label>test_error_code</label>
-			            <input type="text" class="form-control" th:field="*{scanSingle.testErrorCode}" required>
+			            <input type="text" class="form-control form-control-sm" th:field="*{scanSingle.testErrorCode}" required>
 			        </div>
 			    </div>
 			    
 			    <div class="form-row">				       
 		            <div class="col-md-3 form-group">
 			            <label>Same cassette process</label>
-			            <input type="checkbox" class="form-control" id="sameCassetteCheckbox" onclick="showSameCassette(this)" >
+			            <input type="checkbox" class="form-check" id="sameCassetteCheckbox" onclick="showSameCassette(this)" >
 			        </div>
 			    </div>
 			    
 			    <div id="sameCassetteDiv" style="display:none">
 				    <div class="form-row">				       
-			            <div class="col-md-3 form-group">
+			            <div class="col-md-1 form-group">
 				            <label>positive</label>
-				            <input type="checkbox" class="form-control" >
+				            <input type="checkbox" class="form-check" >
 				        </div>
-				        <div class="col-md-3 form-group">
+				        <div class="col-md-2 form-group">
 				            <label>control</label>
-				            <input type="text" class="form-control" >
+				            <input type="text" class="form-control form-control-sm" >
 				        </div>
 				        <div class="col-md-3 form-group">
 				            <label>noise</label>
-				            <input type="text" class="form-control" >
+				            <input type="text" class="form-control form-control-sm" >
 				        </div>
 				        <div class="col-md-3 form-group">
 				            <label>test_line_value</label>
-				            <input type="text" class="form-control" >
+				            <input type="text" class="form-control form-control-sm" >
 				        </div>
 				    </div>
 				    
 				    <div class="form-row">				       
 			            <div class="col-md-3 form-group">
 				            <label>process_id</label>
-				            <input type="text" class="form-control" >
+				            <input type="text" class="form-control form-control-sm" >
 				        </div>
 				        <div class="col-md-3 form-group">
 				            <label>previous_process_id</label>
-				            <input type="text" class="form-control" >
+				            <input type="text" class="form-control form-control-sm" >
 				        </div>
 				    </div>
 				    
 				    <div class="form-row">				       
 			            <div class="col-md-3 form-group">
 				            <label>lot_number</label>
-				            <input type="text" class="form-control" >
+				            <input type="text" class="form-control form-control-sm" >
 				        </div>
 				        <div class="col-md-3 form-group">
 				            <label>scaled_result</label>
-				            <input type="text" class="form-control" >
+				            <input type="text" class="form-control form-control-sm" >
 				        </div>
 				    </div>
 				    
 				    <div class="form-row">				       
 			            <div class="col-md-3 form-group">
 				            <label>cassette_error_code</label>
-				            <input type="text" class="form-control" >
+				            <input type="text" class="form-control form-control-sm" >
 				        </div>
 				        <div class="col-md-3 form-group">
 				            <label>test_error_code</label>
-				            <input type="text" class="form-control" >
+				            <input type="text" class="form-control form-control-sm" >
 				        </div>
 				    </div>			    
 			    </div>
 			     
-			     
+			     </div>
                 <button class="btn btn-primary" type="submit">Save</button>
                 <a class="btn btn-warning" href="/dashboard">Back</a>
             </form>

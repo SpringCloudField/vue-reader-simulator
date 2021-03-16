@@ -2,11 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Spring Security Example</title>
+        <meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
         <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
     	<link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
     </head>
     <body>
-        <div class="container" layout:fragment="content">
+        <div class="container home" layout:fragment="content">
             <h1>Welcome!</h1>
 
         <p>Click <a th:href="@{/login}">here</a> to see a greeting.</p>

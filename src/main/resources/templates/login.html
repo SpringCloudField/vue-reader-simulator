@@ -1,34 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <title>Login</title>
-        <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
-    	<link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
-    </head>
-    <body class="text-center">    
-        <div class="container" layout:fragment="content">
-            <form class="form-signin" th:action="@{/login}" method="post">
-                <img class="mb-4" th:src="@{/images/ot2.png}" alt="" width="250" height="75" />
-                <h1 class="h3 mb-3 font-weight-bold">VUE Reader Simulator</h1>
-                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-                <div th:if="${param.error}">
-                    Invalid email and password.
-                </div>
-                <p th:text="${successMessage}"></p>
-                <div th:if="${param.logout}">
-                    You have been logged out.
-                </div>
-                <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required />
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required />
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-            </form>
-            <form class="form-signin" th:action="@{/signup}" method="get">
-                <button class="btn btn-md btn-success btn-block" type="Submit">Signup Here</button>
-            </form>
-        </div>
-        <div th:replace="fragments/footer :: footer"></div>        
-    </body>
+<head>
+<title>Login</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+<link th:rel="stylesheet"
+	th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
+<link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
+</head>
+<body class="text-center">
+
+	<div class="container login-form">
+	
+				<img class="m-5" th:src="@{/images/ot2.png}" alt="" width="250"
+				height="75" />
+			<h1 class="h3 mb-3 font-weight-bold">VUE Reader Simulator</h1>
+			<h2 class="h3 mb-3 font-weight-normal">Please sign in</h2>
+			
+			<div th:if="${param.error}" class="alert-danger">Invalid email and password.</div>
+			<p th:text="${successMessage}"></p>
+			<div th:if="${param.logout}" class="alert-warning">You have been logged out.</div>
+
+		<form class="form-signin" th:action="@{/login}" method="post">
+
+			
+			
+			<label for="inputEmail" class="sr-only">Email address</label> 
+			<div class="input-group mb-2">
+			<div class = "input-group-prepend"><span class="input-group-text bg-white">User</span></div>
+			<input
+				type="email" name="email" id="inputEmail" class="form-control"
+				placeholder="Email" required /> 
+			</div>
+				
+			<label for="inputPassword" class="sr-only">Password</label>
+			<div class="input-group mb-2">
+			<div class = "input-group-prepend"><span class="input-group-text bg-white">Pass</span></div> 
+				<input 
+				type="password" name="password" id="inputPassword" class="form-control"
+				placeholder="Password" required />
+				</div> 
+			<button class="btn btn-lg btn-primary btn-block btn-sm mt-3" type="submit">Sign
+				in</button>
+		</form>
+		
+		<form class="form-signin" th:action="@{/signup}" method="get">
+			<button class="btn btn-md btn-success btn-block" type="Submit">Signup
+				Here</button>
+		</form>
+	</div>
+
+
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
 </html>
