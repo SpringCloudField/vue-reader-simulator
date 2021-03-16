@@ -2,12 +2,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Dashboard</title>
+        <meta charset="UTF-8">
+    	<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
         <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
     	<link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
     </head>
     <body>
     	<div th:replace="fragments/header :: header"></div>
-        <div class="container" >
+        <div class="container dashboard" >
             <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
             <h2>This is your Simulator Dashboard</h2>
             <p th:if="${configs == null}"><a th:href="@{/simulator}">Add new configuration</a></p>

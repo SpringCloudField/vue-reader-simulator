@@ -7,7 +7,7 @@
     	<link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
     </head>
     <body class="text-center">
-        <div class="container" layout:fragment="content">
+        <div class="container signup-form">
             <form class="form-signin" th:action="@{/signup}" method="post">
                 <img class="mb-4" th:src="@{/images/ot2.png}" alt="" width="250" height="75" />
                 <h1 class="h3 mb-3 font-weight-normal">Signup Here</h1>
@@ -18,15 +18,15 @@
                     You have been logged out.
                 </div>
                 <label for="inputUsername" class="sr-only">Username</label>
-                <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Username" required />
+                <input type="email" name="email" id="inputEmail" class="form-control mb-2" placeholder="Username" required />
                 <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required />
+                <input type="password" name="password" id="inputPassword" class="form-control mb-2" placeholder="Password" required />
                 <label for="inputFullname" class="sr-only">Full Name</label>
-                <input type="text" name="fullName" id="inputEmail" class="form-control" placeholder="Fullname" required />
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+                <input type="text" name="fullName" id="inputEmail" class="form-control mb-2" placeholder="Fullname" required />
+                <button class="btn btn-lg btn-primary btn-block m-1" type="submit">Sign Up</button>
             </form>
             <form class="form-signin" th:action="@{/login}" method="get">
-                <button class="btn btn-md btn-success btn-block" type="Submit">Sign In</button>
+                <button class="btn btn-md btn-success btn-block m-1" type="Submit">Sign In</button>
             </form>	        
         </div>        
         <div th:replace="fragments/footer :: footer"></div>
