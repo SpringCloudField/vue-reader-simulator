@@ -47,3 +47,20 @@ footer p {margin: 0;}
 .dashboard {
 	padding-top: 100px;
 }
+
+/**** By Default hidden Div's on simulator.html  *****/
+
+#processIdDiv,
+#cplScanDiv,
+#felvFivTestDiv,
+#flex4TestDiv,
+#sameCassetteOptionsDiv,
+#sameCassetteCheckboxDiv,
+#processIdDivSame,
+#cplSacanDivSame,
+#felvFivTestDivSame,
+#flex4TestDivSame {
+	display: none;
+}
+
+
