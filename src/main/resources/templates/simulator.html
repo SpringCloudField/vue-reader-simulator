@@ -10,7 +10,7 @@
 <link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
 <script type="text/javascript"
 	th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/main.js}"></script>
+
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
@@ -56,7 +56,7 @@
 							class="form-control form-control-sm" th:field="*{releaseVersion}"
 							required>
 					</div>
-					<div class="col-md-2 form-group">
+					<div class="col-md-3 form-group">
 						<label>cassette_time</label> <input type="text"
 							class="form-control form-control-sm" th:field="*{cassetteTime}"
 							required>
@@ -70,7 +70,7 @@
 						<label>cassette_type</label> <select class="custom-select"
 							th:field="*{cassetteTypeId}"
 							onchange="selectedCassetteType(this.value)" required>
-							<option value="0">Select cassette type</option>
+							<option value="" selected>Select cassette type</option>
 							<option th:each="cassetteType:${cassetteTypes}"
 								th:value="${cassetteType.code}" th:text="${cassetteType.type}">
 							</option>
@@ -80,7 +80,7 @@
 						<label>test_type</label> <select class="custom-select"
 							th:field="*{testType}" onchange="toggleProcessId(this.value)"
 							required>
-							<option value="0">Select test type</option>
+							<option value="" selected>Select test type</option>
 							<option value="Quick">Quick</option>
 							<option value="Timed">Timed</option>
 						</select>
@@ -104,12 +104,14 @@
 						<div class="col-md-3 form-group">
 							<label>lot_number</label> <input type="text"
 								class="form-control form-control-sm"
-								th:field="*{scanSingle.lotNumber}" id="lotNumberInput">
+								th:field="*{scanSingle.lotNumber}" 
+								id="lotNumberInput">
 						</div>
 						<div class="col-md-3 form-group">
 							<label>scaled_result</label> <input type="text"
 								class="form-control form-control-sm"
-								th:field="*{scanSingle.scaledResult}" id="scaledResultInput">
+								th:field="*{scanSingle.scaledResult}" 
+								id="scaledResultInput">
 						</div>
 					</div>
 				</div>
@@ -125,12 +127,11 @@
 						<div class="col-md-3 form-group">
 							<label>previous_process_id</label> <input type="text"
 								class="form-control form-control-sm"
-								th:field="*{previousProcessId}" id="previousProcessIdInput">
+								th:field="*{previousProcessId}" 
+								id="previousProcessIdInput">
 						</div>
 					</div>
 				</div>
-
-
 
 				<div id="sameCassetteCheckboxDiv">
 					<div class="col-md-3 pl-3 m-3">
@@ -150,9 +151,6 @@
 						</div>
 
 					</div>
-
-
-
 
 					<div id="processIdDivSame">
 						<div class="form-row">
@@ -198,5 +196,6 @@
 
 	</div>
 	<div th:replace="fragments/footer :: footer"></div>
+<script type="text/javascript" th:src="@{/js/main.js}"></script>
 </body>
 </html>

@@ -1,4 +1,6 @@
 
+
+
 function toggleProcessId(id) {
     if (id == "Quick") {
  		
@@ -32,20 +34,22 @@ function toggleProcessId(id) {
 }
 
 function showSameCassette(chBox) {	
-	sameCassetteOptionsDiv.style.display = chBox.checked ? "block" : "none";
-	showDivs ([
-		"processIdDivSame"
-	]);
+		sameCassetteOptionsDiv.style.display = chBox.checked ? "block" : "none";
+
+		showDivs ([
+			"processIdDivSame"
+		]);
 }
 
 
 function selectedCassetteType(codeCassetteType) {
-	
+//		let sameCassetteCheckboxChecked = document.getElementById ("sameCassetteCheckbox").checked;
+
 		switch (codeCassetteType){
-
-//------------Felv Fiv status ------------------	
-
-		case "2": //felVfiV status
+		
+//------------Felv Fiv status ------------------
+	
+		case "2": 
 		
 		hideDivs ([
 			"singleTestDiv", 
@@ -59,8 +63,13 @@ function selectedCassetteType(codeCassetteType) {
 		showDivs ([
 			"felvFivTestDiv",
 			"felvFivTestDivSame"
-		]);		
+		]);
 		
+		setRequiredInputFields ([
+			"felvControlInput",
+			"felvNoiseInput",
+			"felvTestLineValueInput"
+		])
 		break;
 		
 //------------cPL status ------------------		
@@ -88,7 +97,7 @@ function selectedCassetteType(codeCassetteType) {
     	
 //-------- Flex4 status ----------------------		
     	
-    	case "9": //Flex4 status
+    	case "9": 
     	
     	hideDivs ([
 	    	"singleTestDiv",
@@ -160,6 +169,8 @@ function hideDivs (hiddenDivs) {
 
 
 
+
+
 // Self-executing function
 (function() {
     'use strict';
@@ -189,7 +200,7 @@ $(document).ready(function () {
 
         fire_ajax_submit();
 
-    });
+    });    
 
 });
 

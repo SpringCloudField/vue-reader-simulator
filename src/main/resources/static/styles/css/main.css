@@ -10,7 +10,7 @@ body {
 	
 }
 
-.simulator-form, .login-form, .dashboard, .home, .signup-form {
+.simulator-form, .login-form, .dashboard, .home, .signup-form, .saveConfig {
 	flex-grow: 1;
 }
 .simulator-form label {
@@ -44,9 +44,10 @@ footer p {margin: 0;}
 /* 	overflow: auto; */
 }
 
-.dashboard {
+.dashboard, .saveConfig {
 	padding-top: 100px;
 }
+
 
 /**** By Default hidden Div's on simulator.html  *****/
 
