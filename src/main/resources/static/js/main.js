@@ -1,31 +1,174 @@
-function showSameCassette(chBox) {	
-	var div = document.getElementById("sameCassetteDiv");
-	div.style.display = chBox.checked ? "block" : "none";
-}
+
+
 
 function toggleProcessId(id) {
     if (id == "Quick") {
-    	document.getElementById("processIdDiv").style.display = "none";
-    	document.getElementById("processIdInput").required = false;
-    	document.getElementById("prevousProcessIdInput").required = false;
+ 		
+ 		sameCassetteCheckbox.checked = false;
+ 		   
+    	hideDivs([
+	    	"processIdDiv",
+	    	"sameCassetteCheckboxDiv",
+	    	"sameCassetteOptionsDiv"
+    	]);
+    	    	
+		setNotRequiredInputFields ([
+			"processIdInput",
+			"previousProcessIdInput",
+			"processIdInputSame",
+			"previousProcessIdInputSame"
+		]);
+     
     } else if (id == "Timed") {
-    	document.getElementById("processIdDiv").style.display = "block";
-    	document.getElementById("processIdInput").required = true;
-    	document.getElementById("prevousProcessIdInput").required = true;
+    
+    	showDivs ([
+	    	"processIdDiv",
+	    	"sameCassetteCheckboxDiv",
+    	])
+    	
+    	setRequiredInputFields ([
+	    	"processIdInput",
+	    	"previousProcessIdInput"
+    	])
     }
 }
 
-function selectedCassetteType(codeCassetteType) {
-    if (codeCassetteType == "8") {
-    	document.getElementById("cplScanDiv").style.display = "block";
-    	document.getElementById("lotNumberInput").required = true;
-    	document.getElementById("scaledResult").required = true;
-    } else {
-    	document.getElementById("cplScanDiv").style.display = "none";
-    	document.getElementById("lotNumberInput").required = false;
-    	document.getElementById("scaledResult").required = false;
-    }
+function showSameCassette(chBox) {	
+		sameCassetteOptionsDiv.style.display = chBox.checked ? "block" : "none";
+
+		showDivs ([
+			"processIdDivSame"
+		]);
 }
+
+
+function selectedCassetteType(codeCassetteType) {
+//		let sameCassetteCheckboxChecked = document.getElementById ("sameCassetteCheckbox").checked;
+
+		switch (codeCassetteType){
+		
+//------------Felv Fiv status ------------------
+	
+		case "2": 
+		
+		hideDivs ([
+			"singleTestDiv", 
+			"cplScanDiv", 
+			"flex4TestDiv", 
+			"singleTestDivSame", 
+			"cplScanDivSame", 
+			"flex4TestDivSame"
+		]);
+		
+		showDivs ([
+			"felvFivTestDiv",
+			"felvFivTestDivSame"
+		]);
+		
+		setRequiredInputFields ([
+			"felvControlInput",
+			"felvNoiseInput",
+			"felvTestLineValueInput"
+		])
+		break;
+		
+//------------cPL status ------------------		
+		
+		case "8":
+		hideDivs ([
+			"felvFivTestDiv",
+			"flex4TestDiv",
+			"felvFivTestDivSame",
+			"flex4TestDivSame"
+		])
+		
+		showDivs ([
+			"singleTestDiv",
+			"cplScanDiv",
+			"cplScanDivSame"
+		]);
+		
+ 		setRequiredInputFields ([
+	 		"lotNumberInput",
+	 		"scaledResultInput"
+ 		]);  
+ 		
+    	break;
+    	
+//-------- Flex4 status ----------------------		
+    	
+    	case "9": 
+    	
+    	hideDivs ([
+	    	"singleTestDiv",
+	    	"singleTestDivSame", 
+	    	"felvFivTestDiv",
+	    	"felvFivTestDivSame",
+	    	"cplScanDiv",
+	    	"cplScanDivSame"
+    	]);
+		
+		showDivs ([
+			"flex4TestDiv",
+			"flex4TestDivSame"
+		]);    
+		
+     	break;
+     	
+ //-------- Default status for all cassettes except cpL, Felv Fiv & Flex4 -------		
+     	
+     	default:
+     	
+     	showDivs ([
+	     	"singleTestDiv",
+	     	"singleTestDivSame"
+     	]);
+     	
+     	hideDivs ([
+	     	"felvFivTestDiv",
+	     	"felvFivTestDivSame",
+	     	"flex4TestDiv",
+	     	"flex4TestDivSame",
+	     	"cplScanDiv",
+	     	"cplScanDivSame"
+     	]);
+     	
+    	setNotRequiredInputFields ([
+	    	"lotNumberInput", 
+	    	"scaledResultInput"
+    	]);
+    	
+   		}
+}
+
+// ------ Status functions
+
+function setNotRequiredInputFields (notRequiredFields){
+		for (let elementInput of notRequiredFields){
+			document.getElementById(elementInput).removeAttribute ("required");
+		}
+}
+
+function setRequiredInputFields (requiredFields){
+		for (let elementInput of requiredFields) {
+			document.getElementById(elementInput).required = true;
+		}
+}
+
+function showDivs (visibleDivs){
+		for (let elementDiv	of visibleDivs){
+			document.getElementById(elementDiv).style.display="block";
+		}
+}
+
+function hideDivs (hiddenDivs) {
+		for (let elementDiv	of hiddenDivs){
+			document.getElementById(elementDiv).style.display="none";
+		}
+}
+
+
+
 
 
 // Self-executing function
@@ -57,7 +200,7 @@ $(document).ready(function () {
 
         fire_ajax_submit();
 
-    });
+    });    
 
 });
 
