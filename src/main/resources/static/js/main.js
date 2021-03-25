@@ -1,5 +1,5 @@
 
-
+//**** Simulator form control functions ****
 
 function toggleProcessId(id) {
     if (id == "Quick") {
@@ -12,12 +12,12 @@ function toggleProcessId(id) {
 	    	"sameCassetteOptionsDiv"
     	]);
     	    	
-		setNotRequiredInputFields ([
-			"processIdInput",
-			"previousProcessIdInput",
-			"processIdInputSame",
-			"previousProcessIdInputSame"
-		]);
+//		setNotRequiredInputFields ([
+//			"processIdInput",
+//			"previousProcessIdInput",
+//			"processIdInputSame",
+//			"previousProcessIdInputSame"
+//		]);
      
     } else if (id == "Timed") {
     
@@ -26,10 +26,10 @@ function toggleProcessId(id) {
 	    	"sameCassetteCheckboxDiv",
     	])
     	
-    	setRequiredInputFields ([
-	    	"processIdInput",
-	    	"previousProcessIdInput"
-    	])
+//    	setRequiredInputFields ([
+//	    	"processIdInput",
+//	    	"previousProcessIdInput"
+//    	])
     }
 }
 
@@ -43,8 +43,6 @@ function showSameCassette(chBox) {
 
 
 function selectedCassetteType(codeCassetteType) {
-//		let sameCassetteCheckboxChecked = document.getElementById ("sameCassetteCheckbox").checked;
-
 		switch (codeCassetteType){
 		
 //------------Felv Fiv status ------------------
@@ -65,16 +63,18 @@ function selectedCassetteType(codeCassetteType) {
 			"felvFivTestDivSame"
 		]);
 		
-		setRequiredInputFields ([
-			"felvControlInput",
-			"felvNoiseInput",
-			"felvTestLineValueInput"
-		])
+//		setRequiredInputFields ([
+//			"felvControlInput",
+//			"felvNoiseInput",
+//			"felvTestLineValueInput"
+//		])
+		
 		break;
 		
 //------------cPL status ------------------		
 		
 		case "8":
+		
 		hideDivs ([
 			"felvFivTestDiv",
 			"flex4TestDiv",
@@ -88,10 +88,10 @@ function selectedCassetteType(codeCassetteType) {
 			"cplScanDivSame"
 		]);
 		
- 		setRequiredInputFields ([
-	 		"lotNumberInput",
-	 		"scaledResultInput"
- 		]);  
+// 		setRequiredInputFields ([
+//	 		"lotNumberInput",
+//	 		"scaledResultInput"
+// 		]);  
  		
     	break;
     	
@@ -133,10 +133,10 @@ function selectedCassetteType(codeCassetteType) {
 	     	"cplScanDivSame"
      	]);
      	
-    	setNotRequiredInputFields ([
-	    	"lotNumberInput", 
-	    	"scaledResultInput"
-    	]);
+//    	setNotRequiredInputFields ([
+//	    	"lotNumberInput", 
+//	    	"scaledResultInput"
+//    	]);
     	
    		}
 }
@@ -157,19 +157,40 @@ function setRequiredInputFields (requiredFields){
 
 function showDivs (visibleDivs){
 		for (let elementDiv	of visibleDivs){
-			document.getElementById(elementDiv).style.display="block";
+			const toVisibleDiv=document.getElementById(elementDiv);
+			toVisibleDiv.style.display="block";
+			let inputNodes=toVisibleDiv.getElementsByTagName("input");
+			console.info ("------- DIV SHOW:" + toVisibleDiv.getAttribute("id") + " -------"); 
+			let requiredInputs=" --> ";
+			for (let node of inputNodes){
+				if (node.classList.contains("never-required") || node.getAttribute("type")=="checkbox" || node.getAttribute("type")=="hidden"){
+				console.info ("   NOT SET REQUIRED: " + node.getAttribute("id") + " --> " + node.getAttribute("type")+ " ----> "  + node.classList);
+				continue;}
+				node.required=true;
+				requiredInputs += " " + node.getAttribute("id"); 
+			}
+			console.info (" REQUIRED INPUTS: " + requiredInputs);
 		}
 }
 
 function hideDivs (hiddenDivs) {
 		for (let elementDiv	of hiddenDivs){
-			document.getElementById(elementDiv).style.display="none";
-		}
+			const toHiddenDiv=document.getElementById(elementDiv);
+			toHiddenDiv.style.display="none";
+			let inputNodes=toHiddenDiv.getElementsByTagName("input");
+			console.info ("------- DIV HIDE:" + toHiddenDiv.getAttribute("id") + " -------");
+			let removedRequiredValueInputs=" --> " 
+			for (let node of inputNodes){
+				if (node.getAttribute("type")=="checkbox" || node.getAttribute("type")=="hidden"){
+				console.info ("   NOT REMOVED REQUIRED/VALUE: " + node.getAttribute("id") + " --o " + node.getAttribute("type") + " ----o " + node.classList);
+				continue;}
+				node.removeAttribute("required");
+				node.setAttribute("value","");
+				removedRequiredValueInputs += " " + node.getAttribute("id");
+			}
+			console.info (" REMOVED REQUIRED & VALUE INPUTS: " + removedRequiredValueInputs);
+		}	
 }
-
-
-
-
 
 // Self-executing function
 (function() {
