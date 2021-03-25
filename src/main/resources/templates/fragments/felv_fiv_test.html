@@ -4,7 +4,6 @@
 <title>Single test</title>
 </head>
 <body>
-
 	<div id="felvFivTestDiv" th:fragment="felvFivTest">
 		<div class="form-row">
 			<div class="col-md-1 form-group">
@@ -13,27 +12,26 @@
 			</div>
 			<div class="col-md-2 form-group">
 				<label>test_error_code</label> <input type="text"
-					class="form-control form-control-sm"
-					th:field="*{scanSingle.testErrorCode}"
-					id="felvTestErrorCodelInput">
+					class="form-control form-control-sm never-required"
+					th:field="*{scanSingle.testErrorCode}">
 			</div>
 			<div class="col-md-3 form-group">
 				<label>control</label> <input type="text"
 					class="form-control form-control-sm"
 					th:field="*{scanSingle.control}" 
-					id="felvControlInput" required>
+					required>
 			</div>
 			<div class="col-md-3 form-group">
 				<label>noise</label> <input type="text"
 					class="form-control form-control-sm" 
 					th:field="*{scanSingle.noise}" 
-					id="felvNoiseInput" required>
+					required>
 			</div>
 			<div class="col-md-3 form-group">
 				<label>test_line_value</label> <input type="text"
 					class="form-control form-control-sm"
 					th:field="*{scanSingle.testLineValue}" 
-					id="felvTestLineValueInput" required>
+					required>
 			</div>
 		</div>
 
@@ -44,31 +42,28 @@
 			</div>
 			<div class="col-md-2 form-group">
 				<label>test_error_code</label> <input type="text"
-					class="form-control form-control-sm"
-					th:field="*{scanSingle.testErrorCode}"
-					id="fivTestErrorCodelInput">
+					class="form-control form-control-sm never-required"
+					th:field="*{scanSingle.testErrorCode}">
 			</div>
 			<div class="col-md-3 form-group">
 				<label>control</label> <input type="text"
 					class="form-control form-control-sm"
 					th:field="*{scanSingle.control}" 
-					id="fivControlInput" required>
+					required>
 			</div>
 			<div class="col-md-3 form-group">
 				<label>noise</label> <input type="text"
 					class="form-control form-control-sm" 
 					th:field="*{scanSingle.noise}" 
-					id="fivNoiseInput" required>
+					required>
 			</div>
 			<div class="col-md-3 form-group">
 				<label>test_line_value</label> <input type="text"
 					class="form-control form-control-sm"
 					th:field="*{scanSingle.testLineValue}" 
-					id="fivTestLineValueInput" required>
+					required>
 			</div>
 		</div>
 	</div>
-
-
 </body>
 </html>
