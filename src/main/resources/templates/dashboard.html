@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>Dashboard</title>
-        <meta charset="UTF-8">
-    	<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
-        <link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
-    	<link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
-    </head>
-    <body>
-    	<div th:replace="fragments/header :: header"></div>
-        <div class="container dashboard" >
-            <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-            <h2>This is your Simulator Dashboard</h2>
-            <p th:if="${#lists.isEmpty(configs)}"><a th:href="@{/simulator}">Add new configuration</a></p>
-            <p th:if="${not #lists.isEmpty(configs)}">Your configurations: </p>
-            <div th:each="config : ${configs}" th:attr="data-value=${config.id}">            	
-			    <a th:href="@{/simulator/} + ${config.id}">
-			    	<img th:src="@{/images/vue.png}" alt="" width="250" height="200" />
-			    	<p th:text="${config.serialNumber}"></p>
-			    </a>
-			    
-			</div>            
-        </div>
-        <div th:replace="fragments/footer :: footer"></div>
-    </body>
+<head>
+<title>Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+<link th:rel="stylesheet"
+	th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
+<link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
+</head>
+<body>
+	<div th:replace="fragments/header :: header"></div>
+	<div class="container dashboard">
+		<h2 th:inline="text" class="text-center m-4">Hello
+			[[${#httpServletRequest.remoteUser}]]!</h2>
+		<h4 class="text-center mb-3">This is your Simulator Dashboard</h4>
+		<h4 class="m-5 p-2 card col-12 col-md-6 col-lg-4 mx-auto text-center shadow text-light" th:if="${#lists.isEmpty(configs)}">
+			<a class="text-dark" th:href="@{/simulator}">Add new configuration</a>
+		</h4>
+		<div class="row flex-column justify-content-around align-items-center">
+			<h3 class="m-4" th:if="${not #lists.isEmpty(configs)}">Your
+				configurations:</h3>
+			<div class="d-flex flex-row justify-content-between">
+				<div class="text-center" th:each="config : ${configs}" th:attr="data-value=${config.id}">
+					<a th:href="@{/simulator/} + ${config.id}"> <img class="d-block"
+						th:src="@{/images/vue.png}" alt="" width="250" height="200" /> <span class="btn btn-outline-danger btn-sm"
+						th:text="${config.serialNumber}"></span>
+					</a>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/footer :: footer"></div>
+</body>
 </html>
