@@ -175,4 +175,15 @@ public class ConfigurationTO {
 	public void setTestType(String testType) {
 		this.testType = testType;
 	}
+
+	@Override
+	public String toString() {
+		return "ConfigurationTO [id=" + id + ", serialNumber=" + serialNumber + ", ethernetIp=" + ethernetIp
+				+ ", busyState=" + busyState + ", cassetteIn=" + cassetteIn + ", cassetteTime=" + cassetteTime
+				+ ", settingsVersion=" + settingsVersion + ", releaseVersion=" + releaseVersion + ", cassetteTypeId="
+				+ cassetteTypeId + ", testType=" + testType + ", cassetteErrorCode=" + cassetteErrorCode
+				+ ", processId=" + processId + ", previousProcessId=" + previousProcessId + ", scanSingle=" + scanSingle
+				+ ", scanMultiple=" + scanMultiple + ", scanDouble=" + scanDouble + "]";
+	}
+	
 }
