@@ -8,8 +8,12 @@
 <link th:rel="stylesheet"
 	th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
 <link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
+
 <script type="text/javascript"
 	th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+<link th:rel="stylesheet"
+	th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" />	
+
 
 </head>
 <body>
@@ -17,7 +21,7 @@
 	<div class="container simulator-form mt-6">
 		<form method="post" class="needs-validation p-5"
 			th:action="@{/saveConfig}" th:object="${config}" novalidate>
-			<div class="jumbotron p-4 shadow">
+			<div class="jumbotron border rounded bg-light p-4 shadow">
 				<input type="hidden" th:field="*{id}" id="configId">
 				<h4 th:inline="text">Configuration</h4>
 				<div class="form-row">
@@ -34,7 +38,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="jumbotron p-4 shadow">
+			<div class="jumbotron border rounded bg-light p-4 shadow">
 				<h4 th:inline="text">Status</h4>
 				<div class="form-row">
 					<div class="col-md-1 form-group">
@@ -63,7 +67,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="jumbotron p-4 shadow">
+			<div class="jumbotron border rounded bg-light p-4 shadow">
 				<h4 th:inline="text">Scan</h4>
 				<div class="form-row">
 					<div class="col-md-3 form-group">
@@ -190,8 +194,8 @@
 				</div>
 
 			</div>
-			<button class="btn btn-primary" type="submit">Save</button>
-			<a class="btn btn-warning" href="/dashboard">Back</a>
+			<button class="btn btn-danger" type="submit">Save</button>
+			<a class="btn btn-info" href="/dashboard">Back</a>
 		</form>
 
 	</div>
