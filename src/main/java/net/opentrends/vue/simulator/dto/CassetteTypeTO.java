@@ -1,7 +1,10 @@
 package net.opentrends.vue.simulator.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class CassetteTypeTO {
 	
+	@JsonProperty("description")
 	private String type;	
 	private Integer code;
 
@@ -20,5 +23,12 @@ public class CassetteTypeTO {
 	public void setCode(Integer code) {
 		this.code = code;
 	}
+
+	@Override
+	public String toString() {
+		return "CassetteTypeTO [type=" + type + ", code=" + code + "]";
+	}
+	
+	
 
 }

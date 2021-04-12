@@ -13,6 +13,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import net.opentrends.vue.simulator.dto.CassetteProcessesResponseTO;
 import net.opentrends.vue.simulator.dto.ConfigResponseTO;
+import net.opentrends.vue.simulator.dto.DateTimeResponseTO;
 import net.opentrends.vue.simulator.dto.StatusResponseTO;
 import net.opentrends.vue.simulator.service.ConfigurationService;
 
@@ -23,23 +24,18 @@ public class SimulatorController {
 	@Autowired
 	private ConfigurationService configurationService;
 	
-	@Autowired
-	private StatusResponseTO statusResponse;
-	
-	@Autowired 
-	ConfigResponseTO configResponse;
-	
-	@Autowired
-	CassetteProcessesResponseTO cassetteProcessesResponse;
-	
 	@ApiOperation(value = "Configuration from VUE reader simulator ")
 	@GetMapping("/{idSimulator}/v2.4/config_reader")
 	public ResponseEntity<?> config(
 			@ApiParam(value = "Id simulator")
 			@PathVariable String idSimulator) {
+		ConfigResponseTO configResponse = new ConfigResponseTO();
 		configResponse.setConfigTO(configurationService.getConfig(idSimulator));
-		
-		return ResponseEntity.ok(configResponse); 
+		if (configResponse.getConfigTO() == null) {
+			return ResponseEntity.notFound().build();
+		}else {
+			return ResponseEntity.ok(configResponse);
+		}
 	}
 
 	@ApiOperation(value = "Status from VUE reader simulator ")
@@ -47,10 +43,10 @@ public class SimulatorController {
 	public ResponseEntity <?> readerStatus(
 			@ApiParam(value = "Id simulator") 
 			@PathVariable String idSimulator) {
-		
+		StatusResponseTO statusResponse = new StatusResponseTO();
 		statusResponse.setStatusTO(configurationService.getStatusConfig(idSimulator));
-		if (statusResponse == null) {
-			return ResponseEntity.noContent().build();
+		if (statusResponse.getStatusTO() == null) {
+			return ResponseEntity.notFound().build();
 		}else {
 			return ResponseEntity.ok(statusResponse);
 		}
@@ -58,12 +54,10 @@ public class SimulatorController {
 	
 	@ApiOperation(value = " ")
 	@GetMapping("/{idSimulator}/v2.4/reader_date_and_time")
-	public ResponseEntity<DateTimeResponse> readerDateAndTime(
+	public ResponseEntity<DateTimeResponseTO> readerDateAndTime(
 			@ApiParam(value = "Id simulator") 
 			@PathVariable String idSimulator) {
-		
-		return ResponseEntity.ok(new DateTimeResponse());
-		
+		return ResponseEntity.ok(new DateTimeResponseTO());
 	}
 	
 	@ApiOperation(value = "Test from VUE reader simulator ")
@@ -74,10 +68,14 @@ public class SimulatorController {
 	
 	@ApiOperation(value = "Test from VUE reader simulator ")
 	@GetMapping("/{idSimulator}/v2.4/cassette_processes")
-	public CassetteProcessesResponseTO cassetteProcesses2(@ApiParam(value = "Id simulator") @PathVariable String idSimulator) {
-		cassetteProcessesResponse.setResult(configurationService.getCassetteProcesses(idSimulator));
-		
-		return cassetteProcessesResponse;
+	public ResponseEntity<?> cassetteProcesses2(@ApiParam(value = "Id simulator") @PathVariable String idSimulator) {
+		CassetteProcessesResponseTO  cassetteProcessesResponse = new CassetteProcessesResponseTO();
+		cassetteProcessesResponse.setResultTO(configurationService.getCassetteProcesses(idSimulator));
+		if (cassetteProcessesResponse.getResultTO() == null) {
+			return ResponseEntity.notFound().build();
+		}else {
+			return ResponseEntity.ok(cassetteProcessesResponse);
+		}
 	}
 	
 	@ApiOperation(value = "Image test from VUE reader simulator ")
@@ -94,10 +92,3 @@ public class SimulatorController {
 
 }
 
-class DateTimeResponse {
-	  public String date_time;
-	  DateTimeResponse() {
-		  this.date_time = "1997-07-16T19:20+01:00";
-	  }
-	  
-}

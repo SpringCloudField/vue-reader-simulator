@@ -18,13 +18,13 @@ import net.opentrends.vue.simulator.dto.EthernetTO;
 import net.opentrends.vue.simulator.dto.ProcessResultTO;
 import net.opentrends.vue.simulator.dto.ReaderDataTO;
 import net.opentrends.vue.simulator.dto.ResultTO;
-import net.opentrends.vue.simulator.dto.StatusResponseTO;
 import net.opentrends.vue.simulator.dto.StatusTO;
 import net.opentrends.vue.simulator.dto.WifiApTO;
 import net.opentrends.vue.simulator.dto.WifiModeTO;
 import net.opentrends.vue.simulator.dto.WifiStationTO;
 import net.opentrends.vue.simulator.model.Configuration;
 import net.opentrends.vue.simulator.repository.ConfigurationRepository;
+import net.opentrends.vue.simulator.service.CassetteTypeService;
 import net.opentrends.vue.simulator.service.ConfigurationService;
 
 @Service
@@ -32,18 +32,12 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	
 	@Autowired
 	private ConfigurationRepository configRespository;
+	
+	@Autowired
+	private CassetteTypeService cassetteTypeService;
+	
 	@Autowired
 	private ModelMapper mapper;
-	@Autowired
-	private DeviceStatusTO deviceStatus;
-	@Autowired
-	private ErrorTO error;
-	@Autowired
-	private StatusTO status;
-	@Autowired 
-	private ConfigTO config;
-	
-	
 
 	@Override
 	public void saveConfig(ConfigurationTO config, String userId) {
@@ -70,19 +64,21 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	public ConfigTO getConfig(String serialNumber) {
 		
 		Optional<Configuration>conf = configRespository.findBySerialNumber(serialNumber);
+		if (!conf.isPresent()) {
+			return null;
+		}
 		ConfigurationTO configuration = conf.map(c-> mapper.map(c, ConfigurationTO.class)).orElse(null);
-//		ConfigTO config = new ConfigTO();
+		ConfigTO config = new ConfigTO();
 		EthernetTO ethernet = new EthernetTO();
 		WifiApTO wifiAp = new WifiApTO();
 		WifiModeTO wifiMode = new WifiModeTO();
 		WifiStationTO wifiStation = new WifiStationTO();
-		System.out.println("PASSSEM PER AQUI CONFIG" + configuration.toString()); //esborrar		
 
 		ethernet.setDhcp(1);
-		ethernet.setGateway("");
+		ethernet.setGateway("192.168.133.1");
 		ethernet.setIp(configuration.getEthernetIp());
 		ethernet.setNetmask("255.255.255.0");
-		wifiAp.setIp("192.168.133.1");
+		wifiAp.setIp("192.168.133.123");
 		wifiAp.setNetmask("255.255.255.0");
 		wifiAp.setPwd("abwi-rdr");
 		wifiAp.setSsid("VUESIMUL");
@@ -98,23 +94,20 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		config.setWifimodeTO(wifiMode);
 		config.setWifiStationTO(wifiStation);
 		
-		
 		return config;
-		
 	}
 
 	@Override
 	public StatusTO getStatusConfig(String serialNumber) {
 
 		Optional<Configuration>conf = configRespository.findBySerialNumber(serialNumber);
-		//		Optional<Configuration> conf = Optional.of(configRespository.findBySerialNumber(serialNumber));
+		if (!conf.isPresent()) {
+			return null;
+		}
 		ConfigurationTO configuration = conf.map(c-> mapper.map(c, ConfigurationTO.class)).orElse(null);
-//		System.out.println("PASSSEM PER AQUI" + configuration.toString()); //esborrar		
-		
-		
-//		DeviceStatusTO deviceStatus = new  DeviceStatusTO();
-//		ErrorTO errorTO = new ErrorTO();
-//		StatusTO statusTO = new StatusTO();
+		DeviceStatusTO deviceStatus = new  DeviceStatusTO();
+		ErrorTO error = new ErrorTO();
+		StatusTO status = new StatusTO();
 		
 		deviceStatus.setBusyState(configuration.getBusyState());
 		deviceStatus.setCassetteIn(configuration.getCassetteIn());
@@ -141,46 +134,52 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	public ResultTO getCassetteProcesses(String serialNumber) {
 		
 		Optional<Configuration>conf = configRespository.findBySerialNumber(serialNumber);
+		if (!conf.isPresent()) {
+			return null;
+		}
 		ConfigurationTO configuration = conf.map(c-> mapper.map(c, ConfigurationTO.class)).orElse(null);
-		System.out.println("CASSETTE PROCESS" + configuration.toString());
 		ResultTO result = new ResultTO();
 		CassetteTypeTO cassetteType = new CassetteTypeTO();
 		ErrorTO error = new ErrorTO();
 		ProcessResultTO result1 = new ProcessResultTO();
-		ErrorTO resultError = new ErrorTO();
+		CassetteTypeTO cassetteTypeRead = cassetteTypeService.getCassetteTypeByCode(configuration.getCassetteTypeId());
 		ReaderDataTO readerData = new ReaderDataTO();
 		
-		result.setCassetteProcessId(1);
-		result.setPreviousProcessId(-1);
+		result.setCassetteProcessId(configuration.getProcessId());
+		result.setPreviousProcessId(configuration.getPreviousProcessId());
 		
-		cassetteType.setCode(1);
-		cassetteType.setType("Anaplasma");
+		cassetteType.setCode(configuration.getCassetteTypeId());
+		cassetteType.setType(cassetteTypeRead.getType());
 		
-		error.setCode(0);
-		error.setDescription("success");
+		Integer errorCode = configuration.getCassetteErrorCode();
+		error.setCode(errorCode);
+		if (errorCode !=0) {error.setDescription("Error " + errorCode);}
+		else {error.setDescription("success");}
 		
 		result1.setBackground("205.9887617021278");
 		result1.setColor01("#FF7000");
 		result1.setColor02("#FF7000");
-		result1.setControl(58.98551);
+		result1.setControl(configuration.getScanSingle().getControl());
 		
-		resultError.setCode(0);
-		resultError.setDescription("success");
-		result1.setError(resultError);
-
+		ErrorTO error1 = new ErrorTO();
+		Integer resultErrorCode = configuration.getScanSingle().getTestErrorCode();
+		error1.setCode(resultErrorCode);
+		if (resultErrorCode !=0) {error1.setDescription("Error " + resultErrorCode);}
+		else {error1.setDescription("success");}
+		result1.setError(error1);
 		result1.setInitial('A');
-		result1.setNoise(58.98551);
+		result1.setNoise(configuration.getScanSingle().getNoise());
 		result1.setPositive(true);
 		result1.setReliable(true);
-		result1.setTestLineValue(0.5487337);
-		result1.setTestName("Anaplasma");
+		result1.setTestLineValue(configuration.getScanSingle().getTestLineValue());
+		result1.setTestName(cassetteTypeRead.getType());
 		result1.setWarnings(null);
 		
-		readerData.setCassetteTime(4.24);
+		readerData.setCassetteTime(configuration.getCassetteTime());
 		readerData.setDateTime("2020-11-15 11:29:59");
 		readerData.setDbVersion("5");
-		readerData.setReleaseVersion("9.2.2.4");
-		readerData.setSettingsVersion("5.3.6");
+		readerData.setReleaseVersion(configuration.getReleaseVersion());
+		readerData.setSettingsVersion(configuration.getSettingsVersion());
 		
 		result.setCassetteType(cassetteType);
 		result.setError(error);
@@ -188,6 +187,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		processResults.add(result1);
 		result.setProcessResults(processResults);
 		result.setReaderData(readerData);
+		
 		return result;
 	}	
 

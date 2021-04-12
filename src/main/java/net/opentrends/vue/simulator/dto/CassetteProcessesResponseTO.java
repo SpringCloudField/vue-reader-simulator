@@ -7,14 +7,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Component
 public class CassetteProcessesResponseTO {
 	@JsonProperty("Result")
-	private ResultTO result;
+	private ResultTO resultTO;
 
-	public ResultTO getResult() {
-		return result;
+	public ResultTO getResultTO() {
+		return resultTO;
 	}
 
-	public void setResult(ResultTO result) {
-		this.result = result;
+	public void setResultTO(ResultTO resultTO) {
+		this.resultTO = resultTO;
 	}
 	
 }
