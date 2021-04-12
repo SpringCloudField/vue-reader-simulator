@@ -40,6 +40,11 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 				.stream()
 				.map(config -> mapper.map(config, ConfigurationTO.class))
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public boolean existSerialNumber(String serialNumber, String userId) {
+		return configRespository.existsBySerialNumberAndUserIdNot(serialNumber, userId);
 	}	
 
 }

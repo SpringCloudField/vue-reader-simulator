@@ -11,4 +11,6 @@ public interface ConfigurationService {
 	public ConfigurationTO getConfigById(String configId);
 	
 	public List<ConfigurationTO> getConfigsByUserId(String idUser);
+	
+	public boolean existSerialNumber(String serialNumber, String userId);
 }

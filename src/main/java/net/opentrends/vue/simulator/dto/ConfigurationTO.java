@@ -12,20 +12,18 @@ public class ConfigurationTO {
 	private String id;
 	
 	// Config
-	@NotNull
-	@NotEmpty
+	@NotEmpty(message = "Serialnumber is required")
 	private String serialNumber;
-	@NotNull
-	@NotEmpty
+	
+	@NotEmpty(message = "Ethernet_ip is required")
 	private String ethernetIp;
 
 	// Status
 	@NotNull
 	private Boolean busyState;
-	@NotEmpty
+	@NotNull	
 	private Integer cassetteIn;
-	@NotNull
-	@NotEmpty
+	@NotNull	
 	private Double cassetteTime;
 	@NotNull
 	@NotEmpty
@@ -35,8 +33,7 @@ public class ConfigurationTO {
 	private String releaseVersion;
 
 	// Scan
-	@NotNull
-	@NotEmpty
+	@NotNull	
 	private Integer cassetteTypeId;
 	@NotNull
 	@NotEmpty
@@ -47,6 +44,11 @@ public class ConfigurationTO {
 	private ScanSingle scanSingle;
 	private ScanMultiple scanMultiple;
 	private ScanDouble scanDouble;
+	
+	
+
+	public ConfigurationTO() {
+	}
 
 	public String getId() {
 		return id;
