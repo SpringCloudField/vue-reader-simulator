@@ -3,12 +3,9 @@
 <head>
 <title>Login</title>
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
-<link th:rel="stylesheet"
-	th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
-<link th:rel="stylesheet"
-	th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+<link th:rel="stylesheet" th:href="@{webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
+<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" />
 <link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
 </head>
 <body>
@@ -21,48 +18,40 @@
 		<p th:text="${successMessage}"></p>
 		<div th:if="${param.logout}" class="alert-warning">You have been logged out.</div>
 		<div class="jumbotron border rounded col-12 col-md-10 col-lg-6 bg-light shadow p-5">
-		<div class="card-header">
-		<h4 class="m-2 font-weight-normal text-center">Please sign in</h4>
-		</div>
-		<div th:if="${param.error}" class="alert-danger col-12 p-2 text-center mb-3">Invalid email and password.</div>
+			<div class="card-header">
+				<h4 class="m-2 font-weight-normal text-center">Please sign in</h4>
+			</div>
+			<div th:if="${param.error}" class="alert-danger col-12 p-2 text-center mb-3">Invalid email and password.</div>
 			<form class="form-signin" th:action="@{/login}" method="post">
 				<div class="d-flex flex-column justify-content-around">
 					<label for="inputEmail" class="sr-only">Email address</label>
 					<div class="input-group mb-3 mt-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text bg-light-grey text-danger" style="display: inline-block; width: 43px;"> 
-							<i class="fa fa-envelope"
-								aria-hidden="true"></i></span>
+							<i class="fa fa-envelope" aria-hidden="true"></i></span>
 						</div>
-						<input type="email" name="email" id="inputEmail"
-							class="form-control" placeholder="Email" required />
+						<input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required />
 					</div>
 
 					<label for="inputPassword" class="sr-only">Password</label>
 					<div class="input-group mb-4">
 						<div class="input-group-prepend">
-							<span class="input-group-text bg-light-grey text-danger" style="display: inline-block; width: 43px;"> <i class="fa fa-lock"
-								aria-hidden="true"></i></span>
+							<span class="input-group-text bg-light-grey text-danger" style="display: inline-block; width: 43px;"> <i class="fa fa-lock" aria-hidden="true"></i></span>
 						</div>
-						<input type="password" name="password" id="inputPassword"
-							class="form-control" placeholder="Password" required />
+						<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required />
 					</div>
-					<button class="btn btn-lg btn-outline-danger btn-block btn-sm mb-5"
-						type="submit">Sign in</button>
+					<button class="btn btn-lg btn-outline-danger btn-block btn-sm mb-5" type="submit">Sign in</button>
 				</div>
 			</form>
-
 			
 			<form class="form-signup" th:action="@{/signup}" method="get">
-				<button class="btn btn-lg btn-info btn-block btn-sm"
-					type="Submit">Signup Here</button>
-			</form>
-
+				<button class="btn btn-lg btn-info btn-block btn-sm" type="Submit">Signup Here</button>
+			</form>	
 
 		</div>
 	</div>
 
-
 	<div th:replace="fragments/footer :: footer"></div>
+	
 </body>
 </html>

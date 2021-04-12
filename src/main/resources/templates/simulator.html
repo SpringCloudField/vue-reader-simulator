@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Simulator config</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
-<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
-<link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
-<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
-<script type="text/javascript" th:src="@{/js/main.js}"></script>
-<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" />
-
+	<title>Simulator config</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0 shrink-to-fit=no">
+	<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}" />
+	<link th:rel="stylesheet" th:href="@{/styles/css/main.css}" />
+	<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/main.js}"></script>
+	<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" />
 </head>
 <body>
 	<div th:replace="fragments/header :: header"></div>
@@ -27,7 +26,7 @@
 					</div>
 					<div class="col-md-3 form-group">
 						<label>ethernet_ip</label> 
-						<input type="text" class="form-control form-control-sm" th:field="*{ethernetIp}">
+						<input type="text" class="form-control form-control-sm" th:field="*{ethernetIp}" required>
 						<small th:if="${#fields.hasErrors('ethernetIp')}" th:errors="*{ethernetIp}" class="form-text text-danger"></small>
 					</div>
 				</div>
