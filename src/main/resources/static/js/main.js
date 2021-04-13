@@ -1,7 +1,8 @@
 
 //**** Simulator form control functions ****
 
-function toggleProcessId(id) {
+function toggleProcessId() {
+	let id = document.getElementById("testType").value;
     if (id == "Quick") {
  		
  		sameCassetteCheckbox.checked = false;
@@ -11,13 +12,6 @@ function toggleProcessId(id) {
 	    	"sameCassetteCheckboxDiv",
 	    	"sameCassetteOptionsDiv"
     	]);
-    	    	
-//		setNotRequiredInputFields ([
-//			"processIdInput",
-//			"previousProcessIdInput",
-//			"processIdInputSame",
-//			"previousProcessIdInputSame"
-//		]);
      
     } else if (id == "Timed") {
     
@@ -25,15 +19,11 @@ function toggleProcessId(id) {
 	    	"processIdDiv",
 	    	"sameCassetteCheckboxDiv",
     	])
-    	
-//    	setRequiredInputFields ([
-//	    	"processIdInput",
-//	    	"previousProcessIdInput"
-//    	])
     }
 }
 
-function showSameCassette(chBox) {	
+function showSameCassette() {
+		let chBox = document.getElementById("sameCassetteCheckbox");
 		sameCassetteOptionsDiv.style.display = chBox.checked ? "block" : "none";
 
 		showDivs ([
@@ -42,103 +32,91 @@ function showSameCassette(chBox) {
 }
 
 
-function selectedCassetteType(codeCassetteType) {
+function selectedCassetteType() {
+
+		let codeCassetteType = document.getElementById("cassetteTypeId").value;
 		switch (codeCassetteType){
 		
-//------------Felv Fiv status ------------------
+			//------------Felv Fiv status ------------------
 	
-		case "2": 
-		
-		hideDivs ([
-			"singleTestDiv", 
-			"cplScanDiv", 
-			"flex4TestDiv", 
-			"singleTestDivSame", 
-			"cplScanDivSame", 
-			"flex4TestDivSame"
-		]);
-		
-		showDivs ([
-			"felvFivTestDiv",
-			"felvFivTestDivSame"
-		]);
-		
-//		setRequiredInputFields ([
-//			"felvControlInput",
-//			"felvNoiseInput",
-//			"felvTestLineValueInput"
-//		])
-		
-		break;
-		
-//------------cPL status ------------------		
-		
-		case "8":
-		
-		hideDivs ([
-			"felvFivTestDiv",
-			"flex4TestDiv",
-			"felvFivTestDivSame",
-			"flex4TestDivSame"
-		])
-		
-		showDivs ([
-			"singleTestDiv",
-			"cplScanDiv",
-			"cplScanDivSame"
-		]);
-		
-// 		setRequiredInputFields ([
-//	 		"lotNumberInput",
-//	 		"scaledResultInput"
-// 		]);  
- 		
-    	break;
-    	
-//-------- Flex4 status ----------------------		
-    	
-    	case "9": 
-    	
-    	hideDivs ([
-	    	"singleTestDiv",
-	    	"singleTestDivSame", 
-	    	"felvFivTestDiv",
-	    	"felvFivTestDivSame",
-	    	"cplScanDiv",
-	    	"cplScanDivSame"
-    	]);
-		
-		showDivs ([
-			"flex4TestDiv",
-			"flex4TestDivSame"
-		]);    
-		
-     	break;
-     	
- //-------- Default status for all cassettes except cpL, Felv Fiv & Flex4 -------		
-     	
-     	default:
-     	
-     	showDivs ([
-	     	"singleTestDiv",
-	     	"singleTestDivSame"
-     	]);
-     	
-     	hideDivs ([
-	     	"felvFivTestDiv",
-	     	"felvFivTestDivSame",
-	     	"flex4TestDiv",
-	     	"flex4TestDivSame",
-	     	"cplScanDiv",
-	     	"cplScanDivSame"
-     	]);
-     	
-//    	setNotRequiredInputFields ([
-//	    	"lotNumberInput", 
-//	    	"scaledResultInput"
-//    	]);
-    	
+			case "2": 
+			
+				hideDivs ([
+					"singleTestDiv", 
+					"cplScanDiv", 
+					"flex4TestDiv", 
+					"singleTestDivSame", 
+					"cplScanDivSame", 
+					"flex4TestDivSame"
+				]);
+				
+				showDivs ([
+					"felvFivTestDiv",
+					"felvFivTestDivSame"
+				]);
+				
+				break;
+			
+			//------------cPL status ------------------		
+			
+			case "8":
+			
+				hideDivs ([
+					"felvFivTestDiv",
+					"flex4TestDiv",
+					"felvFivTestDivSame",
+					"flex4TestDivSame"
+				])
+				
+				showDivs ([
+					"singleTestDiv",
+					"cplScanDiv",
+					"cplScanDivSame"
+				]);
+		 		
+		    	break;
+	    	
+			//-------- Flex4 status ----------------------		
+	    	
+	    	case "9": 
+	    	
+		    	hideDivs ([
+			    	"singleTestDiv",
+			    	"singleTestDivSame", 
+			    	"felvFivTestDiv",
+			    	"felvFivTestDivSame",
+			    	"cplScanDiv",
+			    	"cplScanDivSame"
+		    	]);
+				
+				showDivs ([
+					"flex4TestDiv",
+					"flex4TestDivSame"
+				]);    
+				
+		     	break;
+	     	
+	 		//-------- Default status for all cassettes except cpL, Felv Fiv & Flex4 -------		
+	     	
+	     	default:
+	     	
+		     	showDivs ([
+			     	"singleTestDiv",
+			     	"singleTestDivSame"
+		     	]);
+		     	
+		     	hideDivs ([
+			     	"felvFivTestDiv",
+			     	"felvFivTestDivSame",
+			     	"flex4TestDiv",
+			     	"flex4TestDivSame",
+			     	"cplScanDiv",
+			     	"cplScanDivSame"
+		     	]);
+	    	
    		}
+   		
+   		toggleProcessId();
 }
 
 // ------ Status functions
@@ -164,8 +142,9 @@ function showDivs (visibleDivs){
 			let requiredInputs=" --> ";
 			for (let node of inputNodes){
 				if (node.classList.contains("never-required") || node.getAttribute("type")=="checkbox" || node.getAttribute("type")=="hidden"){
-				console.info ("   NOT SET REQUIRED: " + node.getAttribute("id") + " --> " + node.getAttribute("type")+ " ----> "  + node.classList);
-				continue;}
+					console.info ("   NOT SET REQUIRED: " + node.getAttribute("id") + " --> " + node.getAttribute("type")+ " ----> "  + node.classList);
+					continue;
+				}
 				node.required=true;
 				requiredInputs += " " + node.getAttribute("id"); 
 			}
@@ -182,8 +161,9 @@ function hideDivs (hiddenDivs) {
 			let removedRequiredValueInputs=" --> " 
 			for (let node of inputNodes){
 				if (node.getAttribute("type")=="checkbox" || node.getAttribute("type")=="hidden"){
-				console.info ("   NOT REMOVED REQUIRED/VALUE: " + node.getAttribute("id") + " --o " + node.getAttribute("type") + " ----o " + node.classList);
-				continue;}
+					console.info ("   NOT REMOVED REQUIRED/VALUE: " + node.getAttribute("id") + " --o " + node.getAttribute("type") + " ----o " + node.classList);
+					continue;
+				}
 				node.removeAttribute("required");
 				node.setAttribute("value","");
 				removedRequiredValueInputs += " " + node.getAttribute("id");
@@ -212,37 +192,3 @@ function hideDivs (hiddenDivs) {
 })();
 
 
-$(document).ready(function () {
-
-    $("#config-form").submit(function (event) {
-
-        //stop submit the form, we will post it manually.
-        event.preventDefault();
-
-        fire_ajax_submit();
-
-    });    
-
-});
-
-function fire_ajax_submit() {
-
-    var search = {}
-
-    $.ajax({
-        type: "POST",
-        contentType: "application/json",
-        url: "/saveConfig",
-        data: JSON.stringify(search),
-        dataType: 'json',
-        cache: false,
-        timeout: 600000,
-        success: function (data) {
-            console.log("SUCCESS : ", data);
-        },
-        error: function (e) {
-            console.log("ERROR : ", e);
-        }
-    });
-
-}

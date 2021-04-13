@@ -10,7 +10,7 @@
 	<script type="text/javascript" th:src="@{/js/main.js}"></script>
 	<link th:rel="stylesheet" th:href="@{/webjars/font-awesome/4.7.0/css/font-awesome.min.css}" />
 </head>
-<body>
+<body th:onload="selectedCassetteType(); toggleProcessId(); showSameCassette();">
 	<div th:replace="fragments/header :: header"></div>
 	<div class="container simulator-form mt-6">
 		<form method="post" class="needs-validation p-5" th:action="@{/saveConfig}" th:object="${configurationTO}" novalidate>
@@ -61,14 +61,14 @@
 				<div class="form-row">
 					<div class="col-md-3 form-group">
 						<label>cassette_type</label> 
-						<select class="custom-select" th:field="*{cassetteTypeId}" onchange="selectedCassetteType(this.value)" required>
+						<select class="custom-select" th:field="*{cassetteTypeId}" onchange="selectedCassetteType()" required>
 							<option value="" selected>Select cassette type</option>
 							<option th:each="cassetteType:${cassetteTypes}" th:value="${cassetteType.code}" th:text="${cassetteType.type}"></option>
 						</select>
 					</div>
 					<div class="col-md-3 form-group">
 						<label>test_type</label> 
-						<select class="custom-select" th:field="*{testType}" onchange="toggleProcessId(this.value)" required>
+						<select class="custom-select" th:field="*{testType}" onchange="toggleProcessId()" required>
 							<option value="" selected>Select test type</option>
 							<option value="Quick">Quick</option>
 							<option value="Timed">Timed</option>
@@ -116,7 +116,7 @@
 
 				<div id="sameCassetteCheckboxDiv">
 					<div class="col-md-3 pl-3 m-3">
-						<input type="checkbox" class="form-check-input border" id="sameCassetteCheckbox" onclick="showSameCassette(this)">
+						<input type="checkbox" class="form-check-input border" id="sameCassetteCheckbox" onclick="showSameCassette()" th:field="*{sameCassette}">
 						<label class="form-check-label text-danger font-weight-bold">Same cassette process</label>
 					</div>
 				</div>
@@ -162,8 +162,8 @@
 				</div>
 
 			</div>
-			<button class="btn btn-danger" type="submit">Save</button>
-			<a class="btn btn-info" href="/dashboard">Back</a>
+			<button class="btn btn-info" type="submit">Save</button>
+			<a class="btn btn-danger" href="/dashboard">Back</a>
 		</form>
 
 	</div>

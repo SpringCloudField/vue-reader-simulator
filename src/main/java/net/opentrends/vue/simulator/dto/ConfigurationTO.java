@@ -11,29 +11,27 @@ public class ConfigurationTO {
 
 	private String id;
 	
-	// Config
 	@NotEmpty(message = "Serial_number is required")
 	private String serialNumber;	
 	@NotEmpty(message = "Ethernet_ip is required")
 	private String ethernetIp;
 
-	// Status
 	@NotNull
 	private Boolean busyState;
 	@NotNull(message = "Cassette_in is required")
 	private Integer cassetteIn;
-	@NotNull(message = "Cassette_in is required")
+	@NotNull(message = "Cassette_time is required")
 	private Double cassetteTime;
 	@NotEmpty(message = "Settings_version is required")
 	private String settingsVersion;
 	@NotEmpty(message = "Release_version is required")
 	private String releaseVersion;
 
-	// Scan
 	@NotNull(message = "Cassette_type is required")	
 	private Integer cassetteTypeId;
 	@NotNull(message = "Test_type is required")	
 	private String testType;
+	private Boolean sameCassette;
 	private Integer cassetteErrorCode;
 	private Integer processId;
 	private Integer previousProcessId;
@@ -171,5 +169,13 @@ public class ConfigurationTO {
 
 	public void setTestType(String testType) {
 		this.testType = testType;
+	}
+
+	public Boolean getSameCassette() {
+		return sameCassette;
+	}
+
+	public void setSameCassette(Boolean sameCassette) {
+		this.sameCassette = sameCassette;
 	}
 }
