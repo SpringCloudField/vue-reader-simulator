@@ -145,6 +145,8 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		CassetteTypeTO cassetteTypeRead = cassetteTypeService.getCassetteTypeByCode(configuration.getCassetteTypeId());
 		ReaderDataTO readerData = new ReaderDataTO();
 		
+		
+		
 		result.setCassetteProcessId(configuration.getProcessId());
 		result.setPreviousProcessId(configuration.getPreviousProcessId());
 		
@@ -167,7 +169,7 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		if (resultErrorCode !=0) {error1.setDescription("Error " + resultErrorCode);}
 		else {error1.setDescription("success");}
 		result1.setError(error1);
-		result1.setInitial('A');
+		result1.setInitial(cassetteTypeRead.getType().toUpperCase().charAt(0));
 		result1.setNoise(configuration.getScanSingle().getNoise());
 		result1.setPositive(true);
 		result1.setReliable(true);
