@@ -16,7 +16,7 @@ public class ConfigurationTO {
 	@NotEmpty(message = "Ethernet_ip is required")
 	private String ethernetIp;
 
-	@NotNull
+	@NotNull(message = "Busy_state is required")
 	private Boolean busyState;
 	@NotNull(message = "Cassette_in is required")
 	private Integer cassetteIn;
@@ -31,6 +31,7 @@ public class ConfigurationTO {
 	private Integer cassetteTypeId;
 	@NotNull(message = "Test_type is required")	
 	private String testType;
+	@NotNull(message = "Same_cassette is required")
 	private Boolean sameCassette;
 	private Integer cassetteErrorCode;
 	private Integer processId;

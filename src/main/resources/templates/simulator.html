@@ -40,19 +40,23 @@
 					</div>
 					<div class="col-md-2 form-group">
 						<label>cassette_in</label> 
-						<input type="text" class="form-control form-control-sm" th:field="*{cassetteIn}" required>
+						<input type="number" class="form-control form-control-sm" th:field="*{cassetteIn}" required>
+						<small th:if="${#fields.hasErrors('cassetteIn')}" th:errors="*{cassetteIn}" class="form-text text-danger"></small>
 					</div>
 					<div class="col-md-3 form-group">
 						<label>settings_version</label> 
 						<input type="text" class="form-control form-control-sm" th:field="*{settingsVersion}" required>
+						<small th:if="${#fields.hasErrors('settingsVersion')}" th:errors="*{settingsVersion}" class="form-text text-danger"></small>
 					</div>
 					<div class="col-md-3 form-group">
 						<label>realease_version</label> 
 						<input type="text" class="form-control form-control-sm" th:field="*{releaseVersion}" required>
+						<small th:if="${#fields.hasErrors('releaseVersion')}" th:errors="*{releaseVersion}" class="form-text text-danger"></small>
 					</div>
 					<div class="col-md-3 form-group">
 						<label>cassette_time</label> 
-						<input type="text" class="form-control form-control-sm" th:field="*{cassetteTime}" required>
+						<input type="number" class="form-control form-control-sm" th:field="*{cassetteTime}" required>
+						<small th:if="${#fields.hasErrors('cassetteTime')}" th:errors="*{cassetteTime}" class="form-text text-danger"></small>
 					</div>
 				</div>
 			</div>
@@ -65,6 +69,7 @@
 							<option value="" selected>Select cassette type</option>
 							<option th:each="cassetteType:${cassetteTypes}" th:value="${cassetteType.code}" th:text="${cassetteType.type}"></option>
 						</select>
+						<small th:if="${#fields.hasErrors('cassetteTypeId')}" th:errors="*{cassetteTypeId}" class="form-text text-danger"></small>
 					</div>
 					<div class="col-md-3 form-group">
 						<label>test_type</label> 
@@ -73,6 +78,7 @@
 							<option value="Quick">Quick</option>
 							<option value="Timed">Timed</option>
 						</select>
+						<small th:if="${#fields.hasErrors('testType')}" th:errors="*{testType}" class="form-text text-danger"></small>
 					</div>
 					<div class="col-md-3 form-group">
 						<label>cassette_error_code</label> 
@@ -91,11 +97,13 @@
 					<div class="form-row">
 						<div class="col-md-3 form-group">
 							<label>lot_number</label> 
-							<input type="text" class="form-control form-control-sm" th:field="*{scanSingle.lotNumber}" id="lotNumberInput">
+							<input type="number" class="form-control form-control-sm" th:field="*{scanSingle.lotNumber}" id="lotNumberInput">
+							<small th:if="${#fields.hasErrors('scanSingle.lotNumber')}" th:errors="*{scanSingle.lotNumber}" class="form-text text-danger"></small>
 						</div>
 						<div class="col-md-3 form-group">
 							<label>scaled_result</label> 
-							<input type="text" class="form-control form-control-sm" th:field="*{scanSingle.scaledResult}" id="scaledResultInput">
+							<input type="number" class="form-control form-control-sm" th:field="*{scanSingle.scaledResult}" id="scaledResultInput">
+							<small th:if="${#fields.hasErrors('scanSingle.scaledResult')}" th:errors="*{scanSingle.scaledResult}" class="form-text text-danger"></small>
 						</div>
 					</div>
 				</div>
@@ -105,11 +113,13 @@
 					<div class="form-row">
 						<div class="col-md-3 form-group">
 							<label>process_id</label> 
-							<input type="text" class="form-control form-control-sm" th:field="*{processId}" id="processIdInput">
+							<input type="number" class="form-control form-control-sm" th:field="*{processId}" id="processIdInput">
+							<small th:if="${#fields.hasErrors('processId')}" th:errors="*{processId}" class="form-text text-danger"></small>
 						</div>
 						<div class="col-md-3 form-group">
 							<label>previous_process_id</label> 
-							<input type="text" class="form-control form-control-sm" th:field="*{previousProcessId}" id="previousProcessIdInput">
+							<input type="number" class="form-control form-control-sm" th:field="*{previousProcessId}" id="previousProcessIdInput">
+							<small th:if="${#fields.hasErrors('previousProcessId')}" th:errors="*{previousProcessId}" class="form-text text-danger"></small>
 						</div>
 					</div>
 				</div>
@@ -151,11 +161,13 @@
 						<div class="form-row">
 							<div class="col-md-3 form-group">
 								<label>lot_number</label> 
-								<input type="text" class="form-control form-control-sm" th:field="*{scanSingle.lotNumber}" id="lotNumberInputSame">
+								<input type="number" class="form-control form-control-sm" th:field="*{scanSingle.lotNumber}" id="lotNumberInputSame">
+								<small th:if="${#fields.hasErrors('scanSingle.lotNumber')}" th:errors="*{scanSingle.lotNumber}" class="form-text text-danger"></small>
 							</div>
 							<div class="col-md-3 form-group">
 								<label>scaled_result</label> 
-								<input type="text" class="form-control form-control-sm" th:field="*{scanSingle.scaledResult}" id="scaledResultInputSame">
+								<input type="number" class="form-control form-control-sm" th:field="*{scanSingle.scaledResult}" id="scaledResultInputSame">
+								<small th:if="${#fields.hasErrors('scanSingle.scaledResult')}" th:errors="*{scanSingle.scaledResult}" class="form-text text-danger"></small>
 							</div>
 						</div>
 					</div>
