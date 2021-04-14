@@ -14,7 +14,6 @@ public class Configuration {
 	
 	private String userId;
 
-	// Config
 	@NotNull
 	@NotEmpty
 	private String serialNumber;
@@ -22,7 +21,6 @@ public class Configuration {
 	@NotEmpty
 	private String ethernetIp;
 	
-	// Status
 	@NotNull
 	@NotEmpty
 	private Boolean busyState;
@@ -39,13 +37,13 @@ public class Configuration {
 	@NotEmpty
 	private String releaseVersion;
 	
-	// Scan
 	@NotNull
 	@NotEmpty
 	private Integer cassetteTypeId;		
 	@NotNull
 	@NotEmpty
 	private String testType;
+	private Boolean sameCassette;
 	private Integer cassetteErrorCode;
 	private Integer processId;
 	private Integer previousProcessId;
@@ -154,6 +152,12 @@ public class Configuration {
 	}
 	public void setTestType(String testType) {
 		this.testType = testType;
+	}
+	public Boolean getSameCassette() {
+		return sameCassette;
+	}
+	public void setSameCassette(Boolean sameCassette) {
+		this.sameCassette = sameCassette;
 	}
 
 }

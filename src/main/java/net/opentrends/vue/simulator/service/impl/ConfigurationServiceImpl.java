@@ -191,6 +191,11 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 		result.setReaderData(readerData);
 		
 		return result;
+	}
+
+	@Override
+	public boolean existSerialNumber(String serialNumber, String userId) {
+		return configRespository.existsBySerialNumberAndUserIdNot(serialNumber, userId);
 	}	
 
 }

@@ -12,5 +12,7 @@ public interface ConfigurationRepository extends MongoRepository<Configuration, 
 	public List<Configuration> findByUserId(String idUser);
 	
 	public Optional<Configuration> findBySerialNumber(String serialNumber);
+	
+	public boolean existsBySerialNumberAndUserIdNot(String seriaNumber, String idUser);
 
 }

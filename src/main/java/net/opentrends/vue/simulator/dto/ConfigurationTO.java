@@ -11,42 +11,38 @@ public class ConfigurationTO {
 
 	private String id;
 	
-	// Config
-	@NotNull
-	@NotEmpty
-	private String serialNumber;
-	@NotNull
-	@NotEmpty
+	@NotEmpty(message = "Serial_number is required")
+	private String serialNumber;	
+	@NotEmpty(message = "Ethernet_ip is required")
 	private String ethernetIp;
 
-	// Status
-	@NotNull
+	@NotNull(message = "Busy_state is required")
 	private Boolean busyState;
-	@NotEmpty
+	@NotNull(message = "Cassette_in is required")
 	private Integer cassetteIn;
-	@NotNull
-	@NotEmpty
+	@NotNull(message = "Cassette_time is required")
 	private Double cassetteTime;
-	@NotNull
-	@NotEmpty
+	@NotEmpty(message = "Settings_version is required")
 	private String settingsVersion;
-	@NotNull
-	@NotEmpty
+	@NotEmpty(message = "Release_version is required")
 	private String releaseVersion;
 
-	// Scan
-	@NotNull
-	@NotEmpty
+	@NotNull(message = "Cassette_type is required")	
 	private Integer cassetteTypeId;
-	@NotNull
-	@NotEmpty
+	@NotNull(message = "Test_type is required")	
 	private String testType;
+	@NotNull(message = "Same_cassette is required")
+	private Boolean sameCassette;
 	private Integer cassetteErrorCode;
 	private Integer processId;
 	private Integer previousProcessId;
 	private ScanSingle scanSingle;
 	private ScanMultiple scanMultiple;
 	private ScanDouble scanDouble;
+		
+
+	public ConfigurationTO() {
+	}
 
 	public String getId() {
 		return id;
@@ -174,6 +170,14 @@ public class ConfigurationTO {
 
 	public void setTestType(String testType) {
 		this.testType = testType;
+	}
+
+	public Boolean getSameCassette() {
+		return sameCassette;
+	}
+
+	public void setSameCassette(Boolean sameCassette) {
+		this.sameCassette = sameCassette;
 	}
 
 	@Override
