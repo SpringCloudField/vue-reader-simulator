@@ -17,18 +17,27 @@ function toggleProcessId() {
     
     	showDivs ([
 	    	"processIdDiv",
-	    	"sameCassetteCheckboxDiv",
+	    	"sameCassetteCheckboxDiv"
     	])
     }
 }
 
 function showSameCassette() {
 		let chBox = document.getElementById("sameCassetteCheckbox");
-		sameCassetteOptionsDiv.style.display = chBox.checked ? "block" : "none";
-
-		showDivs ([
-			"processIdDivSame"
-		]);
+		
+		if(chBox.checked){
+			sameCassetteOptionsDiv.style.display = "block";
+			showDivs ([
+				"sameCassetteOptionsDiv",
+				"processIdDivSame"
+			]);
+		} else {
+			sameCassetteOptionsDiv.style.display = "none";
+			hideDivs ([
+				"sameCassetteOptionsDiv",
+				"processIdDivSame"
+			]);
+		}		
 }
 
 
