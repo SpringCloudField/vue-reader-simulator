@@ -179,4 +179,15 @@ public class ConfigurationTO {
 	public void setSameCassette(Boolean sameCassette) {
 		this.sameCassette = sameCassette;
 	}
+
+	@Override
+	public String toString() {
+		return "ConfigurationTO [id=" + id + ", serialNumber=" + serialNumber + ", ethernetIp=" + ethernetIp
+				+ ", busyState=" + busyState + ", cassetteIn=" + cassetteIn + ", cassetteTime=" + cassetteTime
+				+ ", settingsVersion=" + settingsVersion + ", releaseVersion=" + releaseVersion + ", cassetteTypeId="
+				+ cassetteTypeId + ", testType=" + testType + ", cassetteErrorCode=" + cassetteErrorCode
+				+ ", processId=" + processId + ", previousProcessId=" + previousProcessId + ", scanSingle=" + scanSingle
+				+ ", scanMultiple=" + scanMultiple + ", scanDouble=" + scanDouble + "]";
+	}
+	
 }

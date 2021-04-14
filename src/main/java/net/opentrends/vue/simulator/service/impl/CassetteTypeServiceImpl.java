@@ -27,4 +27,10 @@ public class CassetteTypeServiceImpl implements CassetteTypeService {
 			.collect(Collectors.toList());
 	}
 
+	@Override
+	public CassetteTypeTO getCassetteTypeByCode(Integer code) {
+		return cassetteTypeRepository.findByCode(code);
+		
+	}
+
 }
