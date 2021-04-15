@@ -6,15 +6,15 @@ function toggleProcessId() {
     if (id == "Quick") {
  		
  		sameCassetteCheckbox.checked = false;
- 		   
+    	
     	hideDivs([
 	    	"processIdDiv",
+	    	"processIdDivSame",
 	    	"sameCassetteCheckboxDiv",
 	    	"sameCassetteOptionsDiv"
     	]);
-     
     } else if (id == "Timed") {
-    
+    	
     	showDivs ([
 	    	"processIdDiv",
 	    	"sameCassetteCheckboxDiv"
@@ -26,13 +26,13 @@ function showSameCassette() {
 		let chBox = document.getElementById("sameCassetteCheckbox");
 		
 		if(chBox.checked){
-			sameCassetteOptionsDiv.style.display = "block";
+			
 			showDivs ([
 				"sameCassetteOptionsDiv",
 				"processIdDivSame"
 			]);
 		} else {
-			sameCassetteOptionsDiv.style.display = "none";
+			
 			hideDivs ([
 				"sameCassetteOptionsDiv",
 				"processIdDivSame"
