@@ -12,26 +12,26 @@ import org.springframework.web.bind.annotation.RestController;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import net.opentrends.vue.simulator.dto.CassetteProcessesResponseTO;
-import net.opentrends.vue.simulator.dto.ConfigResponseTO;
+import net.opentrends.vue.simulator.dto.ConfigReaderResponseTO;
 import net.opentrends.vue.simulator.dto.DateTimeResponseTO;
 import net.opentrends.vue.simulator.dto.StatusResponseTO;
-import net.opentrends.vue.simulator.service.ConfigurationService;
+import net.opentrends.vue.simulator.service.SimulatorService;
 
 @RestController
 @RequestMapping("/api/vue/simulator/")
 public class SimulatorController {
 
 	@Autowired
-	private ConfigurationService configurationService;
+	private SimulatorService simulatorService;
 	
 	@ApiOperation(value = "Configuration from VUE reader simulator ")
-	@GetMapping("/{idSimulator}/v2.4/config_reader")
+	@GetMapping("/{serialNumber}/v2.4/config_reader")
 	public ResponseEntity<?> config(
-			@ApiParam(value = "Id simulator")
-			@PathVariable String idSimulator) {
-		ConfigResponseTO configResponse = new ConfigResponseTO();
-		configResponse.setConfigTO(configurationService.getConfig(idSimulator));
-		if (configResponse.getConfigTO() == null) {
+			@ApiParam(value = "VUE Reader Simulator SN")
+			@PathVariable String serialNumber) {
+		ConfigReaderResponseTO configResponse = new ConfigReaderResponseTO();
+		configResponse.setConfigReaderTO(simulatorService.getConfigReader(serialNumber));
+		if (configResponse.getConfigReaderTO() == null) {
 			return ResponseEntity.notFound().build();
 		}else {
 			return ResponseEntity.ok(configResponse);
@@ -39,12 +39,12 @@ public class SimulatorController {
 	}
 
 	@ApiOperation(value = "Status from VUE reader simulator ")
-	@GetMapping("/{idSimulator}/status")
+	@GetMapping("/{serialNumber}/status")
 	public ResponseEntity <?> readerStatus(
-			@ApiParam(value = "Id simulator") 
-			@PathVariable String idSimulator) {
+			@ApiParam(value = "VUE Reader Simulator SN")
+			@PathVariable String serialNumber) {
 		StatusResponseTO statusResponse = new StatusResponseTO();
-		statusResponse.setStatusTO(configurationService.getStatusConfig(idSimulator));
+		statusResponse.setStatusTO(simulatorService.getStatusConfig(serialNumber));
 		if (statusResponse.getStatusTO() == null) {
 			return ResponseEntity.notFound().build();
 		}else {
@@ -53,24 +53,24 @@ public class SimulatorController {
 	}
 	
 	@ApiOperation(value = " ")
-	@GetMapping("/{idSimulator}/v2.4/reader_date_and_time")
+	@GetMapping("/{serialNumber}/v2.4/reader_date_and_time")
 	public ResponseEntity<DateTimeResponseTO> readerDateAndTime(
-			@ApiParam(value = "Id simulator") 
-			@PathVariable String idSimulator) {
+			@ApiParam(value = "VUE Reader Simulator SN")
+			@PathVariable String serialNumber) {
 		return ResponseEntity.ok(new DateTimeResponseTO());
 	}
 	
 	@ApiOperation(value = "Test from VUE reader simulator ")
-	@PostMapping("/{idSimulator}/v2.4/cassette_processes")
-	public String cassetteProcesses1(@ApiParam(value = "Id simulator") @PathVariable String idSimulator) {
+	@PostMapping("/{serialNumber}/v2.4/cassette_processes")
+	public String cassetteProcesses1(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		return "statusTO";
 	}
 	
 	@ApiOperation(value = "Test from VUE reader simulator ")
-	@GetMapping("/{idSimulator}/v2.4/cassette_processes")
-	public ResponseEntity<?> cassetteProcesses2(@ApiParam(value = "Id simulator") @PathVariable String idSimulator) {
+	@GetMapping("/{serialNumber}/v2.4/cassette_processes")
+	public ResponseEntity<?> cassetteProcesses2(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		CassetteProcessesResponseTO  cassetteProcessesResponse = new CassetteProcessesResponseTO();
-		cassetteProcessesResponse.setResultTO(configurationService.getCassetteProcesses(idSimulator));
+		cassetteProcessesResponse.setResultTO(simulatorService.getCassetteProcesses(serialNumber));
 		if (cassetteProcessesResponse.getResultTO() == null) {
 			return ResponseEntity.notFound().build();
 		}else {
@@ -79,14 +79,14 @@ public class SimulatorController {
 	}
 	
 	@ApiOperation(value = "Image test from VUE reader simulator ")
-	@GetMapping("/{idSimulator}/v2.4/images")
-	public String images(@ApiParam(value = "Id simulator") @PathVariable String idSimulator) {
+	@GetMapping("/{serialNumber}/v2.4/images")
+	public String images(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		return "statusTO";
 	}
 	
 	@ApiOperation(value = "Cancel timed scan ")
-	@PutMapping("/{idSimulator}/v2.4/images")
-	public String cancelTimedScant(@ApiParam(value = "Id simulator") @PathVariable String idSimulator) {
+	@PutMapping("/{serialNumber}/v2.4/images")
+	public String cancelTimedScant(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		return "statusTO";
 	}
 

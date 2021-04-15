@@ -1,6 +1,5 @@
 package net.opentrends.vue.simulator.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,33 +8,17 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import net.opentrends.vue.simulator.dto.CassetteTypeTO;
-import net.opentrends.vue.simulator.dto.ConfigTO;
 import net.opentrends.vue.simulator.dto.ConfigurationTO;
-import net.opentrends.vue.simulator.dto.DeviceStatusTO;
-import net.opentrends.vue.simulator.dto.ErrorTO;
-import net.opentrends.vue.simulator.dto.EthernetTO;
-import net.opentrends.vue.simulator.dto.ProcessResultTO;
-import net.opentrends.vue.simulator.dto.ReaderDataTO;
-import net.opentrends.vue.simulator.dto.ResultTO;
-import net.opentrends.vue.simulator.dto.StatusTO;
-import net.opentrends.vue.simulator.dto.WifiApTO;
-import net.opentrends.vue.simulator.dto.WifiModeTO;
-import net.opentrends.vue.simulator.dto.WifiStationTO;
 import net.opentrends.vue.simulator.model.Configuration;
 import net.opentrends.vue.simulator.repository.ConfigurationRepository;
-import net.opentrends.vue.simulator.service.CassetteTypeService;
 import net.opentrends.vue.simulator.service.ConfigurationService;
 
 @Service
 public class ConfigurationServiceImpl implements ConfigurationService {
-	
+
 	@Autowired
 	private ConfigurationRepository configRespository;
-	
-	@Autowired
-	private CassetteTypeService cassetteTypeService;
-	
+
 	@Autowired
 	private ModelMapper mapper;
 
@@ -47,155 +30,28 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 	}
 
 	@Override
-	public ConfigurationTO getConfigById(String configId) {		
+	public ConfigurationTO getConfigById(String configId) {
 		Optional<Configuration> conf = configRespository.findById(configId);
-		return conf.map(c-> mapper.map(c, ConfigurationTO.class)).orElse(null);
+		return conf.map(c -> mapper.map(c, ConfigurationTO.class)).orElse(null);
 	}
 
 	@Override
 	public List<ConfigurationTO> getConfigsByUserId(String idUser) {
 		return configRespository.findByUserId(idUser)
-				.stream()
-				.map(config -> mapper.map(config, ConfigurationTO.class))
-				.collect(Collectors.toList());
+			.stream()
+			.map(config -> mapper.map(config, ConfigurationTO.class))
+			.collect(Collectors.toList());
 	}
 	
 	@Override
-	public ConfigTO getConfig(String serialNumber) {
-		
-		Optional<Configuration>conf = configRespository.findBySerialNumber(serialNumber);
-		if (!conf.isPresent()) {
-			return null;
-		}
-		ConfigurationTO configuration = conf.map(c-> mapper.map(c, ConfigurationTO.class)).orElse(null);
-		ConfigTO config = new ConfigTO();
-		EthernetTO ethernet = new EthernetTO();
-		WifiApTO wifiAp = new WifiApTO();
-		WifiModeTO wifiMode = new WifiModeTO();
-		WifiStationTO wifiStation = new WifiStationTO();
-
-		ethernet.setDhcp(1);
-		ethernet.setGateway("192.168.133.1");
-		ethernet.setIp(configuration.getEthernetIp());
-		ethernet.setNetmask("255.255.255.0");
-		wifiAp.setIp("192.168.133.123");
-		wifiAp.setNetmask("255.255.255.0");
-		wifiAp.setPwd("abwi-rdr");
-		wifiAp.setSsid("VUESIMUL");
-		wifiMode.setWifiAp(true);
-		wifiStation.setDhcp(true);
-		wifiStation.setGateway("192.168.0.1");
-		wifiStation.setIp("192.168.255.254");
-		wifiStation.setNetmask("255.255.255.0");
-		wifiStation.setPwd("pwd_easy_easy");
-		wifiStation.setSsid("VUE123456");
-		config.setEthernetTO(ethernet);
-		config.setWifiApTO(wifiAp);
-		config.setWifimodeTO(wifiMode);
-		config.setWifiStationTO(wifiStation);
-		
-		return config;
-	}
-
-	@Override
-	public StatusTO getStatusConfig(String serialNumber) {
-
-		Optional<Configuration>conf = configRespository.findBySerialNumber(serialNumber);
-		if (!conf.isPresent()) {
-			return null;
-		}
-		ConfigurationTO configuration = conf.map(c-> mapper.map(c, ConfigurationTO.class)).orElse(null);
-		DeviceStatusTO deviceStatus = new  DeviceStatusTO();
-		ErrorTO error = new ErrorTO();
-		StatusTO status = new StatusTO();
-		
-		deviceStatus.setBusyState(configuration.getBusyState());
-		deviceStatus.setCassetteIn(configuration.getCassetteIn());
-		deviceStatus.setCassetteTime(configuration.getCassetteTime().toString());
-		deviceStatus.setDateTime("1970-01-01T00:08:52.702955"); //mocked data
-		deviceStatus.setDbVersion(5);//mocked data
-		deviceStatus.setPlatform("RPi3_x86");//mocked data
-		deviceStatus.setReleaseVersion(configuration.getReleaseVersion());
-		deviceStatus.setSerialNumber(configuration.getSerialNumber());
-		deviceStatus.setSettingsVersion(configuration.getSettingsVersion());
-		
-		Integer errorCode= configuration.getCassetteErrorCode();
-		error.setCode(errorCode);
-		if (errorCode !=0) {error.setDescription("Error " + configuration.getCassetteErrorCode());}
-		else {error.setDescription("success");}
-		
-		status.setDeviceStatus(deviceStatus);
-		status.setError(error);
-		
-		return status;
-	}
-
-	@Override
-	public ResultTO getCassetteProcesses(String serialNumber) {
-		
-		Optional<Configuration>conf = configRespository.findBySerialNumber(serialNumber);
-		if (!conf.isPresent()) {
-			return null;
-		}
-		ConfigurationTO configuration = conf.map(c-> mapper.map(c, ConfigurationTO.class)).orElse(null);
-		ResultTO result = new ResultTO();
-		CassetteTypeTO cassetteType = new CassetteTypeTO();
-		ErrorTO error = new ErrorTO();
-		ProcessResultTO result1 = new ProcessResultTO();
-		CassetteTypeTO cassetteTypeRead = cassetteTypeService.getCassetteTypeByCode(configuration.getCassetteTypeId());
-		ReaderDataTO readerData = new ReaderDataTO();
-		
-		
-		
-		result.setCassetteProcessId(configuration.getProcessId());
-		result.setPreviousProcessId(configuration.getPreviousProcessId());
-		
-		cassetteType.setCode(configuration.getCassetteTypeId());
-		cassetteType.setType(cassetteTypeRead.getType());
-		
-		Integer errorCode = configuration.getCassetteErrorCode();
-		error.setCode(errorCode);
-		if (errorCode !=0) {error.setDescription("Error " + errorCode);}
-		else {error.setDescription("success");}
-		
-		result1.setBackground("205.9887617021278");
-		result1.setColor01("#FF7000");
-		result1.setColor02("#FF7000");
-		result1.setControl(configuration.getScanSingle().getControl());
-		
-		ErrorTO error1 = new ErrorTO();
-		Integer resultErrorCode = configuration.getScanSingle().getTestErrorCode();
-		error1.setCode(resultErrorCode);
-		if (resultErrorCode !=0) {error1.setDescription("Error " + resultErrorCode);}
-		else {error1.setDescription("success");}
-		result1.setError(error1);
-		result1.setInitial(cassetteTypeRead.getType().toUpperCase().charAt(0));
-		result1.setNoise(configuration.getScanSingle().getNoise());
-		result1.setPositive(true);
-		result1.setReliable(true);
-		result1.setTestLineValue(configuration.getScanSingle().getTestLineValue());
-		result1.setTestName(cassetteTypeRead.getType());
-		result1.setWarnings(null);
-		
-		readerData.setCassetteTime(configuration.getCassetteTime());
-		readerData.setDateTime("2020-11-15 11:29:59");
-		readerData.setDbVersion("5");
-		readerData.setReleaseVersion(configuration.getReleaseVersion());
-		readerData.setSettingsVersion(configuration.getSettingsVersion());
-		
-		result.setCassetteType(cassetteType);
-		result.setError(error);
-		ArrayList<ProcessResultTO> processResults = new ArrayList<ProcessResultTO>();
-		processResults.add(result1);
-		result.setProcessResults(processResults);
-		result.setReaderData(readerData);
-		
-		return result;
-	}
+	public ConfigurationTO getConfigBySerialNumber(String serialNumber) {
+		Configuration conf = configRespository.findBySerialNumber(serialNumber);
+		return Optional.ofNullable(conf).map(c -> mapper.map(conf, ConfigurationTO.class)).orElse(null);
+	}	
 
 	@Override
 	public boolean existSerialNumber(String serialNumber, String userId) {
 		return configRespository.existsBySerialNumberAndUserIdNot(serialNumber, userId);
-	}	
+	}
 
 }

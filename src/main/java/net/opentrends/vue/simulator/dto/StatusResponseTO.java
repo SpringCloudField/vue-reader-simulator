@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Component
-//@JsonRootName(value = "Status")
 public class StatusResponseTO {
 	
 	@JsonProperty("Status")

@@ -30,7 +30,6 @@ public class CassetteTypeServiceImpl implements CassetteTypeService {
 	@Override
 	public CassetteTypeTO getCassetteTypeByCode(Integer code) {
 		return cassetteTypeRepository.findByCode(code);
-		
 	}
 
 }

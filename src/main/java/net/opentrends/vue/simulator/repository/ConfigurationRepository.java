@@ -1,7 +1,6 @@
 package net.opentrends.vue.simulator.repository;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -11,7 +10,7 @@ public interface ConfigurationRepository extends MongoRepository<Configuration, 
 	
 	public List<Configuration> findByUserId(String idUser);
 	
-	public Optional<Configuration> findBySerialNumber(String serialNumber);
+	public Configuration findBySerialNumber(String serialNumber);
 	
 	public boolean existsBySerialNumberAndUserIdNot(String seriaNumber, String idUser);
 
