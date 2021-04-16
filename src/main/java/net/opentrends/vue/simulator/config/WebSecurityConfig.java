@@ -22,8 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
-	CustomizeAuthenticationSuccessHandler customizeAuthenticationSuccessHandler;
-
+	private CustomizeAuthenticationSuccessHandler customizeAuthenticationSuccessHandler;
+	
 	
 	@Bean
 	public UserDetailsService mongoUserDetails() {
@@ -44,18 +44,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .antMatchers("/signup").permitAll()
             .antMatchers("/dashboard/**").hasAuthority("ADMIN")
             .antMatchers("/simulator/**").hasAuthority("ADMIN")
-            .antMatchers("/api/vue/simulator/**").permitAll()
-            .anyRequest()
-            .authenticated()
-            .and().csrf().disable().formLogin()
+            .antMatchers("/api/vue/simulator/**").hasAuthority("API")
+            .anyRequest().denyAll()
+            .and().csrf().disable()
+            .headers().frameOptions().disable()
+            .and().httpBasic()
+            .and().formLogin()
             	.successHandler(customizeAuthenticationSuccessHandler)
             	.loginPage("/login")
             	.failureUrl("/login?error=true")
             	.usernameParameter("email")
             	.passwordParameter("password")
-            .and().logout()
+            	.and()
+            .logout()
             	.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-            	.logoutSuccessUrl("/login").and().exceptionHandling();
+            	.logoutSuccessUrl("/login");
 	}
 	
 	@Override
