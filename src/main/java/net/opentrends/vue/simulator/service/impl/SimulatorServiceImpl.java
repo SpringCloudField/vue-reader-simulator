@@ -26,6 +26,7 @@ import net.opentrends.vue.simulator.dto.WifiStationTO;
 import net.opentrends.vue.simulator.service.CassetteTypeService;
 import net.opentrends.vue.simulator.service.ConfigurationService;
 import net.opentrends.vue.simulator.service.SimulatorService;
+import net.opentrends.vue.simulator.utils.DefaultParams;
 
 @Service
 public class SimulatorServiceImpl implements SimulatorService {
@@ -42,27 +43,28 @@ public class SimulatorServiceImpl implements SimulatorService {
 		ConfigurationTO configuration = configurationService.getConfigBySerialNumber(serialNumber);
 		
 		EthernetTO ethernet = new EthernetTO();
+		// TODO: boolean?
 		ethernet.setDhcp(1);
-		ethernet.setGateway("192.168.133.1");
+		ethernet.setGateway(DefaultParams.GATEWAY);
 		ethernet.setIp(configuration.getEthernetIp());
-		ethernet.setNetmask("255.255.255.0");
+		ethernet.setNetmask(DefaultParams.MASK);
 		
 		WifiApTO wifiAp = new WifiApTO();
-		wifiAp.setIp("192.168.133.123");
-		wifiAp.setNetmask("255.255.255.0");
-		wifiAp.setPwd("abwi-rdr");
-		wifiAp.setSsid("VUESIMUL");
+		wifiAp.setIp(DefaultParams.IP);
+		wifiAp.setNetmask(DefaultParams.MASK);
+		wifiAp.setPwd(DefaultParams.PWD);
+		wifiAp.setSsid(DefaultParams.SSID);
 		
 		WifiModeTO wifiMode = new WifiModeTO();
 		wifiMode.setWifiAp(true);
 		
 		WifiStationTO wifiStation = new WifiStationTO();
 		wifiStation.setDhcp(true);
-		wifiStation.setGateway("192.168.0.1");
-		wifiStation.setIp("192.168.255.254");
-		wifiStation.setNetmask("255.255.255.0");
-		wifiStation.setPwd("pwd_easy_easy");
-		wifiStation.setSsid("VUE123456");
+		wifiStation.setGateway(DefaultParams.GATEWAY);
+		wifiStation.setIp(DefaultParams.IP);
+		wifiStation.setNetmask(DefaultParams.MASK);
+		wifiStation.setPwd(DefaultParams.PWD);
+		wifiStation.setSsid(DefaultParams.SSID);
 		
 		ConfigReaderTO config = new ConfigReaderTO();
 		config.setEthernetTO(ethernet);
@@ -75,16 +77,16 @@ public class SimulatorServiceImpl implements SimulatorService {
 
 	@Override
 	public StatusTO getStatusConfig(String serialNumber) {
-
 		ConfigurationTO configuration = configurationService.getConfigBySerialNumber(serialNumber);
 
 		DeviceStatusTO deviceStatus = new DeviceStatusTO();
 		deviceStatus.setBusyState(configuration.getBusyState());
 		deviceStatus.setCassetteIn(configuration.getCassetteIn());
+		// save as double getCassetteTime
 		deviceStatus.setCassetteTime(configuration.getCassetteTime().toString());
 		deviceStatus.setDateTime("1970-01-01T00:08:52.702955");
 		deviceStatus.setDbVersion(5);
-		deviceStatus.setPlatform("RPi3_x86");
+		deviceStatus.setPlatform(DefaultParams.PLATFORM);
 		deviceStatus.setReleaseVersion(configuration.getReleaseVersion());
 		deviceStatus.setSerialNumber(configuration.getSerialNumber());
 		deviceStatus.setSettingsVersion(configuration.getSettingsVersion());
