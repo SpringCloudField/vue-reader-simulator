@@ -45,7 +45,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
             .antMatchers("/dashboard/**").hasAuthority("ADMIN")
             .antMatchers("/simulator/**").hasAuthority("ADMIN")
             .antMatchers("/api/vue/simulator/**").hasAuthority("API")
-            .anyRequest().denyAll()
+            .anyRequest().authenticated()
             .and().csrf().disable()
             .headers().frameOptions().disable()
             .and().httpBasic()
