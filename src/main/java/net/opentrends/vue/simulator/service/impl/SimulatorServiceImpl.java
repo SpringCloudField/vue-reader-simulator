@@ -1,9 +1,13 @@
 package net.opentrends.vue.simulator.service.impl;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 import net.opentrends.vue.simulator.dto.CassetteTypeTO;
 import net.opentrends.vue.simulator.dto.ConfigReaderTO;
@@ -11,6 +15,7 @@ import net.opentrends.vue.simulator.dto.ConfigurationTO;
 import net.opentrends.vue.simulator.dto.DeviceStatusTO;
 import net.opentrends.vue.simulator.dto.ErrorTO;
 import net.opentrends.vue.simulator.dto.EthernetTO;
+import net.opentrends.vue.simulator.dto.ImagesTO;
 import net.opentrends.vue.simulator.dto.ProcessResultTO;
 import net.opentrends.vue.simulator.dto.ReaderDataTO;
 import net.opentrends.vue.simulator.dto.ResultTO;
@@ -164,6 +169,16 @@ public class SimulatorServiceImpl implements SimulatorService {
 		result.setReaderData(readerData);
 
 		return result;
+	}
+
+	@Override
+	public ImagesTO getImage(String serialNumber) throws IOException {
+		configurationService.getConfigBySerialNumber(serialNumber);
+		ImagesTO imageTo = new ImagesTO();
+		imageTo.setId(1);
+		File file = ResourceUtils.getFile("classpath:static/images/vue.png");
+		imageTo.setImage(Files.readAllBytes(file.toPath()));
+		return imageTo;
 	}
 
 }

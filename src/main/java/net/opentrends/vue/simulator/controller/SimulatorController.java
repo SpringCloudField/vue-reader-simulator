@@ -1,5 +1,7 @@
 package net.opentrends.vue.simulator.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +15,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import net.opentrends.vue.simulator.dto.CassetteProcessesResponseTO;
 import net.opentrends.vue.simulator.dto.ConfigReaderResponseTO;
-import net.opentrends.vue.simulator.dto.DateTimeResponseTO;
+import net.opentrends.vue.simulator.dto.DummyResponseTO;
+import net.opentrends.vue.simulator.dto.ImagesResponseTO;
 import net.opentrends.vue.simulator.dto.StatusResponseTO;
 import net.opentrends.vue.simulator.service.SimulatorService;
 
@@ -51,9 +54,11 @@ public class SimulatorController {
 
 	@ApiOperation(value = " ")
 	@GetMapping("/{serialNumber}/v2.4/reader_date_and_time")
-	public ResponseEntity<DateTimeResponseTO> readerDateAndTime(
-			@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
-		return ResponseEntity.ok(new DateTimeResponseTO());
+	public ResponseEntity<DummyResponseTO> readerDateAndTime(
+			@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {		
+		DummyResponseTO responseTO = new DummyResponseTO();
+		responseTO.setDummy("1997-07-16T19:20+01:00");
+		return ResponseEntity.ok(responseTO);
 	}
 
 	@ApiOperation(value = "Test from VUE reader simulator ")
@@ -77,14 +82,18 @@ public class SimulatorController {
 
 	@ApiOperation(value = "Image test from VUE reader simulator ")
 	@GetMapping("/{serialNumber}/v2.4/images")
-	public String images(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
-		return "statusTO";
+	public ResponseEntity<ImagesResponseTO> images(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) throws IOException {
+		ImagesResponseTO imagesResponseTO = new ImagesResponseTO();
+		imagesResponseTO.setImage(simulatorService.getImage(serialNumber));
+		return ResponseEntity.ok(imagesResponseTO);
 	}
 
 	@ApiOperation(value = "Cancel timed scan ")
-	@PutMapping("/{serialNumber}/v2.4/images")
-	public String cancelTimedScant(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
-		return "statusTO";
+	@PutMapping("/{serialNumber}/v2.4/cancel_timed_scan")
+	public ResponseEntity<DummyResponseTO> cancelTimedScant(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
+		DummyResponseTO responseTO = new DummyResponseTO();
+		responseTO.setDummy("cancel");
+		return ResponseEntity.ok(responseTO);
 	}
 
 }
