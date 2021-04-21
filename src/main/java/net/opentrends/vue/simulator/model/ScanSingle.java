@@ -7,7 +7,7 @@ public class ScanSingle {
 	private Double noise;
 	private Double testLineValue;
 	private Integer lotNumber;
-	private Integer scaledResult;	
+	private Double scaledResult;	
 	private Integer testErrorCode;
 	
 	private Boolean positive2;
@@ -15,7 +15,7 @@ public class ScanSingle {
 	private Double noise2;
 	private Double testLineValue2;
 	private Integer lotNumber2;
-	private Integer scaledResult2;	
+	private Double scaledResult2;	
 	private Integer testErrorCode2;
 	
 	public Boolean getPositive() {
@@ -48,10 +48,10 @@ public class ScanSingle {
 	public void setLotNumber(Integer lotNumber) {
 		this.lotNumber = lotNumber;
 	}
-	public Integer getScaledResult() {
+	public Double getScaledResult() {
 		return scaledResult;
 	}
-	public void setScaledResult(Integer scaledResult) {
+	public void setScaledResult(Double scaledResult) {
 		this.scaledResult = scaledResult;
 	}
 	public Integer getTestErrorCode() {
@@ -90,10 +90,10 @@ public class ScanSingle {
 	public void setLotNumber2(Integer lotNumber2) {
 		this.lotNumber2 = lotNumber2;
 	}
-	public Integer getScaledResult2() {
+	public Double getScaledResult2() {
 		return scaledResult2;
 	}
-	public void setScaledResult2(Integer scaledResult2) {
+	public void setScaledResult2(Double scaledResult2) {
 		this.scaledResult2 = scaledResult2;
 	}
 	public Integer getTestErrorCode2() {
