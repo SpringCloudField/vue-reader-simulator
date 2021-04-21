@@ -19,7 +19,6 @@ import net.opentrends.vue.simulator.repository.CassetteTypeRepository;
 import net.opentrends.vue.simulator.service.impl.CassetteTypeServiceImpl;
 
 
-
 @ExtendWith(SpringExtension.class)
 public class CassetteTypeServiceTest {
 	
