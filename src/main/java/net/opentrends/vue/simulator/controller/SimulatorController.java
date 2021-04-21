@@ -18,6 +18,7 @@ import net.opentrends.vue.simulator.dto.ConfigReaderResponseTO;
 import net.opentrends.vue.simulator.dto.DummyResponseTO;
 import net.opentrends.vue.simulator.dto.ImagesResponseTO;
 import net.opentrends.vue.simulator.dto.StatusResponseTO;
+import net.opentrends.vue.simulator.exception.AppRuntimeException;
 import net.opentrends.vue.simulator.service.SimulatorService;
 
 @RestController
@@ -82,7 +83,7 @@ public class SimulatorController {
 
 	@ApiOperation(value = "Image test from VUE reader simulator ")
 	@GetMapping("/{serialNumber}/v2.4/images")
-	public ResponseEntity<ImagesResponseTO> images(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) throws IOException {
+	public ResponseEntity<ImagesResponseTO> images(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) throws AppRuntimeException, IOException {
 		ImagesResponseTO imagesResponseTO = new ImagesResponseTO();
 		imagesResponseTO.setImage(simulatorService.getImage(serialNumber));
 		return ResponseEntity.ok(imagesResponseTO);

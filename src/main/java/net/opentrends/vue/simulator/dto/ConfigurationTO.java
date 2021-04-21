@@ -3,10 +3,6 @@ package net.opentrends.vue.simulator.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import net.opentrends.vue.simulator.model.ScanDouble;
-import net.opentrends.vue.simulator.model.ScanMultiple;
-import net.opentrends.vue.simulator.model.ScanSingle;
-
 public class ConfigurationTO {
 
 	private String id;
@@ -36,9 +32,9 @@ public class ConfigurationTO {
 	private Integer cassetteErrorCode;
 	private Integer processId;
 	private Integer previousProcessId;
-	private ScanSingle scanSingle;
-	private ScanMultiple scanMultiple;
-	private ScanDouble scanDouble;
+	private ScanSingleTO scanSingle;
+	private ScanMultipleTO scanMultiple;
+	private ScanDoubleTO scanDouble;
 		
 
 	public ConfigurationTO() {
@@ -132,27 +128,27 @@ public class ConfigurationTO {
 		this.previousProcessId = previousProcessId;
 	}
 
-	public ScanSingle getScanSingle() {
+	public ScanSingleTO getScanSingle() {
 		return scanSingle;
 	}
 
-	public void setScanSingle(ScanSingle scanSingle) {
+	public void setScanSingle(ScanSingleTO scanSingle) {
 		this.scanSingle = scanSingle;
 	}
 
-	public ScanMultiple getScanMultiple() {
+	public ScanMultipleTO getScanMultiple() {
 		return scanMultiple;
 	}
 
-	public void setScanMultiple(ScanMultiple scanMultiple) {
+	public void setScanMultiple(ScanMultipleTO scanMultiple) {
 		this.scanMultiple = scanMultiple;
 	}
 
-	public ScanDouble getScanDouble() {
+	public ScanDoubleTO getScanDouble() {
 		return scanDouble;
 	}
 
-	public void setScanDouble(ScanDouble scanDouble) {
+	public void setScanDouble(ScanDoubleTO scanDouble) {
 		this.scanDouble = scanDouble;
 	}
 

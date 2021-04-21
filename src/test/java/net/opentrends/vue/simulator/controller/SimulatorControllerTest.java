@@ -26,7 +26,7 @@ public class SimulatorControllerTest {
 	private SimulatorController simulatorController;
 	
 	@Test
-	public void configTest() {		
+	public void configTest() throws Exception {		
 		when(simulatorService.getConfigReader(ArgumentMatchers.any())).thenReturn(new ConfigReaderTO() );
 		ResponseEntity<ConfigReaderResponseTO> response = simulatorController.config("serial_number");
 		assertNotNull(response.getBody());

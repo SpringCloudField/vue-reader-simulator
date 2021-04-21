@@ -17,6 +17,7 @@ import net.opentrends.vue.simulator.dto.ConfigReaderTO;
 import net.opentrends.vue.simulator.dto.ConfigurationTO;
 import net.opentrends.vue.simulator.dto.ImagesTO;
 import net.opentrends.vue.simulator.dto.StatusTO;
+import net.opentrends.vue.simulator.exception.AppRuntimeException;
 import net.opentrends.vue.simulator.service.CassetteTypeService;
 import net.opentrends.vue.simulator.service.ConfigurationService;
 import net.opentrends.vue.simulator.service.impl.SimulatorServiceImpl;
@@ -33,7 +34,7 @@ public class SimulatorServiceTest {
 	private SimulatorServiceImpl simulatorService;
 	
 	@Test
-	public void getImagesTest() throws IOException {
+	public void getImagesTest() throws AppRuntimeException, IOException {
 		ImagesTO to = simulatorService.getImage("serial_number");
 		assertNotNull(to);
 		assertNotNull(to.getImage());
@@ -41,7 +42,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void getConfigReaderTest() throws IOException {
+	public void getConfigReaderTest() throws AppRuntimeException {
 		ConfigurationTO confTO = createConfigurationTO(false);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
 		
@@ -64,7 +65,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void getStatusReaderTestNoCassetteError() throws IOException {
+	public void getStatusReaderTestNoCassetteError() throws AppRuntimeException {
 		ConfigurationTO confTO = createConfigurationTO(false);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
 		
@@ -81,7 +82,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void getStatusReaderTestWithCassetteError() throws IOException {
+	public void getStatusReaderTestWithCassetteError() throws AppRuntimeException {
 		ConfigurationTO confTO = createConfigurationTO(true);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
 		

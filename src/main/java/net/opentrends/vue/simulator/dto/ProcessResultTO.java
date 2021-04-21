@@ -1,14 +1,14 @@
 package net.opentrends.vue.simulator.dto;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(Include.NON_NULL)
 public class ProcessResultTO {
-	
+
 	private String background;
 	@JsonProperty("color_01")
 	private String color01;
@@ -28,7 +28,8 @@ public class ProcessResultTO {
 	private Double scaledResult;
 	private Integer lotNumber;
 	private CoeficientsTO coeficients;
-	
+	private List<WarningTO> warnings;
+
 	public Double getScaledResult() {
 		return scaledResult;
 	}
@@ -52,8 +53,6 @@ public class ProcessResultTO {
 	public void setCoeficients(CoeficientsTO coeficients) {
 		this.coeficients = coeficients;
 	}
-
-	private ArrayList <WarningTO> warnings;
 
 	public String getBackground() {
 		return background;
@@ -143,14 +142,14 @@ public class ProcessResultTO {
 		this.testName = testName;
 	}
 
-	public ArrayList <WarningTO> getWarnings() {
+	public List<WarningTO> getWarnings() {
 		return warnings;
 	}
 
-	public void setWarnings(ArrayList <WarningTO> warnings) {
+	public void setWarnings(List<WarningTO> warnings) {
 		this.warnings = warnings;
 	}
-	
+
 	public Integer getPosition() {
 		return position;
 	}

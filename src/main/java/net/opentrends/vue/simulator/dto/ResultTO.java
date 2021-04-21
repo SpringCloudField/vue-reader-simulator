@@ -1,6 +1,6 @@
 package net.opentrends.vue.simulator.dto;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,7 +16,7 @@ public class ResultTO {
 	private ErrorTO error;
 	
 	@JsonProperty("results")
-	private ArrayList<ProcessResultTO> processResults;
+	private List<ProcessResultTO> processResults;
 	
 	@JsonProperty("previous_process_id")
 	private Integer previousProcessId;
@@ -48,11 +48,11 @@ public class ResultTO {
 		this.error = error;
 	}
 
-	public ArrayList<ProcessResultTO> getProcessResults() {
+	public List<ProcessResultTO> getProcessResults() {
 		return processResults;
 	}
 
-	public void setProcessResults(ArrayList<ProcessResultTO> processResults) {
+	public void setProcessResults(List<ProcessResultTO> processResults) {
 		this.processResults = processResults;
 	}
 
