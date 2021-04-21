@@ -11,7 +11,7 @@ public class DefaultParams {
 	
 	public final static String PWD = "abwi-rdr";
 	
-	public final static String SSID = "abwi-rdr";
+	public final static String SSID = "VUESIMUL";
 	
 	public final static String PLATFORM = "RPi3_x86";
 	
