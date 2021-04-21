@@ -1,36 +1,59 @@
 package net.opentrends.vue.simulator.dto;
 
+import java.util.ArrayList;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+@JsonInclude(Include.NON_NULL)
 public class ProcessResultTO {
-
+	
 	private String background;
-
 	@JsonProperty("color_01")
 	private String color01;
-
 	@JsonProperty("color_02")
 	private String color02;
-
 	private Double control;
-
 	private ErrorTO error;
-
 	private Character initial;
-
 	private Double noise;
-
 	private Boolean positive;
-
 	private Boolean reliable;
-
+	private Integer position;
 	@JsonProperty("test_line_value")
 	private Double testLineValue;
-
 	@JsonProperty("test_name")
 	private String testName;
+	private Double scaledResult;
+	private Integer lotNumber;
+	private CoeficientsTO coeficients;
+	
+	public Double getScaledResult() {
+		return scaledResult;
+	}
 
-	private WarningTO[] warnings;
+	public void setScaledResult(Double scaledResult) {
+		this.scaledResult = scaledResult;
+	}
+
+	public Integer getLotNumber() {
+		return lotNumber;
+	}
+
+	public void setLotNumber(Integer lotNumber) {
+		this.lotNumber = lotNumber;
+	}
+
+	public CoeficientsTO getCoeficients() {
+		return coeficients;
+	}
+
+	public void setCoeficients(CoeficientsTO coeficients) {
+		this.coeficients = coeficients;
+	}
+
+	private ArrayList <WarningTO> warnings;
 
 	public String getBackground() {
 		return background;
@@ -120,12 +143,20 @@ public class ProcessResultTO {
 		this.testName = testName;
 	}
 
-	public WarningTO[] getWarnings() {
+	public ArrayList <WarningTO> getWarnings() {
 		return warnings;
 	}
 
-	public void setWarnings(WarningTO[] warnings) {
+	public void setWarnings(ArrayList <WarningTO> warnings) {
 		this.warnings = warnings;
+	}
+	
+	public Integer getPosition() {
+		return position;
+	}
+
+	public void setPosition(Integer position) {
+		this.position = position;
 	}
 
 }
