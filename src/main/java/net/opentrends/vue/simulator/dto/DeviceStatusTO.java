@@ -11,10 +11,10 @@ public class DeviceStatusTO {
 	private Boolean busyState;
 	
 	@JsonProperty("cassette_in")
-	private Integer cassetteIn;
+	private Boolean cassetteIn;
 	
 	@JsonProperty("cassette_time")
-	private String cassetteTime;
+	private Double cassetteTime;
 	
 	@JsonProperty("date_time")
 	private String dateTime;
@@ -39,16 +39,16 @@ public class DeviceStatusTO {
 	public void setBusyState(Boolean busyState) {
 		this.busyState = busyState;
 	}
-	public Integer getCassetteIn() {
+	public Boolean getCassetteIn() {
 		return cassetteIn;
 	}
-	public void setCassetteIn(Integer cassetteIn) {
+	public void setCassetteIn(Boolean cassetteIn) {
 		this.cassetteIn = cassetteIn;
 	}
-	public String getCassetteTime() {
+	public Double getCassetteTime() {
 		return cassetteTime;
 	}
-	public void setCassetteTime(String cassetteTime) {
+	public void setCassetteTime(Double cassetteTime) {
 		this.cassetteTime = cassetteTime;
 	}
 	public String getDateTime() {

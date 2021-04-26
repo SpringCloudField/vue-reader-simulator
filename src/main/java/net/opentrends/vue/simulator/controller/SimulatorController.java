@@ -15,9 +15,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import net.opentrends.vue.simulator.dto.CassetteProcessesResponseTO;
 import net.opentrends.vue.simulator.dto.ConfigReaderResponseTO;
-import net.opentrends.vue.simulator.dto.DummyResponseTO;
+import net.opentrends.vue.simulator.dto.DateTimeTO;
 import net.opentrends.vue.simulator.dto.ImagesResponseTO;
 import net.opentrends.vue.simulator.dto.StatusResponseTO;
+import net.opentrends.vue.simulator.dto.TimeStampTO;
 import net.opentrends.vue.simulator.exception.AppRuntimeException;
 import net.opentrends.vue.simulator.service.SimulatorService;
 
@@ -55,11 +56,13 @@ public class SimulatorController {
 
 	@ApiOperation(value = " ")
 	@GetMapping("/{serialNumber}/v2.4/reader_date_and_time")
-	public ResponseEntity<DummyResponseTO> readerDateAndTime(
+	public ResponseEntity<TimeStampTO> readerDateAndTime(
 			@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {		
-		DummyResponseTO responseTO = new DummyResponseTO();
-		responseTO.setDummy("1997-07-16T19:20+01:00");
-		return ResponseEntity.ok(responseTO);
+		TimeStampTO timeStampResponse = new TimeStampTO();
+		DateTimeTO dateTime = new DateTimeTO();
+		dateTime.setDateTime("2015-06-17T12:42:02+02:00");
+		timeStampResponse.setTimeStamp(dateTime);;
+		return ResponseEntity.ok(timeStampResponse);
 	}
 
 	@ApiOperation(value = "Test from VUE reader simulator ")
@@ -91,10 +94,8 @@ public class SimulatorController {
 
 	@ApiOperation(value = "Cancel timed scan ")
 	@PutMapping("/{serialNumber}/v2.4/cancel_timed_scan")
-	public ResponseEntity<DummyResponseTO> cancelTimedScant(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
-		DummyResponseTO responseTO = new DummyResponseTO();
-		responseTO.setDummy("cancel");
-		return ResponseEntity.ok(responseTO);
+	public ResponseEntity<?> cancelTimedScan(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
+		return ResponseEntity.accepted().build();
 	}
 
 }
