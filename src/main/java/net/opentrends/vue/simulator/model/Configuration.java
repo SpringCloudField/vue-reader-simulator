@@ -26,7 +26,7 @@ public class Configuration {
 	private Boolean busyState;
 	@NotNull
 	@NotEmpty
-	private Integer cassetteIn;
+	private Boolean cassetteIn;
 	@NotNull
 	@NotEmpty
 	private Double cassetteTime;
@@ -75,10 +75,10 @@ public class Configuration {
 	public void setBusyState(Boolean busyState) {
 		this.busyState = busyState;
 	}
-	public Integer getCassetteIn() {
+	public Boolean getCassetteIn() {
 		return cassetteIn;
 	}
-	public void setCassetteIn(Integer cassetteIn) {
+	public void setCassetteIn(Boolean cassetteIn) {
 		this.cassetteIn = cassetteIn;
 	}
 	public Double getCassetteTime() {

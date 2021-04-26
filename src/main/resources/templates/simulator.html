@@ -40,8 +40,7 @@
 					</div>
 					<div class="col-md-2 form-group">
 						<label>cassette_in</label> 
-						<input type="number" class="form-control form-control-sm" th:field="*{cassetteIn}" required>
-						<small th:if="${#fields.hasErrors('cassetteIn')}" th:errors="*{cassetteIn}" class="form-text text-danger"></small>
+						<input type="checkbox" class="form-check" th:field="*{cassetteIn}">
 					</div>
 					<div class="col-md-3 form-group">
 						<label>settings_version</label> 

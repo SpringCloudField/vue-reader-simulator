@@ -15,7 +15,7 @@ public class ConfigurationTO {
 	@NotNull(message = "Busy_state is required")
 	private Boolean busyState;
 	@NotNull(message = "Cassette_in is required")
-	private Integer cassetteIn;
+	private Boolean cassetteIn;
 	@NotNull(message = "Cassette_time is required")
 	private Double cassetteTime;
 	@NotEmpty(message = "Settings_version is required")
@@ -72,11 +72,11 @@ public class ConfigurationTO {
 		this.busyState = busyState;
 	}
 
-	public Integer getCassetteIn() {
+	public Boolean getCassetteIn() {
 		return cassetteIn;
 	}
 
-	public void setCassetteIn(Integer cassetteIn) {
+	public void setCassetteIn(Boolean cassetteIn) {
 		this.cassetteIn = cassetteIn;
 	}
 

@@ -21,5 +21,16 @@ public class DefaultParams {
 	public final static String BACKGROUND = "205.9887617021278";
 	
 	public final static String DB_VERSION = "5.0";
-
+	
+	public final static String ANAPLASMA = "Anaplasma";
+	
+	public final static String EHRLICHIA = "Ehrlichia";
+	
+	public final static String LYME = "Lyme";
+	
+	public final static String HEARTWORM = "Heartworm";
+	
+	public final static String FELV = "FeLV";
+	
+	public final static String FIV = "FIV";
 }
