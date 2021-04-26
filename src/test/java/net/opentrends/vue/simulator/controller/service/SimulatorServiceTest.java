@@ -74,7 +74,7 @@ public class SimulatorServiceTest {
 		assertEquals(confTO.getSerialNumber(), responseTO.getDeviceStatus().getSerialNumber());		
 		assertEquals(confTO.getBusyState(), responseTO.getDeviceStatus().getBusyState());
 		assertEquals(confTO.getCassetteIn(), responseTO.getDeviceStatus().getCassetteIn());
-		assertEquals(confTO.getCassetteTime().toString(), responseTO.getDeviceStatus().getCassetteTime());
+		assertEquals(confTO.getCassetteTime(), responseTO.getDeviceStatus().getCassetteTime());
 		assertEquals(confTO.getReleaseVersion(), responseTO.getDeviceStatus().getReleaseVersion());
 		assertEquals(confTO.getSettingsVersion(), responseTO.getDeviceStatus().getSettingsVersion());
 		assertEquals(0, responseTO.getError().getCode());
@@ -91,7 +91,7 @@ public class SimulatorServiceTest {
 		assertEquals(confTO.getSerialNumber(), responseTO.getDeviceStatus().getSerialNumber());		
 		assertEquals(confTO.getBusyState(), responseTO.getDeviceStatus().getBusyState());
 		assertEquals(confTO.getCassetteIn(), responseTO.getDeviceStatus().getCassetteIn());
-		assertEquals(confTO.getCassetteTime().toString(), responseTO.getDeviceStatus().getCassetteTime());
+		assertEquals(confTO.getCassetteTime(), responseTO.getDeviceStatus().getCassetteTime());
 		assertEquals(confTO.getReleaseVersion(), responseTO.getDeviceStatus().getReleaseVersion());
 		assertEquals(confTO.getSettingsVersion(), responseTO.getDeviceStatus().getSettingsVersion());
 		assertEquals(120, responseTO.getError().getCode());
@@ -112,10 +112,9 @@ public class SimulatorServiceTest {
 	private ConfigurationTO createConfigurationTO(boolean cassetteErrorConfigured) {		
 		ConfigurationTO confTO = new ConfigurationTO();
 		confTO.setSerialNumber("serial_number");
-		confTO.setEthernetIp("192.168.133.11");
-		
+		confTO.setEthernetIp("192.168.133.11");		
 		confTO.setBusyState(Boolean.TRUE);
-		confTO.setCassetteIn(11);
+		confTO.setCassetteIn(Boolean.TRUE);
 		confTO.setCassetteTime(2D);
 		confTO.setReleaseVersion("1.2.3");
 		confTO.setSettingsVersion("3.2.1");
