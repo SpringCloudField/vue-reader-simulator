@@ -34,11 +34,7 @@ public class SimulatorController {
 	public ResponseEntity<ConfigReaderResponseTO> config(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		ConfigReaderResponseTO configResponse = new ConfigReaderResponseTO();
 		configResponse.setConfigReaderTO(simulatorService.getConfigReader(serialNumber));
-		if (configResponse.getConfigReaderTO() == null) {
-			return ResponseEntity.notFound().build();
-		} else {
-			return ResponseEntity.ok(configResponse);
-		}
+		return ResponseEntity.ok(configResponse);
 	}
 
 	@ApiOperation(value = "Status from VUE reader simulator ")
@@ -47,11 +43,7 @@ public class SimulatorController {
 			@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		StatusResponseTO statusResponse = new StatusResponseTO();
 		statusResponse.setStatusTO(simulatorService.getStatusConfig(serialNumber));
-		if (statusResponse.getStatusTO() == null) {
-			return ResponseEntity.notFound().build();
-		} else {
-			return ResponseEntity.ok(statusResponse);
-		}
+		return ResponseEntity.ok(statusResponse);		
 	}
 
 	@ApiOperation(value = " ")
@@ -77,11 +69,7 @@ public class SimulatorController {
 			@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		CassetteProcessesResponseTO cassetteProcessesResponse = new CassetteProcessesResponseTO();
 		cassetteProcessesResponse.setResultTO(simulatorService.getCassetteProcesses(serialNumber));
-		if (cassetteProcessesResponse.getResultTO() == null) {
-			return ResponseEntity.notFound().build();
-		} else {
-			return ResponseEntity.ok(cassetteProcessesResponse);
-		}
+		return ResponseEntity.ok(cassetteProcessesResponse);		
 	}
 
 	@ApiOperation(value = "Image test from VUE reader simulator ")
