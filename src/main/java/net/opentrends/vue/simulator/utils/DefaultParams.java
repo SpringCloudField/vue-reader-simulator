@@ -33,4 +33,5 @@ public class DefaultParams {
 	public final static String FELV = "FeLV";
 	
 	public final static String FIV = "FIV";
+	
 }
