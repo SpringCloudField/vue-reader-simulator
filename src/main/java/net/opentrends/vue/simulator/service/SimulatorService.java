@@ -3,6 +3,7 @@ package net.opentrends.vue.simulator.service;
 import java.io.IOException;
 
 import net.opentrends.vue.simulator.dto.ConfigReaderTO;
+import net.opentrends.vue.simulator.dto.DateTimeTO;
 import net.opentrends.vue.simulator.dto.ImagesTO;
 import net.opentrends.vue.simulator.dto.ResultTO;
 import net.opentrends.vue.simulator.dto.StatusTO;
@@ -17,6 +18,8 @@ public interface SimulatorService {
 	public ResultTO getCassetteProcesses(String serialNumber) throws AppRuntimeException;
 	
 	public ImagesTO getImage(String serialNumber) throws AppRuntimeException, IOException;
+	
+	public DateTimeTO getReaderDateAndTime(String serialNumber);
 
 
 }

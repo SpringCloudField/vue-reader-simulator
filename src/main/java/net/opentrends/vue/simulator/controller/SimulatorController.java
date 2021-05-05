@@ -34,11 +34,7 @@ public class SimulatorController {
 	public ResponseEntity<ConfigReaderResponseTO> config(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		ConfigReaderResponseTO configResponse = new ConfigReaderResponseTO();
 		configResponse.setConfigReaderTO(simulatorService.getConfigReader(serialNumber));
-		if (configResponse.getConfigReaderTO() == null) {
-			return ResponseEntity.notFound().build();
-		} else {
-			return ResponseEntity.ok(configResponse);
-		}
+		return ResponseEntity.ok(configResponse);
 	}
 
 	@ApiOperation(value = "Status from VUE reader simulator ")
@@ -47,21 +43,15 @@ public class SimulatorController {
 			@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		StatusResponseTO statusResponse = new StatusResponseTO();
 		statusResponse.setStatusTO(simulatorService.getStatusConfig(serialNumber));
-		if (statusResponse.getStatusTO() == null) {
-			return ResponseEntity.notFound().build();
-		} else {
-			return ResponseEntity.ok(statusResponse);
-		}
+		return ResponseEntity.ok(statusResponse);		
 	}
 
-	@ApiOperation(value = " ")
+	@ApiOperation(value = "Reader date and time ")
 	@GetMapping("/{serialNumber}/v2.4/reader_date_and_time")
 	public ResponseEntity<TimeStampTO> readerDateAndTime(
 			@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {		
 		TimeStampTO timeStampResponse = new TimeStampTO();
-		DateTimeTO dateTime = new DateTimeTO();
-		dateTime.setDateTime("2015-06-17T12:42:02+02:00");
-		timeStampResponse.setTimeStamp(dateTime);;
+		timeStampResponse.setTimeStamp(simulatorService.getReaderDateAndTime(serialNumber));
 		return ResponseEntity.ok(timeStampResponse);
 	}
 
@@ -77,11 +67,7 @@ public class SimulatorController {
 			@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		CassetteProcessesResponseTO cassetteProcessesResponse = new CassetteProcessesResponseTO();
 		cassetteProcessesResponse.setResultTO(simulatorService.getCassetteProcesses(serialNumber));
-		if (cassetteProcessesResponse.getResultTO() == null) {
-			return ResponseEntity.notFound().build();
-		} else {
-			return ResponseEntity.ok(cassetteProcessesResponse);
-		}
+		return ResponseEntity.ok(cassetteProcessesResponse);		
 	}
 
 	@ApiOperation(value = "Image test from VUE reader simulator ")

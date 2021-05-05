@@ -5,7 +5,9 @@ import static java.util.Optional.ofNullable;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import net.opentrends.vue.simulator.dto.CassetteTypeTO;
 import net.opentrends.vue.simulator.dto.CoeficientsTO;
 import net.opentrends.vue.simulator.dto.ConfigReaderTO;
 import net.opentrends.vue.simulator.dto.ConfigurationTO;
+import net.opentrends.vue.simulator.dto.DateTimeTO;
 import net.opentrends.vue.simulator.dto.DeviceStatusTO;
 import net.opentrends.vue.simulator.dto.ErrorTO;
 import net.opentrends.vue.simulator.dto.EthernetTO;
@@ -36,6 +39,8 @@ import net.opentrends.vue.simulator.utils.DefaultParams;
 
 @Service
 public class SimulatorServiceImpl implements SimulatorService {
+	
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ");
 
 	@Autowired
 	private ConfigurationService configurationService;
@@ -319,6 +324,13 @@ public class SimulatorServiceImpl implements SimulatorService {
 			errorTO.setDescription(DefaultParams.SUCCESS);
 		}
 		return errorTO;
+	}
+
+	@Override
+	public DateTimeTO getReaderDateAndTime(String serialNumber) {
+		DateTimeTO dateTime = new DateTimeTO();
+		dateTime.setDateTime(sdf.format(new Date()));
+		return dateTime;
 	}
 
 }
