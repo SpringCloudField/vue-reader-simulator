@@ -40,7 +40,7 @@ public class SimulatorServiceTest {
 	private SimulatorServiceImpl simulatorService;
 	
 	@Test
-	public void getImagesTest() throws AppRuntimeException, IOException {
+	public void getImagesTest() throws IOException {
 		ImagesTO to = simulatorService.getImage("serial_number");
 		assertNotNull(to);
 		assertNotNull(to.getImage());
@@ -48,7 +48,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void getConfigReaderTest() throws AppRuntimeException {
+	public void getConfigReaderTest() {
 		ConfigurationTO confTO = createConfigurationTO(false, 0, false);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
 		
@@ -71,7 +71,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void getStatusReaderTestNoCassetteError() throws AppRuntimeException {
+	public void getStatusReaderTestNoCassetteError() {
 		ConfigurationTO confTO = createConfigurationTO(false, 0, false);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
 		
@@ -88,7 +88,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void getStatusReaderTestWithCassetteError() throws AppRuntimeException {
+	public void getStatusReaderTestWithCassetteError() {
 		ConfigurationTO confTO = createConfigurationTO(true, 0, false);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
 		
@@ -101,12 +101,11 @@ public class SimulatorServiceTest {
 		assertEquals(confTO.getReleaseVersion(), responseTO.getDeviceStatus().getReleaseVersion());
 		assertEquals(confTO.getSettingsVersion(), responseTO.getDeviceStatus().getSettingsVersion());
 		assertEquals(120, responseTO.getError().getCode());
-		assertEquals("Error 120", responseTO.getError().getDescription());
-		
+		assertEquals("Error 120", responseTO.getError().getDescription());		
 	}
 	
 	@Test
-	public void scanSingleTestWithoutError() throws AppRuntimeException {
+	public void scanSingleTestWithoutError() {
 		ConfigurationTO confTO = createConfigurationTO(false, 1, false);
 		CassetteTypeTO cassTO = createCassetteTypeTO(1);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
@@ -119,7 +118,7 @@ public class SimulatorServiceTest {
 		assertEquals("success", resultTO.getError().getDescription());
 		assertEquals(cassTO.getType(),resultTO.getCassetteType().getType());
 		assertEquals(confTO.getCassetteTime(), resultTO.getReaderData().getCassetteTime());
-		assertEquals("2020-11-15 11:29:59", resultTO.getReaderData().getDateTime());
+		assertNotNull(resultTO.getReaderData().getDateTime());
 		assertEquals(confTO.getReleaseVersion(), resultTO.getReaderData().getReleaseVersion());
 		assertEquals(confTO.getSettingsVersion(), resultTO.getReaderData().getSettingsVersion());
 		defaultParamsTest (resultTO, 0);
@@ -136,7 +135,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void scanSingleTestWithCassetteError() throws AppRuntimeException {
+	public void scanSingleTestWithCassetteError() {
 		ConfigurationTO confTO = createConfigurationTO(true, 1, false);
 		CassetteTypeTO cassTO = createCassetteTypeTO(1);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
@@ -149,7 +148,7 @@ public class SimulatorServiceTest {
 		assertEquals("Error 120", resultTO.getError().getDescription());
 		assertEquals(cassTO.getType(),resultTO.getCassetteType().getType());
 		assertEquals(confTO.getCassetteTime(), resultTO.getReaderData().getCassetteTime());
-		assertEquals("2020-11-15 11:29:59", resultTO.getReaderData().getDateTime());
+		assertNotNull(resultTO.getReaderData().getDateTime());
 		assertEquals(confTO.getReleaseVersion(), resultTO.getReaderData().getReleaseVersion());
 		assertEquals(confTO.getSettingsVersion(), resultTO.getReaderData().getSettingsVersion());
 		defaultParamsTest (resultTO, 0);
@@ -164,7 +163,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void scanSingleTestWithCassetteAndTestError() throws AppRuntimeException {
+	public void scanSingleTestWithCassetteAndTestError() {
 		ConfigurationTO confTO = createConfigurationTO(true, 1, true);
 		CassetteTypeTO cassTO = createCassetteTypeTO(1);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
@@ -177,7 +176,7 @@ public class SimulatorServiceTest {
 		assertEquals("Error 120", resultTO.getError().getDescription());
 		assertEquals(cassTO.getType(),resultTO.getCassetteType().getType());
 		assertEquals(confTO.getCassetteTime(), resultTO.getReaderData().getCassetteTime());
-		assertEquals("2020-11-15 11:29:59", resultTO.getReaderData().getDateTime());
+		assertNotNull(resultTO.getReaderData().getDateTime());
 		assertEquals(confTO.getReleaseVersion(), resultTO.getReaderData().getReleaseVersion());
 		assertEquals(confTO.getSettingsVersion(), resultTO.getReaderData().getSettingsVersion());
 		defaultParamsTest (resultTO, 0);
@@ -193,7 +192,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void scanDoubleTestNoCassetteError() throws AppRuntimeException {
+	public void scanDoubleTestNoCassetteError() {
 		ConfigurationTO confTO = createConfigurationTO(false, 2, false);
 		CassetteTypeTO cassTO = createCassetteTypeTO(2);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
@@ -206,7 +205,7 @@ public class SimulatorServiceTest {
 		assertEquals(0, resultTO.getError().getCode());
 		assertEquals("success", resultTO.getError().getDescription());
 		assertEquals(confTO.getCassetteTime(), resultTO.getReaderData().getCassetteTime());
-		assertEquals("2020-11-15 11:29:59", resultTO.getReaderData().getDateTime());
+		assertNotNull(resultTO.getReaderData().getDateTime());
 		assertEquals(confTO.getReleaseVersion(), resultTO.getReaderData().getReleaseVersion());
 		assertEquals(confTO.getSettingsVersion(), resultTO.getReaderData().getSettingsVersion());
 		// FeLV data
@@ -228,12 +227,11 @@ public class SimulatorServiceTest {
 		assertEquals(confTO.getScanDouble().getNoiseFiv(), resultTO.getProcessResults().get(1).getNoise());
 		assertEquals(confTO.getScanDouble().getTestLineValueFiv(), resultTO.getProcessResults().get(1).getTestLineValue());
 		assertEquals(2, resultTO.getProcessResults().get(1).getPosition());
-		assertEquals(DefaultParams.FIV, resultTO.getProcessResults().get(1).getTestName());
-		
+		assertEquals(DefaultParams.FIV, resultTO.getProcessResults().get(1).getTestName());		
 	}
 	
 	@Test
-	public void scanDoubleTestWithCassetteError() throws AppRuntimeException {
+	public void scanDoubleTestWithCassetteError() {
 		ConfigurationTO confTO = createConfigurationTO(true, 2, false);
 		CassetteTypeTO cassTO = createCassetteTypeTO(2);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
@@ -246,7 +244,7 @@ public class SimulatorServiceTest {
 		assertEquals(120, resultTO.getError().getCode());
 		assertEquals("Error 120", resultTO.getError().getDescription());
 		assertEquals(confTO.getCassetteTime(), resultTO.getReaderData().getCassetteTime());
-		assertEquals("2020-11-15 11:29:59", resultTO.getReaderData().getDateTime());
+		assertNotNull(resultTO.getReaderData().getDateTime());
 		assertEquals(confTO.getReleaseVersion(), resultTO.getReaderData().getReleaseVersion());
 		assertEquals(confTO.getSettingsVersion(), resultTO.getReaderData().getSettingsVersion());
 		// FeLV data
@@ -266,12 +264,11 @@ public class SimulatorServiceTest {
 		assertEquals(confTO.getScanDouble().getNoiseFiv(), resultTO.getProcessResults().get(1).getNoise());
 		assertEquals(confTO.getScanDouble().getTestLineValueFiv(), resultTO.getProcessResults().get(1).getTestLineValue());
 		assertEquals(2, resultTO.getProcessResults().get(1).getPosition());
-		assertEquals(DefaultParams.FIV, resultTO.getProcessResults().get(1).getTestName());
-		
+		assertEquals(DefaultParams.FIV, resultTO.getProcessResults().get(1).getTestName());		
 	}
 	
 	@Test
-	public void scanDoubleTestWithCassetteAndTestError() throws AppRuntimeException {
+	public void scanDoubleTestWithCassetteAndTestError() {
 		ConfigurationTO confTO = createConfigurationTO(true, 2, true);
 		CassetteTypeTO cassTO = createCassetteTypeTO(2);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
@@ -284,7 +281,7 @@ public class SimulatorServiceTest {
 		assertEquals(120, resultTO.getError().getCode());
 		assertEquals("Error 120", resultTO.getError().getDescription());
 		assertEquals(confTO.getCassetteTime(), resultTO.getReaderData().getCassetteTime());
-		assertEquals("2020-11-15 11:29:59", resultTO.getReaderData().getDateTime());
+		assertNotNull(resultTO.getReaderData().getDateTime());
 		assertEquals(confTO.getReleaseVersion(), resultTO.getReaderData().getReleaseVersion());
 		assertEquals(confTO.getSettingsVersion(), resultTO.getReaderData().getSettingsVersion());
 		// FeLV data
@@ -305,8 +302,7 @@ public class SimulatorServiceTest {
 		assertEquals(confTO.getScanDouble().getNoiseFiv(), resultTO.getProcessResults().get(1).getNoise());
 		assertEquals(confTO.getScanDouble().getTestLineValueFiv(), resultTO.getProcessResults().get(1).getTestLineValue());
 		assertEquals(2, resultTO.getProcessResults().get(1).getPosition());
-		assertEquals(DefaultParams.FIV, resultTO.getProcessResults().get(1).getTestName());
-		
+		assertEquals(DefaultParams.FIV, resultTO.getProcessResults().get(1).getTestName());		
 	}
 	
 		
@@ -324,7 +320,7 @@ public class SimulatorServiceTest {
 		assertEquals("success", resultTO.getError().getDescription());
 		assertEquals(cassTO.getType(),resultTO.getCassetteType().getType());
 		assertEquals(confTO.getCassetteTime(), resultTO.getReaderData().getCassetteTime());
-		assertEquals("2020-11-15 11:29:59", resultTO.getReaderData().getDateTime());
+		assertNotNull(resultTO.getReaderData().getDateTime());
 		assertEquals(confTO.getReleaseVersion(), resultTO.getReaderData().getReleaseVersion());
 		assertEquals(confTO.getSettingsVersion(), resultTO.getReaderData().getSettingsVersion());
 		defaultParamsTest(resultTO, 0);
@@ -343,8 +339,7 @@ public class SimulatorServiceTest {
 		assertEquals(1, resultTO.getProcessResults().get(0).getCoeficients().getB());
 		assertEquals(3, resultTO.getProcessResults().get(0).getCoeficients().getC());
 		assertEquals(1, resultTO.getProcessResults().get(0).getCoeficients().getD());
-		assertEquals(1, resultTO.getProcessResults().get(0).getCoeficients().getF());
-		
+		assertEquals(1, resultTO.getProcessResults().get(0).getCoeficients().getF());		
 	}
 	
 	@Test
@@ -361,7 +356,7 @@ public class SimulatorServiceTest {
 		assertEquals("Error 120", resultTO.getError().getDescription());
 		assertEquals(cassTO.getType(),resultTO.getCassetteType().getType());
 		assertEquals(confTO.getCassetteTime(), resultTO.getReaderData().getCassetteTime());
-		assertEquals("2020-11-15 11:29:59", resultTO.getReaderData().getDateTime());
+		assertNotNull(resultTO.getReaderData().getDateTime());
 		assertEquals(confTO.getReleaseVersion(), resultTO.getReaderData().getReleaseVersion());
 		assertEquals(confTO.getSettingsVersion(), resultTO.getReaderData().getSettingsVersion());
 		defaultParamsTest(resultTO, 0);
@@ -380,11 +375,8 @@ public class SimulatorServiceTest {
 		assertEquals(1, resultTO.getProcessResults().get(0).getCoeficients().getB());
 		assertEquals(3, resultTO.getProcessResults().get(0).getCoeficients().getC());
 		assertEquals(1, resultTO.getProcessResults().get(0).getCoeficients().getD());
-		assertEquals(1, resultTO.getProcessResults().get(0).getCoeficients().getF());
-		
+		assertEquals(1, resultTO.getProcessResults().get(0).getCoeficients().getF());		
 	}
-	
-	
 	
 	@Test
 	public void scanMultipleTestNoCassetteError() throws AppRuntimeException {
@@ -400,7 +392,7 @@ public class SimulatorServiceTest {
 		assertEquals(0, resultTO.getError().getCode());
 		assertEquals("success", resultTO.getError().getDescription());
 		assertEquals(confTO.getCassetteTime(), resultTO.getReaderData().getCassetteTime());
-		assertEquals("2020-11-15 11:29:59", resultTO.getReaderData().getDateTime());
+		assertNotNull(resultTO.getReaderData().getDateTime());
 		assertEquals(confTO.getReleaseVersion(), resultTO.getReaderData().getReleaseVersion());
 		assertEquals(confTO.getSettingsVersion(), resultTO.getReaderData().getSettingsVersion());
 		// Anaplasma data
@@ -443,7 +435,6 @@ public class SimulatorServiceTest {
 		assertEquals(confTO.getScanMultiple().getTestLineValueHeartworm(), resultTO.getProcessResults().get(3).getTestLineValue());
 		assertEquals(4, resultTO.getProcessResults().get(3).getPosition());
 		assertEquals(DefaultParams.HEARTWORM, resultTO.getProcessResults().get(3).getTestName());
-
 	}
 	
 	@Test
@@ -460,7 +451,7 @@ public class SimulatorServiceTest {
 		assertEquals(120, resultTO.getError().getCode());
 		assertEquals("Error 120", resultTO.getError().getDescription());
 		assertEquals(confTO.getCassetteTime(), resultTO.getReaderData().getCassetteTime());
-		assertEquals("2020-11-15 11:29:59", resultTO.getReaderData().getDateTime());
+		assertNotNull(resultTO.getReaderData().getDateTime());
 		assertEquals(confTO.getReleaseVersion(), resultTO.getReaderData().getReleaseVersion());
 		assertEquals(confTO.getSettingsVersion(), resultTO.getReaderData().getSettingsVersion());
 		// Anaplasma data
@@ -503,11 +494,8 @@ public class SimulatorServiceTest {
 		assertEquals(confTO.getScanMultiple().getTestLineValueHeartworm(), resultTO.getProcessResults().get(3).getTestLineValue());
 		assertEquals(4, resultTO.getProcessResults().get(3).getPosition());
 		assertEquals(DefaultParams.HEARTWORM, resultTO.getProcessResults().get(3).getTestName());
-
 	}
-	
-	
-		
+
 	
 	private ConfigurationTO createConfigurationTO(boolean cassetteErrorConfigured, int testCode, boolean testErrorConfigured) {		
 		ConfigurationTO confTO = new ConfigurationTO();
@@ -644,8 +632,5 @@ public class SimulatorServiceTest {
 		assertEquals(DefaultParams.COLOR, resultTO.getProcessResults().get(resultIndex).getColor02());
 		
 	}
-	
-	
-	// TODO: more JU cases
 
 }

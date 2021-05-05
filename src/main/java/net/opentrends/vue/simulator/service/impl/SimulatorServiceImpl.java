@@ -50,7 +50,6 @@ public class SimulatorServiceImpl implements SimulatorService {
 
 	@Override
 	public ConfigReaderTO getConfigReader(String serialNumber) throws AppRuntimeException {
-		// TODO: throw exception?
 		ConfigurationTO configuration = configurationService.getConfigBySerialNumber(serialNumber);
 		
 		EthernetTO ethernet = new EthernetTO();
@@ -93,7 +92,7 @@ public class SimulatorServiceImpl implements SimulatorService {
 		deviceStatus.setBusyState(configuration.getBusyState());
 		deviceStatus.setCassetteIn(configuration.getCassetteIn());
 		deviceStatus.setCassetteTime(configuration.getCassetteTime());
-		deviceStatus.setDateTime("1970-01-01T00:08:52.702955");
+		deviceStatus.setDateTime(sdf.format(new Date()));
 		deviceStatus.setDbVersion(5);
 		deviceStatus.setPlatform(DefaultParams.PLATFORM);
 		deviceStatus.setReleaseVersion(configuration.getReleaseVersion());
@@ -114,7 +113,6 @@ public class SimulatorServiceImpl implements SimulatorService {
 		ConfigurationTO configuration = configurationService.getConfigBySerialNumber(serialNumber);
 		CassetteTypeTO cassetteTypeRead = cassetteTypeService.getCassetteTypeByCode(configuration.getCassetteTypeId());
 		ResultTO resultTO = new ResultTO();
-//		Integer i = ofNullable(configuration.getProcessId()).ifPresent(resultTO::setCassetteProcessId);
 		resultTO.setCassetteProcessId(ofNullable(configuration.getProcessId()).map(x -> configuration.getProcessId()).orElse(111));
 		resultTO.setPreviousProcessId(ofNullable(configuration.getPreviousProcessId()).map(x -> configuration.getPreviousProcessId()).orElse(-1));
 
@@ -125,7 +123,7 @@ public class SimulatorServiceImpl implements SimulatorService {
 		ErrorTO errorCodeTO = createErrorTo(configuration.getCassetteErrorCode());
 		ReaderDataTO readerData = new ReaderDataTO();
 		readerData.setCassetteTime(configuration.getCassetteTime());
-		readerData.setDateTime("2020-11-15 11:29:59");
+		readerData.setDateTime(sdf.format(new Date()));
 		readerData.setDbVersion(DefaultParams.DB_VERSION);
 		readerData.setReleaseVersion(configuration.getReleaseVersion());
 		readerData.setSettingsVersion(configuration.getSettingsVersion());
@@ -155,7 +153,7 @@ public class SimulatorServiceImpl implements SimulatorService {
 	}
 	
 	@Override
-	public ImagesTO getImage(String serialNumber) throws AppRuntimeException, IOException {
+	public ImagesTO getImage(String serialNumber) throws IOException {
 		configurationService.getConfigBySerialNumber(serialNumber);
 		ImagesTO imageTo = new ImagesTO();
 		imageTo.setId(1);
@@ -328,9 +326,18 @@ public class SimulatorServiceImpl implements SimulatorService {
 
 	@Override
 	public DateTimeTO getReaderDateAndTime(String serialNumber) {
+		// Nothing to do here with simulator config, just to raise an exception in case serialNumber doesn't exist
+		configurationService.getConfigBySerialNumber(serialNumber);
 		DateTimeTO dateTime = new DateTimeTO();
 		dateTime.setDateTime(sdf.format(new Date()));
 		return dateTime;
+	}
+
+	@Override
+	public String cancelTimedScan(String serialNumber) {
+		// Nothing to do here with simulator config, just to raise an exception in case serialNumber doesn't exist
+		configurationService.getConfigBySerialNumber(serialNumber);
+		return "cancel";
 	}
 
 }

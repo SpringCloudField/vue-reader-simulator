@@ -1,6 +1,8 @@
-package net.opentrends.vue.simulator.dto;
+package net.opentrends.vue.simulator.dto.reponse;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import net.opentrends.vue.simulator.dto.ImagesTO;
 
 public class ImagesResponseTO {
 	

@@ -1,8 +1,10 @@
-package net.opentrends.vue.simulator.dto;
+package net.opentrends.vue.simulator.dto.reponse;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TimeStampTO {
+import net.opentrends.vue.simulator.dto.DateTimeTO;
+
+public class ReaderDateTimeResponseTO {
 	
 	@JsonProperty("Timestamp")
 	private DateTimeTO timeStamp;

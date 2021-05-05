@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import net.opentrends.vue.simulator.dto.CassetteProcessesResponseTO;
-import net.opentrends.vue.simulator.dto.ConfigReaderResponseTO;
-import net.opentrends.vue.simulator.dto.DateTimeTO;
-import net.opentrends.vue.simulator.dto.ImagesResponseTO;
-import net.opentrends.vue.simulator.dto.StatusResponseTO;
-import net.opentrends.vue.simulator.dto.TimeStampTO;
-import net.opentrends.vue.simulator.exception.AppRuntimeException;
+import net.opentrends.vue.simulator.dto.reponse.CancelTimedScanResponseTO;
+import net.opentrends.vue.simulator.dto.reponse.CassetteProcessesResponseTO;
+import net.opentrends.vue.simulator.dto.reponse.ConfigReaderResponseTO;
+import net.opentrends.vue.simulator.dto.reponse.ImagesResponseTO;
+import net.opentrends.vue.simulator.dto.reponse.ReaderDateTimeResponseTO;
+import net.opentrends.vue.simulator.dto.reponse.StatusResponseTO;
 import net.opentrends.vue.simulator.service.SimulatorService;
 
 @RestController
@@ -48,17 +47,18 @@ public class SimulatorController {
 
 	@ApiOperation(value = "Reader date and time ")
 	@GetMapping("/{serialNumber}/v2.4/reader_date_and_time")
-	public ResponseEntity<TimeStampTO> readerDateAndTime(
-			@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {		
-		TimeStampTO timeStampResponse = new TimeStampTO();
+	public ResponseEntity<ReaderDateTimeResponseTO> readerDateAndTime(
+			@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
+		ReaderDateTimeResponseTO timeStampResponse = new ReaderDateTimeResponseTO();
 		timeStampResponse.setTimeStamp(simulatorService.getReaderDateAndTime(serialNumber));
 		return ResponseEntity.ok(timeStampResponse);
 	}
 
 	@ApiOperation(value = "Test from VUE reader simulator ")
 	@PostMapping("/{serialNumber}/v2.4/cassette_processes")
-	public String cassetteProcesses1(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
-		return "statusTO";
+	public ResponseEntity<CassetteProcessesResponseTO> cassetteProcesses1(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
+		// TODO
+		return ResponseEntity.ok(new CassetteProcessesResponseTO());
 	}
 
 	@ApiOperation(value = "Test from VUE reader simulator ")
@@ -67,12 +67,12 @@ public class SimulatorController {
 			@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		CassetteProcessesResponseTO cassetteProcessesResponse = new CassetteProcessesResponseTO();
 		cassetteProcessesResponse.setResultTO(simulatorService.getCassetteProcesses(serialNumber));
-		return ResponseEntity.ok(cassetteProcessesResponse);		
+		return ResponseEntity.ok(cassetteProcessesResponse);
 	}
 
 	@ApiOperation(value = "Image test from VUE reader simulator ")
 	@GetMapping("/{serialNumber}/v2.4/images")
-	public ResponseEntity<ImagesResponseTO> images(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) throws AppRuntimeException, IOException {
+	public ResponseEntity<ImagesResponseTO> images(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) throws IOException {
 		ImagesResponseTO imagesResponseTO = new ImagesResponseTO();
 		imagesResponseTO.setImage(simulatorService.getImage(serialNumber));
 		return ResponseEntity.ok(imagesResponseTO);
@@ -80,8 +80,10 @@ public class SimulatorController {
 
 	@ApiOperation(value = "Cancel timed scan ")
 	@PutMapping("/{serialNumber}/v2.4/cancel_timed_scan")
-	public ResponseEntity<?> cancelTimedScan(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
-		return ResponseEntity.accepted().build();
+	public ResponseEntity<CancelTimedScanResponseTO> cancelTimedScan(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
+		CancelTimedScanResponseTO to = new CancelTimedScanResponseTO();
+		to.setDummy(simulatorService.cancelTimedScan(serialNumber));
+		return ResponseEntity.ok(to);
 	}
 
 }

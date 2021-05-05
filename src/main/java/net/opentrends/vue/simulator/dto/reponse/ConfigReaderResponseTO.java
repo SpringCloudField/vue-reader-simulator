@@ -1,8 +1,10 @@
-package net.opentrends.vue.simulator.dto;
+package net.opentrends.vue.simulator.dto.reponse;
 
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import net.opentrends.vue.simulator.dto.ConfigReaderTO;
 
 @Component
 public class ConfigReaderResponseTO {

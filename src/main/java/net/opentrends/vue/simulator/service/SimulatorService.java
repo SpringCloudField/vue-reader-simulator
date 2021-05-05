@@ -17,9 +17,10 @@ public interface SimulatorService {
 
 	public ResultTO getCassetteProcesses(String serialNumber) throws AppRuntimeException;
 	
-	public ImagesTO getImage(String serialNumber) throws AppRuntimeException, IOException;
+	public ImagesTO getImage(String serialNumber) throws IOException;
 	
 	public DateTimeTO getReaderDateAndTime(String serialNumber);
-
+	
+	public String cancelTimedScan(String serialNumber);
 
 }
