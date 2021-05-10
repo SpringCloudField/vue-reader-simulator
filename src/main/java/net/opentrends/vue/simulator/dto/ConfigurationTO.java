@@ -30,8 +30,11 @@ public class ConfigurationTO {
 	@NotNull(message = "Same_cassette is required")
 	private Boolean sameCassette;
 	private Integer cassetteErrorCode;
+	private Integer cassetteErrorCode2;
 	private Integer processId;
 	private Integer previousProcessId;
+	private Integer processId2;
+	private Integer previousProcessId2;
 	private ScanSingleTO scanSingle;
 	private ScanMultipleTO scanMultiple;
 	private ScanDoubleTO scanDouble;
@@ -111,6 +114,14 @@ public class ConfigurationTO {
 	public void setCassetteErrorCode(Integer cassetteErrorCode) {
 		this.cassetteErrorCode = cassetteErrorCode;
 	}
+	
+	public Integer getCassetteErrorCode2() {
+		return cassetteErrorCode2;
+	}
+
+	public void setCassetteErrorCode2(Integer cassetteErrorCode2) {
+		this.cassetteErrorCode2 = cassetteErrorCode2;
+	}
 
 	public Integer getProcessId() {
 		return processId;
@@ -126,6 +137,22 @@ public class ConfigurationTO {
 
 	public void setPreviousProcessId(Integer previousProcessId) {
 		this.previousProcessId = previousProcessId;
+	}
+	
+	public Integer getProcessId2() {
+		return processId2;
+	}
+
+	public void setProcessId2(Integer processId2) {
+		this.processId2 = processId2;
+	}
+
+	public Integer getPreviousProcessId2() {
+		return previousProcessId2;
+	}
+
+	public void setPreviousProcessId2(Integer previousProcessId2) {
+		this.previousProcessId2 = previousProcessId2;
 	}
 
 	public ScanSingleTO getScanSingle() {

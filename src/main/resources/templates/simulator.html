@@ -134,7 +134,7 @@
 					<div class="form-row">
 						<div class="col-md-3 form-group">
 							<label>cassette_error_code</label> 
-							<input type="text" class="form-control form-control-sm never-required">
+							<input type="text" class="form-control form-control-sm never-required" th:field="*{cassetteErrorCode2}">
 						</div>
 					</div>
 
@@ -142,11 +142,13 @@
 						<div class="form-row">
 							<div class="col-md-3 form-group">
 								<label>process_id</label> 
-								<input type="text" class="form-control form-control-sm" id="processIdInputSame">
+								<input type="number" class="form-control form-control-sm" th:field="*{processId2}" id="processIdInputSame">
+								<small th:if="${#fields.hasErrors('processId2')}" th:errors="*{processId2}" class="form-text text-danger"></small>
 							</div>
 							<div class="col-md-3 form-group">
 								<label>previous_process_id</label> 
-								<input type="text" class="form-control form-control-sm" id="previousProcessIdInputSame">
+								<input type="number" class="form-control form-control-sm"  th:field="*{previousProcessId2}" id="previousProcessIdInputSame">
+								<small th:if="${#fields.hasErrors('previousProcessId2')}" th:errors="*{previousProcessId2}" class="form-text text-danger"></small>
 							</div>
 						</div>
 					</div>
