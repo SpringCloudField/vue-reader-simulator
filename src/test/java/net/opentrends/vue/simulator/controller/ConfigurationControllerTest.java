@@ -3,6 +3,7 @@ package net.opentrends.vue.simulator.controller;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -97,8 +98,42 @@ public class ConfigurationControllerTest {
 	}
 	
 	@Test
+	public void getSaveConfigSerialNumberInUsedTest() throws Exception {
+		User userMock = new User();
+		userMock.setEmail("email");
+		userMock.setEnabled(true);
+		userMock.setFullName("full name");
+		userMock.setId("id");
+		when(userService.findUserByEmail(any())).thenReturn(userMock);
+		when(configurationService.getConfigsByUserId(any())).thenReturn(Arrays.asList(new ConfigurationTO()));
+		when(cassetteTypeService.getAllCassetteType()).thenReturn(Arrays.asList(new CassetteTypeTO()));
+		when(configurationService.existSerialNumber(any(), any())).thenReturn(Boolean.TRUE);
+		// TOOD: create ConfigurationTO 
+		mockMvc.perform(post("/saveConfig").flashAttr("configurationTO", new ConfigurationTO()))
+			.andExpect(status().isOk())
+			.andExpect(view().name("simulator"))
+			.andExpect(model().attributeExists("currentUser"))
+			.andExpect(model().attributeExists("configurationTO"))
+			.andExpect(model().attributeExists("cassetteTypes"))
+			.andExpect(model().hasErrors())
+			.andExpect(model().errorCount(1));
+	}
+	
+	@Test
 	public void getSaveConfigTest() throws Exception {
-		
+		User userMock = new User();
+		userMock.setEmail("email");
+		userMock.setEnabled(true);
+		userMock.setFullName("full name");
+		userMock.setId("id");
+		when(userService.findUserByEmail(any())).thenReturn(userMock);
+		when(configurationService.getConfigsByUserId(any())).thenReturn(Arrays.asList(new ConfigurationTO()));
+		when(cassetteTypeService.getAllCassetteType()).thenReturn(Arrays.asList(new CassetteTypeTO()));
+		when(configurationService.existSerialNumber(any(), any())).thenReturn(Boolean.FALSE);
+		mockMvc.perform(post("/saveConfig").flashAttr("configurationTO", new ConfigurationTO()))
+			.andExpect(status().isOk())
+			.andExpect(view().name("saved"))
+			.andExpect(model().attributeExists("currentUser"));
 	}
 
 }

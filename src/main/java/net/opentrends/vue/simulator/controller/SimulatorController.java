@@ -33,7 +33,6 @@ public class SimulatorController {
 	@ApiOperation(value = "Configuration from VUE reader simulator ")
 	@GetMapping("/{serialNumber}/v2.4/config_reader")
 	public ResponseEntity<ConfigReaderResponseTO> config(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber, HttpServletRequest request) {
-		// TODO: add 
 		ConfigReaderResponseTO configResponse = new ConfigReaderResponseTO();
 		configResponse.setConfigReaderTO(simulatorService.getConfigReader(serialNumber, request.getServerName()));
 		return ResponseEntity.ok(configResponse);
@@ -61,7 +60,7 @@ public class SimulatorController {
 	@PostMapping("/{serialNumber}/v2.4/cassette_processes")
 	public ResponseEntity<CassetteProcessesResponseTO> cassetteProcesses2(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		CassetteProcessesResponseTO cassetteProcessesResponse = new CassetteProcessesResponseTO();
-		cassetteProcessesResponse.setResultTO(simulatorService.getCassetteProcesses2(serialNumber)); //Boolean param set sameCassetteProcess on method
+		cassetteProcessesResponse.setResultTO(simulatorService.getCassetteProcesses2(serialNumber));
 		return ResponseEntity.ok(cassetteProcessesResponse);
 	}
 
@@ -70,7 +69,7 @@ public class SimulatorController {
 	public ResponseEntity<CassetteProcessesResponseTO> cassetteProcesses1(
 			@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		CassetteProcessesResponseTO cassetteProcessesResponse = new CassetteProcessesResponseTO();
-		cassetteProcessesResponse.setResultTO(simulatorService.getCassetteProcesses(serialNumber)); //Boolean param set sameCassetteProcess on method
+		cassetteProcessesResponse.setResultTO(simulatorService.getCassetteProcesses(serialNumber));
 		return ResponseEntity.ok(cassetteProcessesResponse);
 	}
 
