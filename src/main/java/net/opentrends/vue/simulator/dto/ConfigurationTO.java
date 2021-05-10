@@ -8,9 +8,7 @@ public class ConfigurationTO {
 	private String id;
 	
 	@NotEmpty(message = "Serial_number is required")
-	private String serialNumber;	
-	@NotEmpty(message = "Ethernet_ip is required")
-	private String ethernetIp;
+	private String serialNumber;
 
 	@NotNull(message = "Busy_state is required")
 	private Boolean busyState;
@@ -57,14 +55,6 @@ public class ConfigurationTO {
 
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
-	}
-
-	public String getEthernetIp() {
-		return ethernetIp;
-	}
-
-	public void setEthernetIp(String ethernetIp) {
-		this.ethernetIp = ethernetIp;
 	}
 
 	public Boolean getBusyState() {
@@ -205,7 +195,7 @@ public class ConfigurationTO {
 
 	@Override
 	public String toString() {
-		return "ConfigurationTO [id=" + id + ", serialNumber=" + serialNumber + ", ethernetIp=" + ethernetIp
+		return "ConfigurationTO [id=" + id + ", serialNumber=" + serialNumber 
 				+ ", busyState=" + busyState + ", cassetteIn=" + cassetteIn + ", cassetteTime=" + cassetteTime
 				+ ", settingsVersion=" + settingsVersion + ", releaseVersion=" + releaseVersion + ", cassetteTypeId="
 				+ cassetteTypeId + ", testType=" + testType + ", cassetteErrorCode=" + cassetteErrorCode

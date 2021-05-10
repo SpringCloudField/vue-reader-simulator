@@ -13,7 +13,7 @@ public interface SimulatorService {
 	
 	public StatusTO getStatusConfig(String serialNumber) throws AppRuntimeException;
 	
-	public ConfigReaderTO getConfigReader(String serialNumber) throws AppRuntimeException;
+	public ConfigReaderTO getConfigReader(String serialNumber, String serverName) throws AppRuntimeException;
 
 	public ResultTO getCassetteProcesses(String serialNumber) throws AppRuntimeException;
 	

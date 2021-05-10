@@ -2,6 +2,8 @@ package net.opentrends.vue.simulator.controller;
 
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,9 +32,10 @@ public class SimulatorController {
 
 	@ApiOperation(value = "Configuration from VUE reader simulator ")
 	@GetMapping("/{serialNumber}/v2.4/config_reader")
-	public ResponseEntity<ConfigReaderResponseTO> config(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
+	public ResponseEntity<ConfigReaderResponseTO> config(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber, HttpServletRequest request) {
+		// TODO: add 
 		ConfigReaderResponseTO configResponse = new ConfigReaderResponseTO();
-		configResponse.setConfigReaderTO(simulatorService.getConfigReader(serialNumber));
+		configResponse.setConfigReaderTO(simulatorService.getConfigReader(serialNumber, request.getServerName()));
 		return ResponseEntity.ok(configResponse);
 	}
 

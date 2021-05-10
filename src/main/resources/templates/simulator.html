@@ -24,11 +24,6 @@
 						<input type="text" class="form-control form-control-sm" th:field="*{serialNumber}" required>
 						<small th:if="${#fields.hasErrors('serialNumber')}" th:errors="*{serialNumber}" class="form-text text-danger"></small>
 					</div>
-					<div class="col-md-3 form-group">
-						<label>ethernet_ip</label> 
-						<input type="text" class="form-control form-control-sm" th:field="*{ethernetIp}" required>
-						<small th:if="${#fields.hasErrors('ethernetIp')}" th:errors="*{ethernetIp}" class="form-text text-danger"></small>
-					</div>
 				</div>
 			</div>
 			<div class="jumbotron border rounded bg-light p-4 shadow">

@@ -13,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import net.opentrends.vue.simulator.dto.ConfigReaderTO;
@@ -39,8 +40,8 @@ public class SimulatorControllerTest {
 	
 	@Test
 	public void configTest() {
-		when(simulatorService.getConfigReader(any())).thenReturn(new ConfigReaderTO());
-		ResponseEntity<ConfigReaderResponseTO> response = simulatorController.config("serial_number");
+		when(simulatorService.getConfigReader(any(), any())).thenReturn(new ConfigReaderTO());
+		ResponseEntity<ConfigReaderResponseTO> response = simulatorController.config("serial_number", new MockHttpServletRequest());
 		assertNotNull(response.getBody());
 		assertEquals(HttpStatus.OK, response.getStatusCode());
 	}

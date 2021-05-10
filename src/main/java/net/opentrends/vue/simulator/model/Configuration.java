@@ -17,9 +17,6 @@ public class Configuration {
 	@NotNull
 	@NotEmpty
 	private String serialNumber;
-	@NotNull
-	@NotEmpty
-	private String ethernetIp;
 	
 	@NotNull
 	@NotEmpty
@@ -65,12 +62,6 @@ public class Configuration {
 	}
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
-	}
-	public String getEthernetIp() {
-		return ethernetIp;
-	}
-	public void setEthernetIp(String ethernetIp) {
-		this.ethernetIp = ethernetIp;
 	}
 	public Boolean getBusyState() {
 		return busyState;
