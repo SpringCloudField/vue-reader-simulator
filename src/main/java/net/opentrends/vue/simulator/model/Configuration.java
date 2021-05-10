@@ -42,8 +42,11 @@ public class Configuration {
 	private String testType;
 	private Boolean sameCassette;
 	private Integer cassetteErrorCode;
+	private Integer cassetteErrorCode2;
 	private Integer processId;
+	private Integer processId2;
 	private Integer previousProcessId;
+	private Integer previousProcessId2;
 	private ScanSingle scanSingle;
 	private ScanMultiple scanMultiple;
 	private ScanDouble scanDouble;
@@ -96,17 +99,35 @@ public class Configuration {
 	public void setCassetteErrorCode(Integer cassetteErrorCode) {
 		this.cassetteErrorCode = cassetteErrorCode;
 	}
+	public Integer getCassetteErrorCode2() {
+		return cassetteErrorCode2;
+	}
+	public void setCassetteErrorCode2(Integer cassetteErrorCode2) {
+		this.cassetteErrorCode2 = cassetteErrorCode2;
+	}
 	public Integer getProcessId() {
 		return processId;
 	}
 	public void setProcessId(Integer processId) {
 		this.processId = processId;
 	}
+	public Integer getProcessId2() {
+		return processId2;
+	}
+	public void setProcessId2(Integer processId2) {
+		this.processId2 = processId2;
+	}
 	public Integer getPreviousProcessId() {
 		return previousProcessId;
 	}
 	public void setPreviousProcessId(Integer previousProcessId) {
 		this.previousProcessId = previousProcessId;
+	}
+	public Integer getPreviousProcessId2() {
+		return previousProcessId2;
+	}
+	public void setPreviousProcessId2(Integer previousProcessId2) {
+		this.previousProcessId2 = previousProcessId2;
 	}
 	public ScanSingle getScanSingle() {
 		return scanSingle;

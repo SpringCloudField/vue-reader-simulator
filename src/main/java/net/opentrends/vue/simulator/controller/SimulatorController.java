@@ -59,17 +59,18 @@ public class SimulatorController {
 
 	@ApiOperation(value = "Test from VUE reader simulator ")
 	@PostMapping("/{serialNumber}/v2.4/cassette_processes")
-	public ResponseEntity<CassetteProcessesResponseTO> cassetteProcesses1(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
-		// TODO
-		return ResponseEntity.ok(new CassetteProcessesResponseTO());
+	public ResponseEntity<CassetteProcessesResponseTO> cassetteProcesses2(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
+		CassetteProcessesResponseTO cassetteProcessesResponse = new CassetteProcessesResponseTO();
+		cassetteProcessesResponse.setResultTO(simulatorService.getCassetteProcesses2(serialNumber)); //Boolean param set sameCassetteProcess on method
+		return ResponseEntity.ok(cassetteProcessesResponse);
 	}
 
 	@ApiOperation(value = "Test from VUE reader simulator ")
 	@GetMapping("/{serialNumber}/v2.4/cassette_processes")
-	public ResponseEntity<CassetteProcessesResponseTO> cassetteProcesses2(
+	public ResponseEntity<CassetteProcessesResponseTO> cassetteProcesses1(
 			@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		CassetteProcessesResponseTO cassetteProcessesResponse = new CassetteProcessesResponseTO();
-		cassetteProcessesResponse.setResultTO(simulatorService.getCassetteProcesses(serialNumber));
+		cassetteProcessesResponse.setResultTO(simulatorService.getCassetteProcesses(serialNumber)); //Boolean param set sameCassetteProcess on method
 		return ResponseEntity.ok(cassetteProcessesResponse);
 	}
 
