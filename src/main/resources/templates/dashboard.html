@@ -21,11 +21,10 @@
 				configurations:</h3>
 			<div class="d-flex flex-row justify-content-between">
 				<div class="text-center" th:each="config : ${configs}" th:attr="data-value=${config.id}">
-					<a th:href="@{/simulator/} + ${config.id}"> <img class="d-block"
-						th:src="@{/images/vue.png}" alt="" width="250" height="200" /> <span class="btn btn-outline-danger btn-sm"
-						th:text="${config.serialNumber}"></span>
+					<a th:href="@{/simulator/} + ${config.id}"> 
+						<img class="d-block" th:src="@{/images/vue.png}" alt="" width="250" height="200" /> 
+						<span class="btn btn-outline-danger btn-sm" th:text="${config.serialNumber}"></span>
 					</a>
-
 				</div>
 			</div>
 		</div>

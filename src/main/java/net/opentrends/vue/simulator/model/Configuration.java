@@ -1,9 +1,12 @@
 package net.opentrends.vue.simulator.model;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "configuration")
@@ -11,7 +14,8 @@ public class Configuration {
 
 	@Id
 	private String id;
-	
+	@NotNull
+	@NotEmpty
 	private String userId;
 
 	@NotNull
@@ -50,6 +54,9 @@ public class Configuration {
 	private ScanSingle scanSingle;
 	private ScanMultiple scanMultiple;
 	private ScanDouble scanDouble;
+
+	@LastModifiedDate
+	private Date lastModifiedDate; 
 	
 	public String getId() {
 		return id;
@@ -170,6 +177,12 @@ public class Configuration {
 	}
 	public void setSameCassette(Boolean sameCassette) {
 		this.sameCassette = sameCassette;
+	}	
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+	public void setLastModifiedDate(Date lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
 	}
 
 }

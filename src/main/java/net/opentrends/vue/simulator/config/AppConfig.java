@@ -3,6 +3,7 @@ package net.opentrends.vue.simulator.config;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.config.EnableMongoAuditing;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import springfox.documentation.builders.PathSelectors;
@@ -13,6 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
+@EnableMongoAuditing
 public class AppConfig {
 	
 	@Bean

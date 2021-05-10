@@ -69,8 +69,6 @@ public class ConfiguratorController {
 	
 	@PostMapping(value = "/saveConfig")
 	public ModelAndView saveConfig(@Valid ConfigurationTO configurationTO, BindingResult bindingResult, ModelAndView modelAndView) {
-		// TODO implement bindingresults for sameCassetteProcess fields
-		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	    User user = userService.findUserByEmail(auth.getName());
 	    
