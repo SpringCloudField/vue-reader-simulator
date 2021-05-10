@@ -52,9 +52,9 @@ public class SimulatorServiceTest {
 		ConfigurationTO confTO = createConfigurationTO(false, 0, false);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
 		
-		ConfigReaderTO responseTO = simulatorService.getConfigReader("serial_number");
+		ConfigReaderTO responseTO = simulatorService.getConfigReader("serial_number", "localhost");
 		assertNotNull(responseTO);
-		assertEquals(confTO.getEthernetIp(), responseTO.getEthernetTO().getIp());
+		assertEquals("localhost", responseTO.getEthernetTO().getIp());
 		assertEquals(1, responseTO.getEthernetTO().getDhcp());
 		assertEquals(DefaultParams.GATEWAY, responseTO.getEthernetTO().getGateway());
 		assertEquals(DefaultParams.IP, responseTO.getWifiApTO().getIp());
@@ -502,7 +502,6 @@ public class SimulatorServiceTest {
 		
 		confTO.setProcessId(111);
 		confTO.setSerialNumber("serial_number");
-		confTO.setEthernetIp("192.168.133.11");
 		confTO.setBusyState(Boolean.TRUE);
 		confTO.setCassetteIn(Boolean.TRUE);
 		confTO.setCassetteTime(2D);

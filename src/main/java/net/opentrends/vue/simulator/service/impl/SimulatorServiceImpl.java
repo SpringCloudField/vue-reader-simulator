@@ -49,13 +49,13 @@ public class SimulatorServiceImpl implements SimulatorService {
 	private CassetteTypeService cassetteTypeService;
 
 	@Override
-	public ConfigReaderTO getConfigReader(String serialNumber) throws AppRuntimeException {
-		ConfigurationTO configuration = configurationService.getConfigBySerialNumber(serialNumber);
+	public ConfigReaderTO getConfigReader(String serialNumber, String serverName) throws AppRuntimeException {
+		configurationService.getConfigBySerialNumber(serialNumber);
 		
 		EthernetTO ethernet = new EthernetTO();
 		ethernet.setDhcp(1);
 		ethernet.setGateway(DefaultParams.GATEWAY);
-		ethernet.setIp(configuration.getEthernetIp());
+		ethernet.setIp(serverName);
 		ethernet.setNetmask(DefaultParams.MASK);
 
 		WifiApTO wifiAp = new WifiApTO();
