@@ -236,8 +236,8 @@ public class SimulatorServiceTest {
 		ResultTO resultTO = simulatorService.getCassetteProcesses("serial_number");
 		assertNotNull(resultTO);
 		//common data
-		assertEquals(confTO.getProcessId2(), resultTO.getCassetteProcessId());
-		assertEquals(confTO.getPreviousProcessId2(), resultTO.getPreviousProcessId());
+		assertEquals(111, resultTO.getCassetteProcessId());
+		assertEquals(-1, resultTO.getPreviousProcessId());
 		assertEquals(0, resultTO.getError().getCode());
 		assertEquals("success", resultTO.getError().getDescription());
 		assertEquals(confTO.getCassetteTime(), resultTO.getReaderData().getCassetteTime());
