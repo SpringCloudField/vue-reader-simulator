@@ -172,7 +172,7 @@ public class SimulatorServiceImpl implements SimulatorService {
 		readerData.setSettingsVersion(configuration.getSettingsVersion());
 		
 		resultTO.setCassetteProcessId(
-					ofNullable(configuration.getProcessId()).map(x -> configuration.getProcessId2()).orElse(111));
+					ofNullable(configuration.getProcessId2()).map(x -> configuration.getProcessId2()).orElse(111));
 		resultTO.setPreviousProcessId(ofNullable(configuration.getPreviousProcessId2())
 					.map(x -> configuration.getPreviousProcessId2()).orElse(-1));
 
