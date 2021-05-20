@@ -1,175 +1,397 @@
 
 //**** Simulator form control functions ****
 
-function toggleProcessId(id) {
-    if (id == "Quick") {
+function toggleProcessId() {
+	let testType = document.getElementById("testType").value;
+	let codeCassetteType = document.getElementById("cassetteTypeId").value;
+	
+    if (testType == "Quick") {
  		
  		sameCassetteCheckbox.checked = false;
- 		   
-    	hideDivs([
+ 		
+ 		hideDivs([
 	    	"processIdDiv",
+	    	"processIdDivSame",
 	    	"sameCassetteCheckboxDiv",
 	    	"sameCassetteOptionsDiv"
     	]);
-    	    	
-//		setNotRequiredInputFields ([
-//			"processIdInput",
-//			"previousProcessIdInput",
-//			"processIdInputSame",
-//			"previousProcessIdInputSame"
-//		]);
-     
-    } else if (id == "Timed") {
+    	
+    	switch (codeCassetteType){
+    	
+    	case "2":
+    		hideDivs ([
+				"singleTestDiv",
+				"singleTestDivSame",
+				"cplScanDiv",
+				"cplScanDivSame", 
+				"flex4TestDiv",
+				"flex4TestDivSame",
+				"felvFivTestDivSame"
+			]);
+			
+			showDivs ([
+				"felvFivTestDiv"
+			]);
+    	break;
+    	
+    	case "8":
+    		hideDivs ([
+				"singleTestDiv",
+				"singleTestDivSame",
+				"felvFivTestDiv",
+				"felvFivTestDivSame",
+				"flex4TestDiv",
+				"flex4TestDivSame",
+				"cplScanDivSame"
+			]);
+			
+			showDivs ([
+				"singleTestDiv",
+				"cplScanDiv"
+			]);
+    	break;
+    	
+    	case "9":
+    		hideDivs ([
+				"singleTestDiv",
+				"singleTestDivSame",
+				"felvFivTestDiv",
+				"felvFivTestDivSame",
+				"cplScanDiv",
+				"cplScanDivSame",
+				"flex4TestDivSame",
+			]);
+			
+			showDivs ([
+				"flex4TestDiv"
+			]);
+    	
+    	break;
+    	
+    	default:
+    		hideDivs ([
+				"felvFivTestDiv",
+				"felvFivTestDivSame",
+				"cplScanDiv",
+				"cplScanDivSame",
+				"flex4TestDiv",
+				"flex4TestDivSame"
+			]);
+			
+			showDivs ([
+				"singleTestDiv"
+			]);
+    	
+    	}
+    	
+    
+    } else if (testType == "Timed") {
     
     	showDivs ([
 	    	"processIdDiv",
-	    	"sameCassetteCheckboxDiv",
+	    	"sameCassetteCheckboxDiv"
     	])
+    
+    	switch (codeCassetteType) {
     	
-//    	setRequiredInputFields ([
-//	    	"processIdInput",
-//	    	"previousProcessIdInput"
-//    	])
+    		case "2":
+    			showDivs ([
+					"felvFivTestDiv",
+				]);
+    		break;
+    	
+	    	case "8":
+    			showDivs ([
+					"singleTestDiv",
+					"cplScanDiv",
+				]);
+	    	break;
+    	
+    		case "9":
+	    		showDivs ([
+					"flex4TestDiv"
+				]);
+    		break;
+    	
+    		default:
+		    	showDivs ([
+					"singleTestDiv"
+				]);
+    	}	
     }
 }
 
-function showSameCassette(chBox) {	
-		sameCassetteOptionsDiv.style.display = chBox.checked ? "block" : "none";
-
-		showDivs ([
-			"processIdDivSame"
-		]);
+function showSameCassette() {
+		let chBox = document.getElementById("sameCassetteCheckbox");
+		let codeCassetteType = document.getElementById("cassetteTypeId").value;
+		
+		if(chBox.checked){
+			
+			showDivs ([
+				"sameCassetteOptionsDiv",
+				"processIdDivSame"
+			]);
+			
+			switch (codeCassetteType) {
+    	
+  		  		case "2":
+    				showDivs ([
+						"felvFivTestDiv",
+						"felvFivTestDivSame"
+					]);
+					
+					hideDivs ([
+						"singleTestDiv",
+						"singleTestDivSame",
+						"cplScanDiv",
+						"cplScanDivSame",
+						"flex4TestDiv",
+						"flex4TestDivSame"
+					])
+    			break;
+    	
+    			case "8":
+    				showDivs ([
+						"singleTestDiv",
+						"singleTestDivSame",
+						"cplScanDiv",
+						"cplScanDivSame"
+					]);
+					
+					hideDivs ([
+						"felvFivTestDiv",
+						"felvFivTestDivSame",
+						"flex4TestDiv",
+						"flex4TestDivSame"
+					])
+	    		break;
+    	
+    			case "9":
+    				showDivs ([
+						"flex4TestDiv",
+						"flex4TestDivSame"
+					]);
+					
+					hideDivs ([
+						"singleTestDiv",
+						"singleTestDivSame",
+						"felvFivTestDiv",
+						"felvFivTestDivSame",
+						"cplScanDiv",
+						"cplScanDivSame"
+					])
+    			break;
+    	
+    			default:
+    				showDivs ([
+						"singleTestDiv",
+						"singleTestDivSame"
+					]);
+					
+					hideDivs ([
+						"felvFivTestDiv",
+						"felvFivTestDivSame",
+						"cplScanDiv",
+						"cplScanDivSame",
+						"flex4TestDiv",
+						"flex4TestDivSame"
+					])
+					
+    		}	
+			
+		} else {
+			
+			hideDivs ([
+				"sameCassetteOptionsDiv",
+				"processIdDivSame"
+			]);
+		}		
 }
 
 
-function selectedCassetteType(codeCassetteType) {
+function selectedCassetteType() {
+
+		let codeCassetteType = document.getElementById("cassetteTypeId").value;
+		let chBox = document.getElementById("sameCassetteCheckbox");
+		
 		switch (codeCassetteType){
 		
-//------------Felv Fiv status ------------------
+			//------------Felv Fiv status ------------------
 	
-		case "2": 
-		
-		hideDivs ([
-			"singleTestDiv", 
-			"cplScanDiv", 
-			"flex4TestDiv", 
-			"singleTestDivSame", 
-			"cplScanDivSame", 
-			"flex4TestDivSame"
-		]);
-		
-		showDivs ([
-			"felvFivTestDiv",
-			"felvFivTestDivSame"
-		]);
-		
-//		setRequiredInputFields ([
-//			"felvControlInput",
-//			"felvNoiseInput",
-//			"felvTestLineValueInput"
-//		])
-		
-		break;
-		
-//------------cPL status ------------------		
-		
-		case "8":
-		
-		hideDivs ([
-			"felvFivTestDiv",
-			"flex4TestDiv",
-			"felvFivTestDivSame",
-			"flex4TestDivSame"
-		])
-		
-		showDivs ([
-			"singleTestDiv",
-			"cplScanDiv",
-			"cplScanDivSame"
-		]);
-		
-// 		setRequiredInputFields ([
-//	 		"lotNumberInput",
-//	 		"scaledResultInput"
-// 		]);  
- 		
-    	break;
-    	
-//-------- Flex4 status ----------------------		
-    	
-    	case "9": 
-    	
-    	hideDivs ([
-	    	"singleTestDiv",
-	    	"singleTestDivSame", 
-	    	"felvFivTestDiv",
-	    	"felvFivTestDivSame",
-	    	"cplScanDiv",
-	    	"cplScanDivSame"
-    	]);
-		
-		showDivs ([
-			"flex4TestDiv",
-			"flex4TestDivSame"
-		]);    
-		
-     	break;
-     	
- //-------- Default status for all cassettes except cpL, Felv Fiv & Flex4 -------		
-     	
-     	default:
-     	
-     	showDivs ([
-	     	"singleTestDiv",
-	     	"singleTestDivSame"
-     	]);
-     	
-     	hideDivs ([
-	     	"felvFivTestDiv",
-	     	"felvFivTestDivSame",
-	     	"flex4TestDiv",
-	     	"flex4TestDivSame",
-	     	"cplScanDiv",
-	     	"cplScanDivSame"
-     	]);
-     	
-//    	setNotRequiredInputFields ([
-//	    	"lotNumberInput", 
-//	    	"scaledResultInput"
-//    	]);
-    	
+			case "2": 
+				if (chBox.checked){
+				
+					hideDivs ([
+						"singleTestDiv",
+						"singleTestDivSame", 
+						"cplScanDiv", 
+						"cplScanDivSame",
+						"flex4TestDiv",
+						"flex4TestDivSame"
+					]);
+					
+					showDivs ([
+						"felvFivTestDiv",
+						"felvFivTestDivSame",
+						"sameCassetteOptionsDiv"
+					]);
+					
+				} else if (!chBox.checked) {
+				
+					hideDivs ([
+						"sameCassetteOptionsDiv",
+						"singleTestDiv",
+						"singleTestDivSame", 
+						"cplScanDiv",
+						"cplScanDivSame", 
+						"flex4TestDiv",
+						"flex4TestDivSame",
+						"felvFivTestDivSame"
+					]);
+					
+					showDivs ([
+						"felvFivTestDiv"
+					]);
+					
+				}	
+				break;
+			
+			//------------cPL status ------------------		
+			
+			case "8":
+				if (chBox.checked){
+					hideDivs ([
+						"felvFivTestDiv",
+						"felvFivTestDivSame",
+						"flex4TestDiv",
+						"flex4TestDivSame"
+					])
+					
+					showDivs ([
+						"sameCassetteOptionsDiv",
+						"singleTestDiv",
+						"singleTestDivSame",
+						"cplScanDiv",
+						"cplScanDivSame"
+					]);
+					
+				} else if (!chBox.checked) {
+					
+					hideDivs ([
+						"sameCassetteOptionsDiv",
+						"felvFivTestDiv",
+						"felvFivTestDivSame",
+						"flex4TestDiv",
+						"flex4TestDivSame",
+						"cplScanDivSame"
+					]);
+					
+					showDivs ([
+						"singleTestDiv",
+						"cplScanDiv"
+					]);
+					
+				}
+		    	break;
+	    	
+			//-------- Flex4 status ----------------------		
+	    	
+	    	case "9": 
+	    		if (chBox.checked){
+	    		
+	    			hideDivs ([
+			    		"singleTestDiv",
+			    		"singleTestDivSame", 
+			    		"felvFivTestDiv",
+			    		"felvFivTestDivSame",
+			    		"cplScanDiv",
+			    		"cplScanDivSame"
+		    		]);
+	    		
+	    			showDivs ([
+	    				"sameCassetteOptionsDiv",
+						"flex4TestDiv",
+						"flex4TestDivSame"
+					]); 
+	    		
+	    		
+	    		} else if (!chBox.checked) {
+	    		
+	    			hideDivs ([
+			    		"singleTestDiv",
+			    		"singleTestDivSame", 
+			    		"felvFivTestDiv",
+			    		"felvFivTestDivSame",
+			    		"cplScanDiv",
+			    		"cplScanDivSame",
+			    		"flex4TestDivSame"
+		    		]);
+	    		
+	    			showDivs ([
+						"flex4TestDiv",
+					]); 
+	    		
+	    		}
+		     	break;
+	     	
+	 		//-------- Default status for all cassettes except cpL, Felv Fiv & Flex4 -------		
+	     	
+	     	default:
+	     	
+	     		if (chBox.checked){
+	     		
+		     		hideDivs ([
+			     		"felvFivTestDiv",
+			     		"felvFivTestDivSame",
+			     		"flex4TestDiv",
+			     		"flex4TestDivSame",
+			     		"cplScanDiv",
+			     		"cplScanDivSame"
+		     		]);
+		     		
+		     		showDivs ([
+			     		"singleTestDiv",
+			     		"singleTestDivSame",
+			     		"sameCassetteOptionsDiv"
+		     		]);
+	     		
+	     		
+	     		} else if (!chBox.checked) {
+	     		
+	     			hideDivs ([
+	     				"sameCassetteOptionsDiv",
+			     		"felvFivTestDiv",
+			     		"felvFivTestDivSame",
+			     		"flex4TestDiv",
+			     		"flex4TestDivSame",
+			     		"cplScanDiv",
+			     		"cplScanDivSame",
+			     		"singleTestDivSame"
+		     		]);
+		     		
+		     		showDivs ([
+			     		"singleTestDiv",
+		     		]);
+	     		}
+	     		
    		}
+   		
+//  		toggleProcessId(); TODO: Revisar si es pot optimitzar encadenant crides a funcions
 }
 
 // ------ Status functions
-
-function setNotRequiredInputFields (notRequiredFields){
-		for (let elementInput of notRequiredFields){
-			document.getElementById(elementInput).removeAttribute ("required");
-		}
-}
-
-function setRequiredInputFields (requiredFields){
-		for (let elementInput of requiredFields) {
-			document.getElementById(elementInput).required = true;
-		}
-}
 
 function showDivs (visibleDivs){
 		for (let elementDiv	of visibleDivs){
 			const toVisibleDiv=document.getElementById(elementDiv);
 			toVisibleDiv.style.display="block";
 			let inputNodes=toVisibleDiv.getElementsByTagName("input");
-			console.info ("------- DIV SHOW:" + toVisibleDiv.getAttribute("id") + " -------"); 
-			let requiredInputs=" --> ";
 			for (let node of inputNodes){
 				if (node.classList.contains("never-required") || node.getAttribute("type")=="checkbox" || node.getAttribute("type")=="hidden"){
-				console.info ("   NOT SET REQUIRED: " + node.getAttribute("id") + " --> " + node.getAttribute("type")+ " ----> "  + node.classList);
-				continue;}
+					continue;
+				}
 				node.required=true;
-				requiredInputs += " " + node.getAttribute("id"); 
 			}
-			console.info (" REQUIRED INPUTS: " + requiredInputs);
 		}
 }
 
@@ -178,17 +400,13 @@ function hideDivs (hiddenDivs) {
 			const toHiddenDiv=document.getElementById(elementDiv);
 			toHiddenDiv.style.display="none";
 			let inputNodes=toHiddenDiv.getElementsByTagName("input");
-			console.info ("------- DIV HIDE:" + toHiddenDiv.getAttribute("id") + " -------");
-			let removedRequiredValueInputs=" --> " 
 			for (let node of inputNodes){
 				if (node.getAttribute("type")=="checkbox" || node.getAttribute("type")=="hidden"){
-				console.info ("   NOT REMOVED REQUIRED/VALUE: " + node.getAttribute("id") + " --o " + node.getAttribute("type") + " ----o " + node.classList);
-				continue;}
+					continue;
+				}
 				node.removeAttribute("required");
 				node.setAttribute("value","");
-				removedRequiredValueInputs += " " + node.getAttribute("id");
 			}
-			console.info (" REMOVED REQUIRED & VALUE INPUTS: " + removedRequiredValueInputs);
 		}	
 }
 
@@ -212,37 +430,3 @@ function hideDivs (hiddenDivs) {
 })();
 
 
-$(document).ready(function () {
-
-    $("#config-form").submit(function (event) {
-
-        //stop submit the form, we will post it manually.
-        event.preventDefault();
-
-        fire_ajax_submit();
-
-    });    
-
-});
-
-function fire_ajax_submit() {
-
-    var search = {}
-
-    $.ajax({
-        type: "POST",
-        contentType: "application/json",
-        url: "/saveConfig",
-        data: JSON.stringify(search),
-        dataType: 'json',
-        cache: false,
-        timeout: 600000,
-        success: function (data) {
-            console.log("SUCCESS : ", data);
-        },
-        error: function (e) {
-            console.log("ERROR : ", e);
-        }
-    });
-
-}

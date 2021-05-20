@@ -3,50 +3,43 @@ package net.opentrends.vue.simulator.dto;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import net.opentrends.vue.simulator.model.ScanDouble;
-import net.opentrends.vue.simulator.model.ScanMultiple;
-import net.opentrends.vue.simulator.model.ScanSingle;
-
 public class ConfigurationTO {
 
 	private String id;
 	
-	// Config
-	@NotNull
-	@NotEmpty
+	@NotEmpty(message = "Serial_number is required")
 	private String serialNumber;
-	@NotNull
-	@NotEmpty
-	private String ethernetIp;
 
-	// Status
-	@NotNull
+	@NotNull(message = "Busy_state is required")
 	private Boolean busyState;
-	@NotEmpty
-	private Integer cassetteIn;
-	@NotNull
-	@NotEmpty
+	@NotNull(message = "Cassette_in is required")
+	private Boolean cassetteIn;
+	@NotNull(message = "Cassette_time is required")
 	private Double cassetteTime;
-	@NotNull
-	@NotEmpty
+	@NotEmpty(message = "Settings_version is required")
 	private String settingsVersion;
-	@NotNull
-	@NotEmpty
+	@NotEmpty(message = "Release_version is required")
 	private String releaseVersion;
 
-	// Scan
-	@NotNull
-	@NotEmpty
+	@NotNull(message = "Cassette_type is required")	
 	private Integer cassetteTypeId;
-	@NotNull
-	@NotEmpty
+	@NotNull(message = "Test_type is required")	
 	private String testType;
+	@NotNull(message = "Same_cassette is required")
+	private Boolean sameCassette;
 	private Integer cassetteErrorCode;
+	private Integer cassetteErrorCode2;
 	private Integer processId;
 	private Integer previousProcessId;
-	private ScanSingle scanSingle;
-	private ScanMultiple scanMultiple;
-	private ScanDouble scanDouble;
+	private Integer processId2;
+	private Integer previousProcessId2;
+	private ScanSingleTO scanSingle;
+	private ScanMultipleTO scanMultiple;
+	private ScanDoubleTO scanDouble;
+		
+
+	public ConfigurationTO() {
+	}
 
 	public String getId() {
 		return id;
@@ -64,14 +57,6 @@ public class ConfigurationTO {
 		this.serialNumber = serialNumber;
 	}
 
-	public String getEthernetIp() {
-		return ethernetIp;
-	}
-
-	public void setEthernetIp(String ethernetIp) {
-		this.ethernetIp = ethernetIp;
-	}
-
 	public Boolean getBusyState() {
 		return busyState;
 	}
@@ -80,11 +65,11 @@ public class ConfigurationTO {
 		this.busyState = busyState;
 	}
 
-	public Integer getCassetteIn() {
+	public Boolean getCassetteIn() {
 		return cassetteIn;
 	}
 
-	public void setCassetteIn(Integer cassetteIn) {
+	public void setCassetteIn(Boolean cassetteIn) {
 		this.cassetteIn = cassetteIn;
 	}
 
@@ -119,6 +104,14 @@ public class ConfigurationTO {
 	public void setCassetteErrorCode(Integer cassetteErrorCode) {
 		this.cassetteErrorCode = cassetteErrorCode;
 	}
+	
+	public Integer getCassetteErrorCode2() {
+		return cassetteErrorCode2;
+	}
+
+	public void setCassetteErrorCode2(Integer cassetteErrorCode2) {
+		this.cassetteErrorCode2 = cassetteErrorCode2;
+	}
 
 	public Integer getProcessId() {
 		return processId;
@@ -135,28 +128,44 @@ public class ConfigurationTO {
 	public void setPreviousProcessId(Integer previousProcessId) {
 		this.previousProcessId = previousProcessId;
 	}
+	
+	public Integer getProcessId2() {
+		return processId2;
+	}
 
-	public ScanSingle getScanSingle() {
+	public void setProcessId2(Integer processId2) {
+		this.processId2 = processId2;
+	}
+
+	public Integer getPreviousProcessId2() {
+		return previousProcessId2;
+	}
+
+	public void setPreviousProcessId2(Integer previousProcessId2) {
+		this.previousProcessId2 = previousProcessId2;
+	}
+
+	public ScanSingleTO getScanSingle() {
 		return scanSingle;
 	}
 
-	public void setScanSingle(ScanSingle scanSingle) {
+	public void setScanSingle(ScanSingleTO scanSingle) {
 		this.scanSingle = scanSingle;
 	}
 
-	public ScanMultiple getScanMultiple() {
+	public ScanMultipleTO getScanMultiple() {
 		return scanMultiple;
 	}
 
-	public void setScanMultiple(ScanMultiple scanMultiple) {
+	public void setScanMultiple(ScanMultipleTO scanMultiple) {
 		this.scanMultiple = scanMultiple;
 	}
 
-	public ScanDouble getScanDouble() {
+	public ScanDoubleTO getScanDouble() {
 		return scanDouble;
 	}
 
-	public void setScanDouble(ScanDouble scanDouble) {
+	public void setScanDouble(ScanDoubleTO scanDouble) {
 		this.scanDouble = scanDouble;
 	}
 
@@ -175,4 +184,23 @@ public class ConfigurationTO {
 	public void setTestType(String testType) {
 		this.testType = testType;
 	}
+
+	public Boolean getSameCassette() {
+		return sameCassette;
+	}
+
+	public void setSameCassette(Boolean sameCassette) {
+		this.sameCassette = sameCassette;
+	}
+
+	@Override
+	public String toString() {
+		return "ConfigurationTO [id=" + id + ", serialNumber=" + serialNumber 
+				+ ", busyState=" + busyState + ", cassetteIn=" + cassetteIn + ", cassetteTime=" + cassetteTime
+				+ ", settingsVersion=" + settingsVersion + ", releaseVersion=" + releaseVersion + ", cassetteTypeId="
+				+ cassetteTypeId + ", testType=" + testType + ", cassetteErrorCode=" + cassetteErrorCode
+				+ ", processId=" + processId + ", previousProcessId=" + previousProcessId + ", scanSingle=" + scanSingle
+				+ ", scanMultiple=" + scanMultiple + ", scanDouble=" + scanDouble + "]";
+	}
+	
 }

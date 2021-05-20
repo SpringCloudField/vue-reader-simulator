@@ -1,9 +1,12 @@
 package net.opentrends.vue.simulator.model;
 
+import java.util.Date;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "configuration")
@@ -11,24 +14,20 @@ public class Configuration {
 
 	@Id
 	private String id;
-	
+	@NotNull
+	@NotEmpty
 	private String userId;
 
-	// Config
 	@NotNull
 	@NotEmpty
 	private String serialNumber;
-	@NotNull
-	@NotEmpty
-	private String ethernetIp;
 	
-	// Status
 	@NotNull
 	@NotEmpty
 	private Boolean busyState;
 	@NotNull
 	@NotEmpty
-	private Integer cassetteIn;
+	private Boolean cassetteIn;
 	@NotNull
 	@NotEmpty
 	private Double cassetteTime;
@@ -39,19 +38,25 @@ public class Configuration {
 	@NotEmpty
 	private String releaseVersion;
 	
-	// Scan
 	@NotNull
 	@NotEmpty
 	private Integer cassetteTypeId;		
 	@NotNull
 	@NotEmpty
 	private String testType;
+	private Boolean sameCassette;
 	private Integer cassetteErrorCode;
+	private Integer cassetteErrorCode2;
 	private Integer processId;
+	private Integer processId2;
 	private Integer previousProcessId;
+	private Integer previousProcessId2;
 	private ScanSingle scanSingle;
 	private ScanMultiple scanMultiple;
 	private ScanDouble scanDouble;
+
+	@LastModifiedDate
+	private Date lastModifiedDate; 
 	
 	public String getId() {
 		return id;
@@ -65,22 +70,16 @@ public class Configuration {
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
 	}
-	public String getEthernetIp() {
-		return ethernetIp;
-	}
-	public void setEthernetIp(String ethernetIp) {
-		this.ethernetIp = ethernetIp;
-	}
 	public Boolean getBusyState() {
 		return busyState;
 	}
 	public void setBusyState(Boolean busyState) {
 		this.busyState = busyState;
 	}
-	public Integer getCassetteIn() {
+	public Boolean getCassetteIn() {
 		return cassetteIn;
 	}
-	public void setCassetteIn(Integer cassetteIn) {
+	public void setCassetteIn(Boolean cassetteIn) {
 		this.cassetteIn = cassetteIn;
 	}
 	public Double getCassetteTime() {
@@ -107,17 +106,35 @@ public class Configuration {
 	public void setCassetteErrorCode(Integer cassetteErrorCode) {
 		this.cassetteErrorCode = cassetteErrorCode;
 	}
+	public Integer getCassetteErrorCode2() {
+		return cassetteErrorCode2;
+	}
+	public void setCassetteErrorCode2(Integer cassetteErrorCode2) {
+		this.cassetteErrorCode2 = cassetteErrorCode2;
+	}
 	public Integer getProcessId() {
 		return processId;
 	}
 	public void setProcessId(Integer processId) {
 		this.processId = processId;
 	}
+	public Integer getProcessId2() {
+		return processId2;
+	}
+	public void setProcessId2(Integer processId2) {
+		this.processId2 = processId2;
+	}
 	public Integer getPreviousProcessId() {
 		return previousProcessId;
 	}
 	public void setPreviousProcessId(Integer previousProcessId) {
 		this.previousProcessId = previousProcessId;
+	}
+	public Integer getPreviousProcessId2() {
+		return previousProcessId2;
+	}
+	public void setPreviousProcessId2(Integer previousProcessId2) {
+		this.previousProcessId2 = previousProcessId2;
 	}
 	public ScanSingle getScanSingle() {
 		return scanSingle;
@@ -154,6 +171,18 @@ public class Configuration {
 	}
 	public void setTestType(String testType) {
 		this.testType = testType;
+	}
+	public Boolean getSameCassette() {
+		return sameCassette;
+	}
+	public void setSameCassette(Boolean sameCassette) {
+		this.sameCassette = sameCassette;
+	}	
+	public Date getLastModifiedDate() {
+		return lastModifiedDate;
+	}
+	public void setLastModifiedDate(Date lastModifiedDate) {
+		this.lastModifiedDate = lastModifiedDate;
 	}
 
 }

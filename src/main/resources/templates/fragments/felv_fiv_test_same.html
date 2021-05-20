@@ -8,55 +8,47 @@
 	<div id="felvFivTestDivSame" th:fragment="felvFivTestSame">
 		<div class="form-row">
 			<div class="col-md-1 form-group">
-				<label>+ FeLV</label> <input type="checkbox" class="form-check">
-<!-- 					th:field="*{scanSingle.positive}"> -->
+				<label>+ FeLV</label> 
+				<input type="checkbox" class="form-check" th:field="*{scanDouble.positiveFelv2}">
 			</div>
 			<div class="col-md-2 form-group">
-				<label>test_error_code</label> <input type="text"
-					class="form-control form-control-sm">
-<!-- 					th:field="*{scanSingle.testErrorCode}"> -->
+				<label>test_error_code</label> 
+				<input type="text" class="form-control form-control-sm never-required" th:field="*{scanDouble.testErrorCodeFelv2}">
 			</div>
 			<div class="col-md-3 form-group">
-				<label>control</label> <input type="text"
-					class="form-control form-control-sm">
-<!-- 					th:field="*{scanSingle.control}" required> -->
+				<label>control</label> 
+				<input type="text" class="form-control form-control-sm" th:field="*{scanDouble.controlFelv2}" required>
 			</div>
 			<div class="col-md-3 form-group">
-				<label>noise</label> <input type="text"
-					class="form-control form-control-sm">
-<!-- 					th:field="*{scanSingle.noise}" required> -->
+				<label>noise</label> 
+				<input type="text" class="form-control form-control-sm" th:field="*{scanDouble.noiseFelv2}" required>
 			</div>
 			<div class="col-md-3 form-group">
-				<label>test_line_value</label> <input type="text"
-					class="form-control form-control-sm">
-<!-- 					th:field="*{scanSingle.testLineValue}" required> -->
+				<label>test_line_value</label> 
+				<input type="text" class="form-control form-control-sm" th:field="*{scanDouble.testLineValueFelv2}" required>
 			</div>
 		</div>
 
 		<div class="form-row">
 			<div class="col-md-1 form-group">
-				<label>+ FIV</label> <input type="checkbox" class="form-check">
-<!-- 					th:field="*{scanSingle.positive}"> -->
+				<label>+ FIV</label> 
+				<input type="checkbox" class="form-check" th:field="*{scanDouble.positiveFiv2}">
 			</div>
 			<div class="col-md-2 form-group">
-				<label>test_error_code</label> <input type="text"
-					class="form-control form-control-sm">
-<!-- 					th:field="*{scanSingle.testErrorCode}"> -->
+				<label>test_error_code</label> 
+				<input type="text" class="form-control form-control-sm never-required" th:field="*{scanDouble.testErrorCodeFiv2}">
 			</div>
 			<div class="col-md-3 form-group">
-				<label>control</label> <input type="text"
-					class="form-control form-control-sm">
-<!-- 					th:field="*{scanSingle.control}" required> -->
+				<label>control</label> 
+				<input type="text" class="form-control form-control-sm" th:field="*{scanDouble.controlFiv2}" required>
 			</div>
 			<div class="col-md-3 form-group">
-				<label>noise</label> <input type="text"
-					class="form-control form-control-sm"> 
-<!-- 					th:field="*{scanSingle.noise}" required> -->
+				<label>noise</label> 
+				<input type="text" class="form-control form-control-sm" th:field="*{scanDouble.noiseFiv2}" required>
 			</div>
 			<div class="col-md-3 form-group">
-				<label>test_line_value</label> <input type="text"
-					class="form-control form-control-sm">
-<!-- 					th:field="*{scanSingle.testLineValue}" required> -->
+				<label>test_line_value</label> 
+				<input type="text" class="form-control form-control-sm" th:field="*{scanDouble.testLineValueFiv2}" required>
 			</div>
 		</div>
 	</div>

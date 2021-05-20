@@ -38,6 +38,13 @@ public class VueReaderSimulatorApplication {
 	            roleRepository.save(newUserRole);
 			}
 	        
+	        Role apiRole = roleRepository.findByRole("API");
+	        if (apiRole == null) {
+	            Role newApiRole = new Role();
+	            newApiRole.setRole("API");
+	            roleRepository.save(newApiRole);
+			}
+	        
 	        List<CassetteType> cassetteTypeList = cassetteTypeRepository.findAll();
 	        if (cassetteTypeList.isEmpty()) {
 	        	CassetteType newCassetteType = new CassetteType();
