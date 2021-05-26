@@ -2,16 +2,20 @@ package net.opentrends.vue.simulator.controller.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import net.opentrends.vue.simulator.dto.CassetteTypeTO;
@@ -35,12 +39,19 @@ public class SimulatorServiceTest {
 	@Mock
 	private ConfigurationService configurationService;	
 	@Mock
-	private CassetteTypeService cassetteTypeService;	
+	private CassetteTypeService cassetteTypeService;
+	@Mock
+	private ResourceLoader resourceLoader;
 	@InjectMocks
 	private SimulatorServiceImpl simulatorService;
 	
 	@Test
 	public void getImagesTest() throws IOException {
+		String mockFile = "This is my file line 1\nline2\nline3";
+        InputStream is = new ByteArrayInputStream(mockFile.getBytes());
+		Resource mockResource = mock(Resource.class);
+		when(mockResource.getInputStream()).thenReturn(is);
+		when(resourceLoader.getResource(any())).thenReturn(mockResource);		
 		ImagesTO to = simulatorService.getImage("serial_number");
 		assertNotNull(to);
 		assertNotNull(to.getImage());

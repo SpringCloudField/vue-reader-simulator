@@ -2,17 +2,17 @@ package net.opentrends.vue.simulator.service.impl;
 
 import static java.util.Optional.ofNullable;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
+import org.springframework.util.StreamUtils;
 
 import net.opentrends.vue.simulator.dto.CassetteTypeTO;
 import net.opentrends.vue.simulator.dto.CoeficientsTO;
@@ -44,9 +44,11 @@ public class SimulatorServiceImpl implements SimulatorService {
 
 	@Autowired
 	private ConfigurationService configurationService;
-
 	@Autowired
 	private CassetteTypeService cassetteTypeService;
+	@Autowired
+	private ResourceLoader resourceLoader;
+
 
 	@Override
 	public ConfigReaderTO getConfigReader(String serialNumber, String serverName) throws AppRuntimeException {
@@ -201,11 +203,12 @@ public class SimulatorServiceImpl implements SimulatorService {
 	
 	@Override
 	public ImagesTO getImage(String serialNumber) throws IOException {
+		// Nothing to do here with simulator config, just to raise an exception in case serialNumber doesn't exist
 		configurationService.getConfigBySerialNumber(serialNumber);
 		ImagesTO imageTo = new ImagesTO();
-		imageTo.setId(1);
-		File file = ResourceUtils.getFile("classpath:static/images/vue.png");
-		imageTo.setImage(Files.readAllBytes(file.toPath()));
+		imageTo.setId(1);	
+		InputStream is = resourceLoader.getResource("classpath:static/images/vue.png").getInputStream();
+		imageTo.setImage(StreamUtils.copyToByteArray(is));
 		return imageTo;
 	}
 	
