@@ -1,8 +1,5 @@
 package net.opentrends.vue.simulator.dto;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class ErrorTO {
 	
 	private Integer code;

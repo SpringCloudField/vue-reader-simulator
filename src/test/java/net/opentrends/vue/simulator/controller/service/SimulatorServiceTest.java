@@ -55,7 +55,7 @@ public class SimulatorServiceTest {
 		ConfigReaderTO responseTO = simulatorService.getConfigReader("serial_number", "localhost");
 		assertNotNull(responseTO);
 		assertEquals("localhost", responseTO.getEthernetTO().getIp());
-		assertEquals(1, responseTO.getEthernetTO().getDhcp());
+		assertEquals(Boolean.TRUE, responseTO.getEthernetTO().getDhcp());
 		assertEquals(DefaultParams.GATEWAY, responseTO.getEthernetTO().getGateway());
 		assertEquals(DefaultParams.IP, responseTO.getWifiApTO().getIp());
 		assertEquals(DefaultParams.MASK, responseTO.getWifiApTO().getNetmask());

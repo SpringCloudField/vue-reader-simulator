@@ -53,7 +53,7 @@ public class SimulatorServiceImpl implements SimulatorService {
 		configurationService.getConfigBySerialNumber(serialNumber);
 		
 		EthernetTO ethernet = new EthernetTO();
-		ethernet.setDhcp(1);
+		ethernet.setDhcp(true);
 		ethernet.setGateway(DefaultParams.GATEWAY);
 		ethernet.setIp(serverName);
 		ethernet.setNetmask(DefaultParams.MASK);
@@ -113,8 +113,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 		ConfigurationTO configuration = configurationService.getConfigBySerialNumber(serialNumber);
 		CassetteTypeTO cassetteTypeRead = cassetteTypeService.getCassetteTypeByCode(configuration.getCassetteTypeId());
 		ResultTO resultTO = new ResultTO();
-		resultTO.setCassetteProcessId(ofNullable(configuration.getProcessId()).map(x -> configuration.getProcessId()).orElse(111));
-		resultTO.setPreviousProcessId(ofNullable(configuration.getPreviousProcessId()).map(x -> configuration.getPreviousProcessId()).orElse(-1));
+		resultTO.setCassetteProcessId(ofNullable(configuration.getProcessId()).orElse(111));
+		resultTO.setPreviousProcessId(ofNullable(configuration.getPreviousProcessId()).orElse(-1));
 
 		CassetteTypeTO cassetteType = new CassetteTypeTO();
 		cassetteType.setCode(configuration.getCassetteTypeId());
@@ -130,7 +130,7 @@ public class SimulatorServiceImpl implements SimulatorService {
 
 		List<ProcessResultTO> processResults = new ArrayList<>();
 			
-			switch (cassetteTypeRead.getCode()) {
+		switch (cassetteTypeRead.getCode()) {
 			case 2:
 				createFelvFivProcessResults(configuration, processResults, cassetteTypeRead);
 				break;
@@ -143,7 +143,7 @@ public class SimulatorServiceImpl implements SimulatorService {
 			default:
 				createSingleProcessResults(configuration, processResults, cassetteTypeRead);
 				break;
-			}
+		}
 				
 		resultTO.setCassetteType(cassetteType);
 		resultTO.setError(errorCodeTO);
@@ -171,10 +171,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 		readerData.setReleaseVersion(configuration.getReleaseVersion());
 		readerData.setSettingsVersion(configuration.getSettingsVersion());
 		
-		resultTO.setCassetteProcessId(
-					ofNullable(configuration.getProcessId2()).map(x -> configuration.getProcessId2()).orElse(111));
-		resultTO.setPreviousProcessId(ofNullable(configuration.getPreviousProcessId2())
-					.map(x -> configuration.getPreviousProcessId2()).orElse(-1));
+		resultTO.setCassetteProcessId(ofNullable(configuration.getProcessId2()).orElse(111));
+		resultTO.setPreviousProcessId(ofNullable(configuration.getPreviousProcessId2()).orElse(-1));
 
 		ErrorTO errorCodeTO = createErrorTo(configuration.getCassetteErrorCode2());
 
@@ -209,6 +207,22 @@ public class SimulatorServiceImpl implements SimulatorService {
 		File file = ResourceUtils.getFile("classpath:static/images/vue.png");
 		imageTo.setImage(Files.readAllBytes(file.toPath()));
 		return imageTo;
+	}
+	
+	@Override
+	public DateTimeTO getReaderDateAndTime(String serialNumber) {
+		// Nothing to do here with simulator config, just to raise an exception in case serialNumber doesn't exist
+		configurationService.getConfigBySerialNumber(serialNumber);
+		DateTimeTO dateTime = new DateTimeTO();
+		dateTime.setDateTime(sdf.format(new Date()));
+		return dateTime;
+	}
+
+	@Override
+	public String cancelTimedScan(String serialNumber) {
+		// Nothing to do here with simulator config, just to raise an exception in case serialNumber doesn't exist
+		configurationService.getConfigBySerialNumber(serialNumber);
+		return "cancel";
 	}
 	
 	private void createCplProcessResult(ConfigurationTO configuration, List<ProcessResultTO> processResults, CassetteTypeTO cassetteTypeRead) {
@@ -511,8 +525,6 @@ public class SimulatorServiceImpl implements SimulatorService {
 		processResults.add(result1);
 	}
 	
-	
-	
 	private ErrorTO createErrorTo(Integer resultErrorCode) {
 		ErrorTO errorTO = new ErrorTO();
 		if (resultErrorCode != null && resultErrorCode != 0) {
@@ -523,22 +535,6 @@ public class SimulatorServiceImpl implements SimulatorService {
 			errorTO.setDescription(DefaultParams.SUCCESS);
 		}
 		return errorTO;
-	}
-
-	@Override
-	public DateTimeTO getReaderDateAndTime(String serialNumber) {
-		// Nothing to do here with simulator config, just to raise an exception in case serialNumber doesn't exist
-		configurationService.getConfigBySerialNumber(serialNumber);
-		DateTimeTO dateTime = new DateTimeTO();
-		dateTime.setDateTime(sdf.format(new Date()));
-		return dateTime;
-	}
-
-	@Override
-	public String cancelTimedScan(String serialNumber) {
-		// Nothing to do here with simulator config, just to raise an exception in case serialNumber doesn't exist
-		configurationService.getConfigBySerialNumber(serialNumber);
-		return "cancel";
 	}
 
 }
