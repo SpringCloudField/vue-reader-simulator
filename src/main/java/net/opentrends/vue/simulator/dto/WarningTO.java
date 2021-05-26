@@ -1,6 +1,7 @@
 package net.opentrends.vue.simulator.dto;
 
 public class WarningTO {
+	
 	private Integer code;
 	private String description;
 

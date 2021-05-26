@@ -3,6 +3,7 @@ package net.opentrends.vue.simulator.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ReaderDataTO {
+	
 	@JsonProperty("cassette_time")
 	private Double cassetteTime;
 	

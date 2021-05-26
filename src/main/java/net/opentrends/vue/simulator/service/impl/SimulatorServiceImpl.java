@@ -2,17 +2,17 @@ package net.opentrends.vue.simulator.service.impl;
 
 import static java.util.Optional.ofNullable;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
+import org.springframework.util.StreamUtils;
 
 import net.opentrends.vue.simulator.dto.CassetteTypeTO;
 import net.opentrends.vue.simulator.dto.CoeficientsTO;
@@ -44,16 +44,18 @@ public class SimulatorServiceImpl implements SimulatorService {
 
 	@Autowired
 	private ConfigurationService configurationService;
-
 	@Autowired
 	private CassetteTypeService cassetteTypeService;
+	@Autowired
+	private ResourceLoader resourceLoader;
+
 
 	@Override
 	public ConfigReaderTO getConfigReader(String serialNumber, String serverName) throws AppRuntimeException {
 		configurationService.getConfigBySerialNumber(serialNumber);
 		
 		EthernetTO ethernet = new EthernetTO();
-		ethernet.setDhcp(1);
+		ethernet.setDhcp(true);
 		ethernet.setGateway(DefaultParams.GATEWAY);
 		ethernet.setIp(serverName);
 		ethernet.setNetmask(DefaultParams.MASK);
@@ -113,8 +115,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 		ConfigurationTO configuration = configurationService.getConfigBySerialNumber(serialNumber);
 		CassetteTypeTO cassetteTypeRead = cassetteTypeService.getCassetteTypeByCode(configuration.getCassetteTypeId());
 		ResultTO resultTO = new ResultTO();
-		resultTO.setCassetteProcessId(ofNullable(configuration.getProcessId()).map(x -> configuration.getProcessId()).orElse(111));
-		resultTO.setPreviousProcessId(ofNullable(configuration.getPreviousProcessId()).map(x -> configuration.getPreviousProcessId()).orElse(-1));
+		resultTO.setCassetteProcessId(ofNullable(configuration.getProcessId()).orElse(111));
+		resultTO.setPreviousProcessId(ofNullable(configuration.getPreviousProcessId()).orElse(-1));
 
 		CassetteTypeTO cassetteType = new CassetteTypeTO();
 		cassetteType.setCode(configuration.getCassetteTypeId());
@@ -130,7 +132,7 @@ public class SimulatorServiceImpl implements SimulatorService {
 
 		List<ProcessResultTO> processResults = new ArrayList<>();
 			
-			switch (cassetteTypeRead.getCode()) {
+		switch (cassetteTypeRead.getCode()) {
 			case 2:
 				createFelvFivProcessResults(configuration, processResults, cassetteTypeRead);
 				break;
@@ -143,7 +145,7 @@ public class SimulatorServiceImpl implements SimulatorService {
 			default:
 				createSingleProcessResults(configuration, processResults, cassetteTypeRead);
 				break;
-			}
+		}
 				
 		resultTO.setCassetteType(cassetteType);
 		resultTO.setError(errorCodeTO);
@@ -171,10 +173,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 		readerData.setReleaseVersion(configuration.getReleaseVersion());
 		readerData.setSettingsVersion(configuration.getSettingsVersion());
 		
-		resultTO.setCassetteProcessId(
-					ofNullable(configuration.getProcessId2()).map(x -> configuration.getProcessId2()).orElse(111));
-		resultTO.setPreviousProcessId(ofNullable(configuration.getPreviousProcessId2())
-					.map(x -> configuration.getPreviousProcessId2()).orElse(-1));
+		resultTO.setCassetteProcessId(ofNullable(configuration.getProcessId2()).orElse(111));
+		resultTO.setPreviousProcessId(ofNullable(configuration.getPreviousProcessId2()).orElse(-1));
 
 		ErrorTO errorCodeTO = createErrorTo(configuration.getCassetteErrorCode2());
 
@@ -203,12 +203,29 @@ public class SimulatorServiceImpl implements SimulatorService {
 	
 	@Override
 	public ImagesTO getImage(String serialNumber) throws IOException {
+		// Nothing to do here with simulator config, just to raise an exception in case serialNumber doesn't exist
 		configurationService.getConfigBySerialNumber(serialNumber);
 		ImagesTO imageTo = new ImagesTO();
-		imageTo.setId(1);
-		File file = ResourceUtils.getFile("classpath:static/images/vue.png");
-		imageTo.setImage(Files.readAllBytes(file.toPath()));
+		imageTo.setId(1);	
+		InputStream is = resourceLoader.getResource("classpath:static/images/vue.png").getInputStream();
+		imageTo.setImage(StreamUtils.copyToByteArray(is));
 		return imageTo;
+	}
+	
+	@Override
+	public DateTimeTO getReaderDateAndTime(String serialNumber) {
+		// Nothing to do here with simulator config, just to raise an exception in case serialNumber doesn't exist
+		configurationService.getConfigBySerialNumber(serialNumber);
+		DateTimeTO dateTime = new DateTimeTO();
+		dateTime.setDateTime(sdf.format(new Date()));
+		return dateTime;
+	}
+
+	@Override
+	public String cancelTimedScan(String serialNumber) {
+		// Nothing to do here with simulator config, just to raise an exception in case serialNumber doesn't exist
+		configurationService.getConfigBySerialNumber(serialNumber);
+		return "cancel";
 	}
 	
 	private void createCplProcessResult(ConfigurationTO configuration, List<ProcessResultTO> processResults, CassetteTypeTO cassetteTypeRead) {
@@ -511,8 +528,6 @@ public class SimulatorServiceImpl implements SimulatorService {
 		processResults.add(result1);
 	}
 	
-	
-	
 	private ErrorTO createErrorTo(Integer resultErrorCode) {
 		ErrorTO errorTO = new ErrorTO();
 		if (resultErrorCode != null && resultErrorCode != 0) {
@@ -523,22 +538,6 @@ public class SimulatorServiceImpl implements SimulatorService {
 			errorTO.setDescription(DefaultParams.SUCCESS);
 		}
 		return errorTO;
-	}
-
-	@Override
-	public DateTimeTO getReaderDateAndTime(String serialNumber) {
-		// Nothing to do here with simulator config, just to raise an exception in case serialNumber doesn't exist
-		configurationService.getConfigBySerialNumber(serialNumber);
-		DateTimeTO dateTime = new DateTimeTO();
-		dateTime.setDateTime(sdf.format(new Date()));
-		return dateTime;
-	}
-
-	@Override
-	public String cancelTimedScan(String serialNumber) {
-		// Nothing to do here with simulator config, just to raise an exception in case serialNumber doesn't exist
-		configurationService.getConfigBySerialNumber(serialNumber);
-		return "cancel";
 	}
 
 }

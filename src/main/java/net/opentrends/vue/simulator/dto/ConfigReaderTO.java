@@ -1,11 +1,9 @@
 package net.opentrends.vue.simulator.dto;
 
-import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@Component
 public class ConfigReaderTO {
+	
 	@JsonProperty("ethernet")
 	private EthernetTO ethernetTO;
 	@JsonProperty("wifi_ap")
