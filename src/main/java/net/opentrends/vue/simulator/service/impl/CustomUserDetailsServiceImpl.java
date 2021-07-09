@@ -23,10 +23,12 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 	}
 
+	@Override
 	public User findUserByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
 
+	@Override
 	public void saveUser(User user) {
 		user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
 		user.setEnabled(true);
