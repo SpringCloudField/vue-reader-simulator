@@ -1,6 +1,7 @@
 package net.opentrends.vue.simulator.controller;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -13,10 +14,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,21 +29,18 @@ import net.opentrends.vue.simulator.model.User;
 import net.opentrends.vue.simulator.service.CassetteTypeService;
 import net.opentrends.vue.simulator.service.ConfigurationService;
 import net.opentrends.vue.simulator.service.CustomUserDetailsService;
+import net.opentrends.vue.simulator.validator.ConfigurationValidator;
 
 @ExtendWith(SpringExtension.class)
-@AutoConfigureMockMvc
 public class ConfigurationControllerTest {
 
-	@InjectMocks
 	private ConfiguratorController configuratorController;
-	@Mock
 	private CustomUserDetailsService userService;
-	@Mock
 	private CassetteTypeService cassetteTypeService;
-	@Mock
 	private ConfigurationService configurationService;
+	private ConfigurationValidator configValidator;
 	private MockMvc mockMvc;
-
+	
 	@BeforeEach
 	void setUp() throws Exception {
 		Authentication auth = Mockito.mock(Authentication.class);
@@ -58,6 +53,11 @@ public class ConfigurationControllerTest {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 		resolver.setPrefix("/WEB_INF/views");
 		resolver.setSuffix(".jsp");
+		
+		userService = mock(CustomUserDetailsService.class);
+		cassetteTypeService = mock(CassetteTypeService.class);
+		configurationService = mock(ConfigurationService.class);						
+		configuratorController = new ConfiguratorController(userService, cassetteTypeService, configurationService, configValidator);
 		
 		this.mockMvc = MockMvcBuilders.standaloneSetup(configuratorController).setViewResolvers(resolver).build();
 	}

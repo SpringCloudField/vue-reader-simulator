@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
 
 import net.opentrends.vue.simulator.dto.CassetteTypeTO;
@@ -37,17 +35,19 @@ import net.opentrends.vue.simulator.service.ConfigurationService;
 import net.opentrends.vue.simulator.service.SimulatorService;
 import net.opentrends.vue.simulator.utils.DefaultParams;
 
-@Service
 public class SimulatorServiceImpl implements SimulatorService {
 	
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZ");
 
-	@Autowired
-	private ConfigurationService configurationService;
-	@Autowired
-	private CassetteTypeService cassetteTypeService;
-	@Autowired
-	private ResourceLoader resourceLoader;
+	private final ConfigurationService configurationService;
+	private final CassetteTypeService cassetteTypeService;
+	private final ResourceLoader resourceLoader;
+	
+	public SimulatorServiceImpl(ConfigurationService configurationService, CassetteTypeService cassetteTypeService, ResourceLoader resourceLoader) {
+		this.configurationService = configurationService;
+		this.cassetteTypeService = cassetteTypeService;
+		this.resourceLoader = resourceLoader;				
+	}
 
 
 	@Override

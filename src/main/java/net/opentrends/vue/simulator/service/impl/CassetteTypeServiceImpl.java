@@ -4,20 +4,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import net.opentrends.vue.simulator.dto.CassetteTypeTO;
 import net.opentrends.vue.simulator.repository.CassetteTypeRepository;
 import net.opentrends.vue.simulator.service.CassetteTypeService;
 
-@Service
 public class CassetteTypeServiceImpl implements CassetteTypeService {
 
-	@Autowired
-	private CassetteTypeRepository cassetteTypeRepository;
-	@Autowired
-	private ModelMapper mapper;
+	private final CassetteTypeRepository cassetteTypeRepository;
+	private final ModelMapper mapper;
+	
+	public CassetteTypeServiceImpl(CassetteTypeRepository cassetteTypeRepository, ModelMapper mapper) {
+		this.mapper = mapper;
+		this.cassetteTypeRepository = cassetteTypeRepository;
+	}
 
 	@Override
 	public List<CassetteTypeTO> getAllCassetteType() {

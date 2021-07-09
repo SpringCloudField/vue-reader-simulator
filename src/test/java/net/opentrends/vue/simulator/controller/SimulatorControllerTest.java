@@ -3,14 +3,14 @@ package net.opentrends.vue.simulator.controller;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
@@ -33,10 +33,14 @@ import net.opentrends.vue.simulator.utils.DefaultParams;
 @ExtendWith(SpringExtension.class)
 public class SimulatorControllerTest {
 	
-	@Mock
 	private SimulatorService simulatorService;
-	@InjectMocks
 	private SimulatorController simulatorController;
+	
+	@BeforeEach
+	void setUp() {
+		simulatorService = mock(SimulatorService.class);
+		simulatorController = new SimulatorController(simulatorService);
+	}
 	
 	@Test
 	public void configTest() {

@@ -10,13 +10,10 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import net.opentrends.vue.simulator.dto.CassetteTypeTO;
 import net.opentrends.vue.simulator.dto.ConfigReaderTO;
@@ -33,17 +30,20 @@ import net.opentrends.vue.simulator.service.ConfigurationService;
 import net.opentrends.vue.simulator.service.impl.SimulatorServiceImpl;
 import net.opentrends.vue.simulator.utils.DefaultParams;
 
-@ExtendWith(SpringExtension.class)
 public class SimulatorServiceTest {
 	
-	@Mock
 	private ConfigurationService configurationService;	
-	@Mock
 	private CassetteTypeService cassetteTypeService;
-	@Mock
 	private ResourceLoader resourceLoader;
-	@InjectMocks
 	private SimulatorServiceImpl simulatorService;
+	
+	@BeforeEach
+	public void init() {
+		configurationService = mock(ConfigurationService.class);
+		cassetteTypeService = mock(CassetteTypeService.class);
+		resourceLoader = mock(ResourceLoader.class);
+		simulatorService = new SimulatorServiceImpl(configurationService, cassetteTypeService, resourceLoader);
+	}
 	
 	@Test
 	public void getImagesTest() throws IOException {

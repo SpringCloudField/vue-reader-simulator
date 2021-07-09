@@ -1,33 +1,35 @@
 package net.opentrends.vue.simulator.controller.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.modelmapper.ModelMapper;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import net.opentrends.vue.simulator.dto.CassetteTypeTO;
 import net.opentrends.vue.simulator.model.CassetteType;
 import net.opentrends.vue.simulator.repository.CassetteTypeRepository;
+import net.opentrends.vue.simulator.service.CassetteTypeService;
 import net.opentrends.vue.simulator.service.impl.CassetteTypeServiceImpl;
 
 
-@ExtendWith(SpringExtension.class)
 public class CassetteTypeServiceTest {
 	
-	@Mock
 	private CassetteTypeRepository cassetteTypeRepository;
-	@Mock
 	private ModelMapper mapper;
-	@InjectMocks
-	private CassetteTypeServiceImpl cassetteTypeService;
+	private CassetteTypeService cassetteTypeService;
+	
+	@BeforeEach
+	public void init() {
+		cassetteTypeRepository = mock(CassetteTypeRepository.class);
+		mapper = mock(ModelMapper.class);
+		cassetteTypeService = new CassetteTypeServiceImpl(cassetteTypeRepository, mapper);
+	}
 	
 	
 	@Test

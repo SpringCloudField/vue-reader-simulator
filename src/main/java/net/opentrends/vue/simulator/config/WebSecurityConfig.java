@@ -1,7 +1,5 @@
 package net.opentrends.vue.simulator.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -12,28 +10,25 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-import net.opentrends.vue.simulator.service.impl.CustomUserDetailsServiceImpl;
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-	@Autowired
-	private CustomizeAuthenticationSuccessHandler customizeAuthenticationSuccessHandler;
+	private final BCryptPasswordEncoder bCryptPasswordEncoder;
+	private final CustomizeAuthenticationSuccessHandler customizeAuthenticationSuccessHandler;
+	private final UserDetailsService userDetailsService;
 	
-	
-	@Bean
-	public UserDetailsService mongoUserDetails() {
-	    return new CustomUserDetailsServiceImpl();
-	}
+	public WebSecurityConfig(BCryptPasswordEncoder bCryptPasswordEncoder,
+			CustomizeAuthenticationSuccessHandler customizeAuthenticationSuccessHandler, UserDetailsService userDetailsService) {
+		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+		this.customizeAuthenticationSuccessHandler = customizeAuthenticationSuccessHandler;
+		this.userDetailsService = userDetailsService;
+	}		
 	
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		UserDetailsService userDetailsService = mongoUserDetails();
-		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+		UserDetailsService uds = userDetailsService;
+		auth.userDetailsService(uds).passwordEncoder(bCryptPasswordEncoder);
     }
 	
 	@Override
