@@ -31,9 +31,8 @@ public class CassetteTypeServiceTest {
 		cassetteTypeService = new CassetteTypeServiceImpl(cassetteTypeRepository, mapper);
 	}
 	
-	
 	@Test
-	public void test001_retrieveCassetteTypeList() {
+	public void should_return_a_cassette_type_list() {
 		final List<CassetteType> cassetteList = createCassetteTypeList();		
 		when(cassetteTypeRepository.findByOrderByCodeAsc()).thenReturn(cassetteList);		
 		List<CassetteTypeTO> dtoList = cassetteTypeService.getAllCassetteType();

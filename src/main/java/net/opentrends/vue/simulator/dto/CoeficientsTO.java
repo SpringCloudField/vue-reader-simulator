@@ -1,5 +1,21 @@
 package net.opentrends.vue.simulator.dto;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.jackson.Jacksonized;
+
+@Builder
+@Setter
+@Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Jacksonized
 public class CoeficientsTO {
 
 	private Integer a;
@@ -7,47 +23,5 @@ public class CoeficientsTO {
 	private Integer c;
 	private Integer d;
 	private Integer f;
-
-	public Integer getA() {
-		return a;
-	}
-
-	public void setA(Integer a) {
-		this.a = a;
-	}
-
-	public Integer getB() {
-		return b;
-	}
-
-	public void setB(Integer b) {
-		this.b = b;
-	}
-
-	public Integer getC() {
-		return c;
-	}
-
-	public void setC(Integer c) {
-		this.c = c;
-	}
-
-	public Integer getD() {
-		return d;
-	}
-
-	public void setD(Integer d) {
-		this.d = d;
-	}
-
-	public Integer getF() {
-		return f;
-	}
-
-	public void setF(Integer f) {
-		this.f = f;
-	}
-	
-	
 	
 }

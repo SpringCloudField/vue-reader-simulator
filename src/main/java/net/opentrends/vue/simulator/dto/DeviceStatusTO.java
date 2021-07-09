@@ -2,6 +2,22 @@ package net.opentrends.vue.simulator.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.jackson.Jacksonized;
+
+@Builder
+@Setter
+@Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Jacksonized
 public class DeviceStatusTO {
 	
 	@JsonProperty("busy_state")
@@ -29,62 +45,5 @@ public class DeviceStatusTO {
 	
 	@JsonProperty("settings_version")
 	private String settingsVersion;
-	
-	public Boolean getBusyState() {
-		return busyState;
-	}
-	public void setBusyState(Boolean busyState) {
-		this.busyState = busyState;
-	}
-	public Boolean getCassetteIn() {
-		return cassetteIn;
-	}
-	public void setCassetteIn(Boolean cassetteIn) {
-		this.cassetteIn = cassetteIn;
-	}
-	public Double getCassetteTime() {
-		return cassetteTime;
-	}
-	public void setCassetteTime(Double cassetteTime) {
-		this.cassetteTime = cassetteTime;
-	}
-	public String getDateTime() {
-		return dateTime;
-	}
-	public void setDateTime(String dateTime) {
-		this.dateTime = dateTime;
-	}
-	public Integer getDbVersion() {
-		return dbVersion;
-	}
-	public void setDbVersion(Integer dbVersion) {
-		this.dbVersion = dbVersion;
-	}
-	public String getPlatform() {
-		return platform;
-	}
-	public void setPlatform(String platform) {
-		this.platform = platform;
-	}
-	public String getReleaseVersion() {
-		return releaseVersion;
-	}
-	public void setReleaseVersion(String releaseVersion) {
-		this.releaseVersion = releaseVersion;
-	}
-	public String getSerialNumber() {
-		return serialNumber;
-	}
-	public void setSerialNumber(String serialNumber) {
-		this.serialNumber = serialNumber;
-	}
-	public String getSettingsVersion() {
-		return settingsVersion;
-	}
-	public void setSettingsVersion(String settingsVersion) {
-		this.settingsVersion = settingsVersion;
-	}
-	
-	
 	
 }

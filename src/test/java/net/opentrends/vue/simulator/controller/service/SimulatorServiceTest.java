@@ -46,7 +46,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void getImagesTest() throws IOException {
+	public void should_return_a_image() throws IOException {
 		String mockFile = "This is my file line 1\nline2\nline3";
         InputStream is = new ByteArrayInputStream(mockFile.getBytes());
 		Resource mockResource = mock(Resource.class);
@@ -59,7 +59,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void getConfigReaderTest() {
+	public void shoull_return_a_config_reader() {
 		ConfigurationTO confTO = createConfigurationTO(false, 0, false);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
 		
@@ -82,7 +82,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void getStatusReaderTestNoCassetteError() {
+	public void should_return_a_status_reader_with_no_cassette_error() {
 		ConfigurationTO confTO = createConfigurationTO(false, 0, false);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
 		
@@ -99,7 +99,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void getStatusReaderTestWithCassetteError() {
+	public void should_return_a_status_reader_with_cassette_error() {
 		ConfigurationTO confTO = createConfigurationTO(true, 0, false);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
 		
@@ -116,7 +116,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void scanSingleTestNoError() {
+	public void should_return_a_single_scan_test_with_no_cassette_error() {
 		ConfigurationTO confTO = createConfigurationTO(false, 1, false);
 		CassetteTypeTO cassTO = createCassetteTypeTO(1);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
@@ -147,7 +147,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void scanSingleTestWithoutErrorSame() {
+	public void should_return_a_single_scan_test_with_no_error_same() {
 		ConfigurationTO confTO = createConfigurationTO2(false, 1, false);
 		CassetteTypeTO cassTO = createCassetteTypeTO(1);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);

@@ -2,6 +2,22 @@ package net.opentrends.vue.simulator.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.jackson.Jacksonized;
+
+@Builder
+@Setter
+@Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Jacksonized
 public class ReaderDataTO {
 	
 	@JsonProperty("cassette_time")
@@ -18,48 +34,6 @@ public class ReaderDataTO {
 	
 	@JsonProperty("settings_version")
 	private String settingsVersion;
-
-	public Double getCassetteTime() {
-		return cassetteTime;
-	}
-
-	public void setCassetteTime(Double cassetteTime) {
-		this.cassetteTime = cassetteTime;
-	}
-
-	public String getDateTime() {
-		return dateTime;
-	}
-
-	public void setDateTime(String dateTime) {
-		this.dateTime = dateTime;
-	}
-
-	public String getDbVersion() {
-		return dbVersion;
-	}
-
-	public void setDbVersion(String dbVersion) {
-		this.dbVersion = dbVersion;
-	}
-
-	public String getReleaseVersion() {
-		return releaseVersion;
-	}
-
-	public void setReleaseVersion(String releaseVersion) {
-		this.releaseVersion = releaseVersion;
-	}
-
-	public String getSettingsVersion() {
-		return settingsVersion;
-	}
-
-	public void setSettingsVersion(String settingsVersion) {
-		this.settingsVersion = settingsVersion;
-	}
-	
-	
 	
 }
 

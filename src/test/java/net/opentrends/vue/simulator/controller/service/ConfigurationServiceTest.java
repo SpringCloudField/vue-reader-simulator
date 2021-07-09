@@ -35,7 +35,7 @@ public class ConfigurationServiceTest {
 	}
 	
 	@Test
-	public void getConfigBySerialNumberTest_SN_not_exist() {
+	public void should_not_return_reader_config_by_sn_not_exists() {
 		when(configRespository.findBySerialNumber(any())).thenReturn(null);
 		
 		assertThrows(AppRuntimeException.class, () -> {
@@ -44,7 +44,7 @@ public class ConfigurationServiceTest {
 	}
 	
 	@Test
-	public void getConfigBySerialNumberTest() {
+	public void should_return_reader_config_by_sn_not() {
 		when(configRespository.findBySerialNumber(any())).thenReturn(new Configuration());
 		when(mapper.map(any(), any())).thenReturn(new ConfigurationTO());
 		
@@ -53,14 +53,14 @@ public class ConfigurationServiceTest {
 	}
 	
 	@Test
-	public void saveConfigTest() {
+	public void should_save_reader_config() {
 		when(mapper.map(any(), any())).thenReturn(new Configuration());
 		configurationService.saveConfig(new ConfigurationTO(), "userId");
 		verify(configRespository).save(any(Configuration.class));
 	}
 	
 	@Test
-	public void getConfigById_NoExistConfig_Test() {
+	public void should_not_return_reader_config_by_config_id_not_exists() {
 		when(mapper.map(any(), any())).thenReturn(new Configuration());
 		when(configRespository.findById(any())).thenReturn(empty());		
 		ConfigurationTO configTO = configurationService.getConfigById("configId");
@@ -68,7 +68,7 @@ public class ConfigurationServiceTest {
 	}
 	
 	@Test
-	public void getConfigByIdTest() {
+	public void should_return_reader_config_by_config_id() {
 		when(mapper.map(any(), any())).thenReturn(new ConfigurationTO());
 		when(configRespository.findById(any())).thenReturn(of(new Configuration()));		
 		ConfigurationTO configTO = configurationService.getConfigById("configId");

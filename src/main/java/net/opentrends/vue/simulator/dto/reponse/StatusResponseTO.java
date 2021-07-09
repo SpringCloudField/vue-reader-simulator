@@ -1,23 +1,27 @@
 package net.opentrends.vue.simulator.dto.reponse;
 
-import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.jackson.Jacksonized;
 import net.opentrends.vue.simulator.dto.StatusTO;
 
-@Component
+@Builder
+@Setter
+@Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Jacksonized
 public class StatusResponseTO {
 	
 	@JsonProperty("Status")
 	private StatusTO statusTO;
 
-	public StatusTO getStatusTO() {
-		return statusTO;
-	}
-
-	public void setStatusTO(StatusTO statusTO) {
-		this.statusTO = statusTO;
-	}
-	
 }
