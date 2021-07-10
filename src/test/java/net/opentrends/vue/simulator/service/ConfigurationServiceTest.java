@@ -1,4 +1,4 @@
-package net.opentrends.vue.simulator.controller.service;
+package net.opentrends.vue.simulator.service;
 
 import static java.util.Optional.empty;
 import static java.util.Optional.of;

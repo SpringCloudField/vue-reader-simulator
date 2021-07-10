@@ -1,4 +1,4 @@
-package net.opentrends.vue.simulator.controller.service;
+package net.opentrends.vue.simulator.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
