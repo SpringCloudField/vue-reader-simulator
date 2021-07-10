@@ -13,14 +13,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mockito;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.restdocs.RestDocumentationContextProvider;
+import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import net.opentrends.vue.simulator.dto.CassetteTypeTO;
 import net.opentrends.vue.simulator.dto.ConfigurationTO;
@@ -30,34 +25,23 @@ import net.opentrends.vue.simulator.service.ConfigurationService;
 import net.opentrends.vue.simulator.service.CustomUserDetailsService;
 import net.opentrends.vue.simulator.validator.ConfigurationValidator;
 
-@ExtendWith(SpringExtension.class)
-public class ConfigurationControllerTest {
+@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
+public class ConfigurationControllerTest extends BaseResourceDocumentedTest {
 
 	private ConfiguratorController configuratorController;
 	private CustomUserDetailsService userService;
 	private CassetteTypeService cassetteTypeService;
 	private ConfigurationService configurationService;
 	private ConfigurationValidator configValidator;
-	private MockMvc mockMvc;
 	
 	@BeforeEach
-	void setUp() throws Exception {
+	void setUp(RestDocumentationContextProvider restDocumentation) {
 		userService = mock(CustomUserDetailsService.class);
 		cassetteTypeService = mock(CassetteTypeService.class);
 		configurationService = mock(ConfigurationService.class);						
 		configuratorController = new ConfiguratorController(userService, cassetteTypeService, configurationService, configValidator);
-		Authentication auth = Mockito.mock(Authentication.class);
-		SecurityContext securityContext = Mockito.mock(SecurityContext.class);
-		when(securityContext.getAuthentication()).thenReturn(auth);
-		when(auth.getName()).thenReturn("mockedUserName");
 		
-		SecurityContextHolder.setContext(securityContext);
-		//Reconfigure the view resolver in test
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/WEB_INF/views");
-		resolver.setSuffix(".jsp");
-		
-		this.mockMvc = MockMvcBuilders.standaloneSetup(configuratorController).setViewResolvers(resolver).build();
+        configureForDocumentation(restDocumentation, configuratorController);
 	}
 
 	@Test
@@ -65,7 +49,7 @@ public class ConfigurationControllerTest {
 		when(userService.findUserByEmail(any())).thenReturn(createUserMock());
 		when(configurationService.getConfigsByUserId(any())).thenReturn(asList(new ConfigurationTO()));
 		
-		mockMvc.perform(get("/dashboard"))
+		this.mockMvc.perform(get("/dashboard"))
 			.andExpect(status().isOk())
 			.andExpect(view().name("dashboard"))
 			.andExpect(model().attributeExists("currentUser"))
@@ -79,7 +63,7 @@ public class ConfigurationControllerTest {
 		when(configurationService.getConfigsByUserId(any())).thenReturn(asList(new ConfigurationTO()));
 		when(cassetteTypeService.getAllCassetteType()).thenReturn(asList(new CassetteTypeTO()));
 		
-		mockMvc.perform(get("/simulator/{id}", "configId"))
+		this.mockMvc.perform(get("/simulator/{id}", "configId"))
 			.andExpect(status().isOk())
 			.andExpect(view().name("simulator"))
 			.andExpect(model().attributeExists("currentUser"))
@@ -94,7 +78,7 @@ public class ConfigurationControllerTest {
 		when(cassetteTypeService.getAllCassetteType()).thenReturn(asList(new CassetteTypeTO()));
 		when(configurationService.existSerialNumber(any(), any())).thenReturn(Boolean.TRUE);
 
-		mockMvc.perform(post("/saveConfig").flashAttr("configurationTO", new ConfigurationTO()))
+		this.mockMvc.perform(post("/saveConfig").flashAttr("configurationTO", new ConfigurationTO()))
 			.andExpect(status().isOk())
 			.andExpect(view().name("simulator"))
 			.andExpect(model().attributeExists("currentUser"))
@@ -111,7 +95,7 @@ public class ConfigurationControllerTest {
 		when(cassetteTypeService.getAllCassetteType()).thenReturn(asList(new CassetteTypeTO()));
 		when(configurationService.existSerialNumber(any(), any())).thenReturn(Boolean.FALSE);
 		
-		mockMvc.perform(post("/saveConfig").flashAttr("configurationTO", new ConfigurationTO()))
+		this.mockMvc.perform(post("/saveConfig").flashAttr("configurationTO", new ConfigurationTO()))
 			.andExpect(status().isOk())
 			.andExpect(view().name("saved"))
 			.andExpect(model().attributeExists("currentUser"));

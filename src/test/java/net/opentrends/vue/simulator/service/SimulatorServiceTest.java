@@ -25,8 +25,6 @@ import net.opentrends.vue.simulator.dto.ScanMultipleTO;
 import net.opentrends.vue.simulator.dto.ScanSingleTO;
 import net.opentrends.vue.simulator.dto.StatusTO;
 import net.opentrends.vue.simulator.exception.AppRuntimeException;
-import net.opentrends.vue.simulator.service.CassetteTypeService;
-import net.opentrends.vue.simulator.service.ConfigurationService;
 import net.opentrends.vue.simulator.service.impl.SimulatorServiceImpl;
 import net.opentrends.vue.simulator.utils.DefaultParams;
 

@@ -14,7 +14,6 @@ import org.modelmapper.ModelMapper;
 import net.opentrends.vue.simulator.dto.CassetteTypeTO;
 import net.opentrends.vue.simulator.model.CassetteType;
 import net.opentrends.vue.simulator.repository.CassetteTypeRepository;
-import net.opentrends.vue.simulator.service.CassetteTypeService;
 import net.opentrends.vue.simulator.service.impl.CassetteTypeServiceImpl;
 
 

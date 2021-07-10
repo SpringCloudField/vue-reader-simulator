@@ -18,7 +18,6 @@ import net.opentrends.vue.simulator.dto.ConfigurationTO;
 import net.opentrends.vue.simulator.exception.AppRuntimeException;
 import net.opentrends.vue.simulator.model.Configuration;
 import net.opentrends.vue.simulator.repository.ConfigurationRepository;
-import net.opentrends.vue.simulator.service.ConfigurationService;
 import net.opentrends.vue.simulator.service.impl.ConfigurationServiceImpl;
 
 public class ConfigurationServiceTest {
