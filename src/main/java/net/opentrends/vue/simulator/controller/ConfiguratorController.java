@@ -4,7 +4,6 @@ import static java.util.Optional.ofNullable;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -26,14 +25,18 @@ import net.opentrends.vue.simulator.validator.ConfigurationValidator;
 @Controller
 public class ConfiguratorController {
 	
-	@Autowired
-	private CustomUserDetailsService userService;
-	@Autowired
-	private CassetteTypeService cassetteTypeService; 
-	@Autowired
-	private ConfigurationService configurationService;
-	@Autowired
-	private ConfigurationValidator configValidator;
+	private final CustomUserDetailsService userService;
+	private final CassetteTypeService cassetteTypeService; 
+	private final ConfigurationService configurationService;
+	private final ConfigurationValidator configValidator;
+	
+	public ConfiguratorController(CustomUserDetailsService userService, CassetteTypeService cassetteTypeService, ConfigurationService configurationService,
+			ConfigurationValidator configValidator) {
+		this.userService = userService;
+		this.cassetteTypeService = cassetteTypeService;
+		this.configurationService = configurationService;
+		this.configValidator = configValidator;
+	}
 	
 	@InitBinder(value = "configurationTO")
     void initStudentValidator(WebDataBinder binder) {

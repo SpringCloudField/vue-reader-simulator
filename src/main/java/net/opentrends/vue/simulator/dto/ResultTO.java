@@ -4,6 +4,22 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.jackson.Jacksonized;
+
+@Builder
+@Setter
+@Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Jacksonized
 public class ResultTO {
 	
 	@JsonProperty("cassette_process_id")
@@ -24,54 +40,5 @@ public class ResultTO {
 	@JsonProperty("reader_data")
 	private ReaderDataTO readerData;
 
-	public Integer getCassetteProcessId() {
-		return cassetteProcessId;
-	}
-
-	public void setCassetteProcessId(Integer cassetteProcessId) {
-		this.cassetteProcessId = cassetteProcessId;
-	}
-
-	public CassetteTypeTO getCassetteType() {
-		return cassetteType;
-	}
-
-	public void setCassetteType(CassetteTypeTO cassetteType) {
-		this.cassetteType = cassetteType;
-	}
-
-	public ErrorTO getError() {
-		return error;
-	}
-
-	public void setError(ErrorTO error) {
-		this.error = error;
-	}
-
-	public List<ProcessResultTO> getProcessResults() {
-		return processResults;
-	}
-
-	public void setProcessResults(List<ProcessResultTO> processResults) {
-		this.processResults = processResults;
-	}
-
-	public Integer getPreviousProcessId() {
-		return previousProcessId;
-	}
-
-	public void setPreviousProcessId(Integer previousProcessId) {
-		this.previousProcessId = previousProcessId;
-	}
-
-	public ReaderDataTO getReaderData() {
-		return readerData;
-	}
-
-	public void setReaderData(ReaderDataTO readerData) {
-		this.readerData = readerData;
-	}
-	
-	
 	
 }

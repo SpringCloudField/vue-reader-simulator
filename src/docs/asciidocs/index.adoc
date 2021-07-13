@@ -1,0 +1,126 @@
+= RESTful VUE Reader Simulator API Guide
+Opentrends;
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+
+[[overview]]
+= Overview
+
+[[overview_http_verbs]]
+== HTTP verbs
+
+RESTful API tries to adhere as closely as possible to standard HTTP and REST conventions in its use of HTTP verbs.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create a new resource
+
+| `PUT`
+| Used to update an existing resource, including partial updates
+
+| `DELETE`
+| Used to delete an existing resource
+|===
+
+[[overview_http_status_codes]]
+== HTTP status codes
+
+RESTful admin upload data tries to adhere as closely as possible to standard HTTP and REST conventions in its use of HTTP status codes.
+
+|===
+| Status code | Usage
+
+| `200 OK`
+| The request completed successfully
+
+| `201 Created`
+| A new resource has been created successfully.
+
+| `204 No Content`
+| An update to an existing resource has been applied successfully
+
+| `400 Bad Request`
+| The request was malformed.
+The response body will include an error providing further information
+
+| `404 Not Found`
+| The requested resource did not exist
+
+| `500 Server error`
+| Unexpected server error
+|===
+
+
+
+[[resources_simulator]]
+== API
+
+The simulator resource is called by the apps to get information.
+
+
+[[resources_config_reader]]
+=== CONFIG_READER
+
+A `GET` request is used to find vue reader configuration.
+
+operation::should_return_a_valid_configuration[snippets='path-parameters,response-fields,curl-request,http-response']
+
+
+[[resources_cancel_timed_scan]]
+=== CANCEL_TIMED_SCAN
+
+A `PUT` request is used to get a cancel timed scan.
+
+operation::should_return_a_cancel_timed_scan[snippets='path-parameters,response-fields,curl-request,http-response']
+
+
+[[resources_images]]
+=== IMAGES
+
+A `GET` request is used to get images.
+
+operation::should_return_a_image[snippets='path-parameters,response-fields,curl-request,http-response']
+
+
+[[resources_reader_date_time]]
+=== READER_DATE_TIME
+
+A `GET` request is used to get reader date time.
+
+operation::should_return_a_reader_date_time[snippets='path-parameters,response-fields,curl-request,http-response']
+
+
+[[resources_reader_status]]
+=== READER_STATUS
+
+A `GET` request is used to get reader status.
+
+operation::should_return_a_reader_status[snippets='path-parameters,response-fields,curl-request,http-response']
+
+
+[[resources_cassette_processes_get]]
+=== CASSETTE_PROCESSES (GET)
+
+A `GET` request is used to get scan results information.
+
+operation::should_return_cassette_processes[snippets='path-parameters,response-fields,curl-request,http-response']
+
+
+[[resources_cassette_processes_post]]
+=== CASSETTE_PROCESSES (POST)
+
+A `POST` request is used to get scan results information. Only in timed scans.
+
+operation::should_return_cassette_processes_post[snippets='path-parameters,response-fields,curl-request,http-response']
+

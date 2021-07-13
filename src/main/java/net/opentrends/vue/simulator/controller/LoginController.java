@@ -2,7 +2,6 @@ package net.opentrends.vue.simulator.controller;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,8 +14,11 @@ import net.opentrends.vue.simulator.service.CustomUserDetailsService;
 @Controller
 public class LoginController {
 
-	@Autowired
 	private CustomUserDetailsService userService;
+	
+	public LoginController(CustomUserDetailsService userService) {
+		this.userService = userService;
+	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login() {

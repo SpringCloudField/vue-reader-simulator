@@ -2,6 +2,22 @@ package net.opentrends.vue.simulator.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.jackson.Jacksonized;
+
+@Builder
+@Setter
+@Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Jacksonized
 public class ConfigReaderTO {
 	
 	@JsonProperty("ethernet")
@@ -12,30 +28,5 @@ public class ConfigReaderTO {
 	private WifiModeTO wifimodeTO;
 	@JsonProperty("wifi_station")
 	private WifiStationTO wifiStationTO;
-	
-	public EthernetTO getEthernetTO() {
-		return ethernetTO;
-	}
-	public void setEthernetTO(EthernetTO ethernetTO) {
-		this.ethernetTO = ethernetTO;
-	}
-	public WifiApTO getWifiApTO() {
-		return wifiApTO;
-	}
-	public void setWifiApTO(WifiApTO wifiApTO) {
-		this.wifiApTO = wifiApTO;
-	}
-	public WifiModeTO getWifimodeTO() {
-		return wifimodeTO;
-	}
-	public void setWifimodeTO(WifiModeTO wifimodeTO) {
-		this.wifimodeTO = wifimodeTO;
-	}
-	public WifiStationTO getWifiStationTO() {
-		return wifiStationTO;
-	}
-	public void setWifiStationTO(WifiStationTO wifiStationTO) {
-		this.wifiStationTO = wifiStationTO;
-	}
 	
 }

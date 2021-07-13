@@ -1,4 +1,4 @@
-package net.opentrends.vue.simulator.controller.service;
+package net.opentrends.vue.simulator.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -10,13 +10,10 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import net.opentrends.vue.simulator.dto.CassetteTypeTO;
 import net.opentrends.vue.simulator.dto.ConfigReaderTO;
@@ -28,25 +25,26 @@ import net.opentrends.vue.simulator.dto.ScanMultipleTO;
 import net.opentrends.vue.simulator.dto.ScanSingleTO;
 import net.opentrends.vue.simulator.dto.StatusTO;
 import net.opentrends.vue.simulator.exception.AppRuntimeException;
-import net.opentrends.vue.simulator.service.CassetteTypeService;
-import net.opentrends.vue.simulator.service.ConfigurationService;
 import net.opentrends.vue.simulator.service.impl.SimulatorServiceImpl;
 import net.opentrends.vue.simulator.utils.DefaultParams;
 
-@ExtendWith(SpringExtension.class)
 public class SimulatorServiceTest {
 	
-	@Mock
 	private ConfigurationService configurationService;	
-	@Mock
 	private CassetteTypeService cassetteTypeService;
-	@Mock
 	private ResourceLoader resourceLoader;
-	@InjectMocks
 	private SimulatorServiceImpl simulatorService;
 	
+	@BeforeEach
+	public void init() {
+		configurationService = mock(ConfigurationService.class);
+		cassetteTypeService = mock(CassetteTypeService.class);
+		resourceLoader = mock(ResourceLoader.class);
+		simulatorService = new SimulatorServiceImpl(configurationService, cassetteTypeService, resourceLoader);
+	}
+	
 	@Test
-	public void getImagesTest() throws IOException {
+	public void should_return_a_image() throws IOException {
 		String mockFile = "This is my file line 1\nline2\nline3";
         InputStream is = new ByteArrayInputStream(mockFile.getBytes());
 		Resource mockResource = mock(Resource.class);
@@ -59,7 +57,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void getConfigReaderTest() {
+	public void shoull_return_a_config_reader() {
 		ConfigurationTO confTO = createConfigurationTO(false, 0, false);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
 		
@@ -82,7 +80,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void getStatusReaderTestNoCassetteError() {
+	public void should_return_a_status_reader_with_no_cassette_error() {
 		ConfigurationTO confTO = createConfigurationTO(false, 0, false);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
 		
@@ -99,7 +97,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void getStatusReaderTestWithCassetteError() {
+	public void should_return_a_status_reader_with_cassette_error() {
 		ConfigurationTO confTO = createConfigurationTO(true, 0, false);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
 		
@@ -116,7 +114,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void scanSingleTestNoError() {
+	public void should_return_a_single_scan_test_with_no_cassette_error() {
 		ConfigurationTO confTO = createConfigurationTO(false, 1, false);
 		CassetteTypeTO cassTO = createCassetteTypeTO(1);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);
@@ -147,7 +145,7 @@ public class SimulatorServiceTest {
 	}
 	
 	@Test
-	public void scanSingleTestWithoutErrorSame() {
+	public void should_return_a_single_scan_test_with_no_error_same() {
 		ConfigurationTO confTO = createConfigurationTO2(false, 1, false);
 		CassetteTypeTO cassTO = createCassetteTypeTO(1);
 		when(configurationService.getConfigBySerialNumber(any())).thenReturn(confTO);

@@ -5,18 +5,26 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.extern.jackson.Jacksonized;
+
+@Builder
+@Setter
+@Getter
+@ToString
+@NoArgsConstructor
+@Jacksonized
 public class ApiError {
 
 	private HttpStatus status;
 	private String message;
 	private List<String> errors;
 
-	//
-
-	public ApiError() {
-		super();
-	}
-
+	
 	public ApiError(final HttpStatus status, final String message, final List<String> errors) {
 		super();
 		this.status = status;

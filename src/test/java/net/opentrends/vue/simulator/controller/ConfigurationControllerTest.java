@@ -1,6 +1,8 @@
 package net.opentrends.vue.simulator.controller;
 
+import static java.util.Arrays.asList;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -8,22 +10,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.restdocs.RestDocumentationContextProvider;
+import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import net.opentrends.vue.simulator.dto.CassetteTypeTO;
 import net.opentrends.vue.simulator.dto.ConfigurationTO;
@@ -31,47 +23,33 @@ import net.opentrends.vue.simulator.model.User;
 import net.opentrends.vue.simulator.service.CassetteTypeService;
 import net.opentrends.vue.simulator.service.ConfigurationService;
 import net.opentrends.vue.simulator.service.CustomUserDetailsService;
+import net.opentrends.vue.simulator.validator.ConfigurationValidator;
 
-@ExtendWith(SpringExtension.class)
-@AutoConfigureMockMvc
-public class ConfigurationControllerTest {
+@ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
+public class ConfigurationControllerTest extends BaseResourceDocumentedTest {
 
-	@InjectMocks
 	private ConfiguratorController configuratorController;
-	@Mock
 	private CustomUserDetailsService userService;
-	@Mock
 	private CassetteTypeService cassetteTypeService;
-	@Mock
 	private ConfigurationService configurationService;
-	private MockMvc mockMvc;
-
+	private ConfigurationValidator configValidator;
+	
 	@BeforeEach
-	void setUp() throws Exception {
-		Authentication auth = Mockito.mock(Authentication.class);
-		// Mockito.whens() for your authorization object
-		SecurityContext securityContext = Mockito.mock(SecurityContext.class);
-		when(securityContext.getAuthentication()).thenReturn(auth);
-		when(auth.getName()).thenReturn("mockedUserName");
-		SecurityContextHolder.setContext(securityContext);
-		//Reconfigure the view resolver in test
-		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/WEB_INF/views");
-		resolver.setSuffix(".jsp");
+	void setUp(RestDocumentationContextProvider restDocumentation) {
+		userService = mock(CustomUserDetailsService.class);
+		cassetteTypeService = mock(CassetteTypeService.class);
+		configurationService = mock(ConfigurationService.class);						
+		configuratorController = new ConfiguratorController(userService, cassetteTypeService, configurationService, configValidator);
 		
-		this.mockMvc = MockMvcBuilders.standaloneSetup(configuratorController).setViewResolvers(resolver).build();
+        configureForDocumentation(restDocumentation, configuratorController);
 	}
 
 	@Test
-	public void getDashboardTest() throws Exception {
-		User userMock = new User();
-		userMock.setEmail("email");
-		userMock.setEnabled(true);
-		userMock.setFullName("full name");
-		userMock.setId("id");
-		when(userService.findUserByEmail(any())).thenReturn(userMock);
-		when(configurationService.getConfigsByUserId(any())).thenReturn(Arrays.asList(new ConfigurationTO()));
-		mockMvc.perform(get("/dashboard"))
+	public void should_return_dashboard_page() throws Exception {
+		when(userService.findUserByEmail(any())).thenReturn(createUserMock());
+		when(configurationService.getConfigsByUserId(any())).thenReturn(asList(new ConfigurationTO()));
+		
+		this.mockMvc.perform(get("/dashboard"))
 			.andExpect(status().isOk())
 			.andExpect(view().name("dashboard"))
 			.andExpect(model().attributeExists("currentUser"))
@@ -80,16 +58,12 @@ public class ConfigurationControllerTest {
 	}
 	
 	@Test
-	public void getSimulatorTest() throws Exception {
-		User userMock = new User();
-		userMock.setEmail("email");
-		userMock.setEnabled(true);
-		userMock.setFullName("full name");
-		userMock.setId("id");
-		when(userService.findUserByEmail(any())).thenReturn(userMock);
-		when(configurationService.getConfigsByUserId(any())).thenReturn(Arrays.asList(new ConfigurationTO()));
-		when(cassetteTypeService.getAllCassetteType()).thenReturn(Arrays.asList(new CassetteTypeTO()));
-		mockMvc.perform(get("/simulator/{id}", "configId"))
+	public void should_return_simulator_config_page() throws Exception {
+		when(userService.findUserByEmail(any())).thenReturn(createUserMock());
+		when(configurationService.getConfigsByUserId(any())).thenReturn(asList(new ConfigurationTO()));
+		when(cassetteTypeService.getAllCassetteType()).thenReturn(asList(new CassetteTypeTO()));
+		
+		this.mockMvc.perform(get("/simulator/{id}", "configId"))
 			.andExpect(status().isOk())
 			.andExpect(view().name("simulator"))
 			.andExpect(model().attributeExists("currentUser"))
@@ -98,18 +72,13 @@ public class ConfigurationControllerTest {
 	}
 	
 	@Test
-	public void getSaveConfigSerialNumberInUsedTest() throws Exception {
-		User userMock = new User();
-		userMock.setEmail("email");
-		userMock.setEnabled(true);
-		userMock.setFullName("full name");
-		userMock.setId("id");
-		when(userService.findUserByEmail(any())).thenReturn(userMock);
-		when(configurationService.getConfigsByUserId(any())).thenReturn(Arrays.asList(new ConfigurationTO()));
-		when(cassetteTypeService.getAllCassetteType()).thenReturn(Arrays.asList(new CassetteTypeTO()));
+	public void should_return_error_when_sn_is_in_used() throws Exception {
+		when(userService.findUserByEmail(any())).thenReturn(createUserMock());
+		when(configurationService.getConfigsByUserId(any())).thenReturn(asList(new ConfigurationTO()));
+		when(cassetteTypeService.getAllCassetteType()).thenReturn(asList(new CassetteTypeTO()));
 		when(configurationService.existSerialNumber(any(), any())).thenReturn(Boolean.TRUE);
-		// TOOD: create ConfigurationTO 
-		mockMvc.perform(post("/saveConfig").flashAttr("configurationTO", new ConfigurationTO()))
+
+		this.mockMvc.perform(post("/saveConfig").flashAttr("configurationTO", new ConfigurationTO()))
 			.andExpect(status().isOk())
 			.andExpect(view().name("simulator"))
 			.andExpect(model().attributeExists("currentUser"))
@@ -120,20 +89,28 @@ public class ConfigurationControllerTest {
 	}
 	
 	@Test
-	public void getSaveConfigTest() throws Exception {
+	public void should_return_saved_page_when_save_config() throws Exception {
+		when(userService.findUserByEmail(any())).thenReturn(createUserMock());
+		when(configurationService.getConfigsByUserId(any())).thenReturn(asList(new ConfigurationTO()));
+		when(cassetteTypeService.getAllCassetteType()).thenReturn(asList(new CassetteTypeTO()));
+		when(configurationService.existSerialNumber(any(), any())).thenReturn(Boolean.FALSE);
+		
+		this.mockMvc.perform(post("/saveConfig").flashAttr("configurationTO", new ConfigurationTO()))
+			.andExpect(status().isOk())
+			.andExpect(view().name("saved"))
+			.andExpect(model().attributeExists("currentUser"));
+	}
+	
+	@Test
+	private User createUserMock() {
 		User userMock = new User();
 		userMock.setEmail("email");
 		userMock.setEnabled(true);
 		userMock.setFullName("full name");
 		userMock.setId("id");
-		when(userService.findUserByEmail(any())).thenReturn(userMock);
-		when(configurationService.getConfigsByUserId(any())).thenReturn(Arrays.asList(new ConfigurationTO()));
-		when(cassetteTypeService.getAllCassetteType()).thenReturn(Arrays.asList(new CassetteTypeTO()));
-		when(configurationService.existSerialNumber(any(), any())).thenReturn(Boolean.FALSE);
-		mockMvc.perform(post("/saveConfig").flashAttr("configurationTO", new ConfigurationTO()))
-			.andExpect(status().isOk())
-			.andExpect(view().name("saved"))
-			.andExpect(model().attributeExists("currentUser"));
+		return userMock;
 	}
+	
+	
 
 }
