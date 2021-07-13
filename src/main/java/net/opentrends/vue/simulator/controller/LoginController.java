@@ -2,6 +2,8 @@ package net.opentrends.vue.simulator.controller;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,8 @@ import net.opentrends.vue.simulator.service.CustomUserDetailsService;
 @Controller
 public class LoginController {
 
+	private static final Logger LOG = LoggerFactory.getLogger(LoginController.class);
+	
 	private CustomUserDetailsService userService;
 	
 	public LoginController(CustomUserDetailsService userService) {
@@ -52,6 +56,7 @@ public class LoginController {
 	        modelAndView.addObject("user", new User());
 	        modelAndView.setViewName("login");
 	    }
+	    LOG.info("User created. {}", userExists.toString());
 	    return modelAndView;
 	}
 	

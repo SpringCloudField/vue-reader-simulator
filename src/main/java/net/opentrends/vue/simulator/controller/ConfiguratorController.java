@@ -4,6 +4,8 @@ import static java.util.Optional.ofNullable;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,8 @@ import net.opentrends.vue.simulator.validator.ConfigurationValidator;
 
 @Controller
 public class ConfiguratorController {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(ConfiguratorController.class);
 	
 	private final CustomUserDetailsService userService;
 	private final CassetteTypeService cassetteTypeService; 
@@ -89,7 +93,9 @@ public class ConfiguratorController {
 	    }
 	    
 		configurationService.saveConfig(configurationTO, user.getId());		
-		modelAndView.setViewName("saved");		
+		modelAndView.setViewName("saved");
+		
+		LOG.info("Config updated. configId: {}", configurationTO.getId());
 		return modelAndView;
 	}
 
