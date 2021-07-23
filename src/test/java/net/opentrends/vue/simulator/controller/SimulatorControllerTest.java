@@ -133,7 +133,7 @@ public class SimulatorControllerTest extends BaseResourceDocumentedTest {
 								  .build();
 		when(simulatorService.getReaderDateAndTime(any())).thenReturn(dt);
 		
-		this.mockMvc.perform(RestDocumentationRequestBuilders.get("/api/vue/simulator/{serialNumber}/v2.4/reader_date_and_time", "serialNumber")
+		this.mockMvc.perform(RestDocumentationRequestBuilders.put("/api/vue/simulator/{serialNumber}/v2.4/reader_date_and_time", "serialNumber")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -286,8 +286,6 @@ public class SimulatorControllerTest extends BaseResourceDocumentedTest {
                         )
                 ));
 	}
-	
-	
 	
 	private StatusTO createStatusToMock() {
 		return StatusTO.builder()
