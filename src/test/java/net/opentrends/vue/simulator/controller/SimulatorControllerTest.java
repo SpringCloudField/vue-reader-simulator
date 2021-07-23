@@ -136,14 +136,10 @@ public class SimulatorControllerTest extends BaseResourceDocumentedTest {
 		this.mockMvc.perform(RestDocumentationRequestBuilders.put("/api/vue/simulator/{serialNumber}/v2.4/reader_date_and_time", "serialNumber")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.status().isNoContent())
                 .andDo(this.documentationHandler.document(
                 		pathParameters(
                 				parameterWithName("serialNumber").description("VUE Reader serial number")
-                        ),
-                		responseFields(
-                        	fieldWithPath("Timestamp").description("Timestamp information"),
-                        	fieldWithPath("Timestamp.date_time").description("Timestamp date_time")
                         )
                 ));
 	}

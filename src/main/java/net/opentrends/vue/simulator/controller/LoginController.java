@@ -52,11 +52,11 @@ public class LoginController {
 	        modelAndView.setViewName("signup");
 	    } else {
 	        userService.saveUser(user);
+	        LOG.info("User created. {}", user.toString());
 	        modelAndView.addObject("successMessage", "User has been registered successfully");
 	        modelAndView.addObject("user", new User());
 	        modelAndView.setViewName("login");
 	    }
-	    LOG.info("User created. {}", userExists.toString());
 	    return modelAndView;
 	}
 	
