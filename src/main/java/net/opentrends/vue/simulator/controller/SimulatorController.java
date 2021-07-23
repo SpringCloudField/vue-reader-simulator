@@ -50,7 +50,7 @@ public class SimulatorController {
 	}
 
 	@ApiOperation(value = "Reader date and time ")
-	@GetMapping("/{serialNumber}/v2.4/reader_date_and_time")
+	@PutMapping("/{serialNumber}/v2.4/reader_date_and_time")
 	public ResponseEntity<ReaderDateTimeResponseTO> readerDateAndTime(
 			@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		ReaderDateTimeResponseTO timeStampResponse = new ReaderDateTimeResponseTO();
