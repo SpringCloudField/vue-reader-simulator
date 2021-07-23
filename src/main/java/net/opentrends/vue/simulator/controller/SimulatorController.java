@@ -3,6 +3,7 @@ package net.opentrends.vue.simulator.controller;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.ApiOperation;
@@ -51,11 +53,10 @@ public class SimulatorController {
 
 	@ApiOperation(value = "Reader date and time ")
 	@PutMapping("/{serialNumber}/v2.4/reader_date_and_time")
-	public ResponseEntity<ReaderDateTimeResponseTO> readerDateAndTime(
-			@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void readerDateAndTime(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) {
 		ReaderDateTimeResponseTO timeStampResponse = new ReaderDateTimeResponseTO();
 		timeStampResponse.setTimeStamp(simulatorService.getReaderDateAndTime(serialNumber));
-		return ResponseEntity.ok(timeStampResponse);
 	}
 
 	@ApiOperation(value = "Test from VUE reader simulator ")
