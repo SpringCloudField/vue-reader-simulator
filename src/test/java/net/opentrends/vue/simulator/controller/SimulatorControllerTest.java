@@ -110,13 +110,14 @@ public class SimulatorControllerTest extends BaseResourceDocumentedTest {
 	public void should_return_a_image() throws Exception {
 		when(simulatorService.getImage(any())).thenReturn(ImagesTO.builder().id(1).image(("e01").getBytes()).build());
 		
-		this.mockMvc.perform(RestDocumentationRequestBuilders.get("/api/vue/simulator/{serialNumber}/v2.4/images", "serialNumber")
+		this.mockMvc.perform(RestDocumentationRequestBuilders.get("/api/vue/simulator/{serialNumber}/v2.4/images/{cassetteProcessId}", "serialNumber", "cassetteProcessId")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(this.documentationHandler.document(
                 		pathParameters(
-                				parameterWithName("serialNumber").description("VUE Reader serial number")
+                				parameterWithName("serialNumber").description("VUE Reader serial number"),
+                				parameterWithName("cassetteProcessId").description("Cassette process ID")
                         ),
                 		responseFields(
                         	fieldWithPath("Image").description("Image information"),
