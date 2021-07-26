@@ -77,8 +77,9 @@ public class SimulatorController {
 	}
 
 	@ApiOperation(value = "Image test from VUE reader simulator ")
-	@GetMapping("/{serialNumber}/v2.4/images")
-	public ResponseEntity<ImagesResponseTO> images(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber) throws IOException {
+	@GetMapping("/{serialNumber}/v2.4/images/{cassetteProcessId}")
+	public ResponseEntity<ImagesResponseTO> images(@ApiParam(value = "VUE Reader Simulator SN") @PathVariable String serialNumber,
+			@ApiParam(value = "Cassette process ID") @PathVariable String cassetteProcessId) throws IOException {
 		ImagesResponseTO imagesResponseTO = new ImagesResponseTO();
 		imagesResponseTO.setImage(simulatorService.getImage(serialNumber));
 		return ResponseEntity.ok(imagesResponseTO);
