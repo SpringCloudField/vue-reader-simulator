@@ -98,7 +98,7 @@ operation::should_return_a_image[snippets='path-parameters,response-fields,curl-
 
 A `PUT` request is used to get reader date time.
 
-operation::should_return_a_reader_date_time[snippets='path-parameters,response-fields,curl-request,http-response']
+operation::should_return_a_reader_date_time[snippets='path-parameters,curl-request,http-response']
 
 
 [[resources_reader_status]]

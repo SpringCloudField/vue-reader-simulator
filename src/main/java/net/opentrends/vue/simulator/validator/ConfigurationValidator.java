@@ -19,7 +19,7 @@ public class ConfigurationValidator implements Validator {
     public void validate(Object target, Errors errors) {
     	ConfigurationTO conf = (ConfigurationTO) target;
     	
-    	if(conf.getTestType().equals("TIMED")) {
+    	if(conf.getTestType().equals("Timed")) {
     		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "processId", "error.processId", "Required.");
     		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "previousProcessId", "error.previousProcessId", "Required.");
     	}
@@ -30,7 +30,7 @@ public class ConfigurationValidator implements Validator {
 		}
     	
     	if(conf.getSameCassette()) {
-    		if(conf.getTestType().equals("TIMED")) {
+    		if(conf.getTestType().equals("Timed")) {
         		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "processId2", "error.processId2", "Required.");
         		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "previousProcessId2", "error.previousProcessId2", "Required.");
         	}
