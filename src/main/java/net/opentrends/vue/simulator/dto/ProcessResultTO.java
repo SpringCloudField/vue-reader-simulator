@@ -42,8 +42,7 @@ public class ProcessResultTO {
 	private Double testLineValue;
 	@JsonProperty("test_name")
 	private String testName;
-	private Double scaledResult;
-	private Integer lotNumber;
+	private Double scaledResult;	
 	private CoeficientsTO coeficients;
 	private List<WarningTO> warnings;
 

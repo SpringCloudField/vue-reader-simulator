@@ -23,6 +23,6 @@ public class CassetteTypeTO {
 	@JsonProperty("description")
 	private String type;	
 	private Integer code;
-
+	private Integer lotNumber;
 
 }

@@ -121,6 +121,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 		CassetteTypeTO cassetteType = new CassetteTypeTO();
 		cassetteType.setCode(configuration.getCassetteTypeId());
 		cassetteType.setType(cassetteTypeRead.getType());
+		if(configuration.getScanSingle() != null)
+			cassetteType.setLotNumber(configuration.getScanSingle().getLotNumber());
 
 		ErrorTO errorCodeTO = createErrorTo(configuration.getCassetteErrorCode());
 		ReaderDataTO readerData = new ReaderDataTO();
@@ -165,6 +167,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 		CassetteTypeTO cassetteType = new CassetteTypeTO();
 		cassetteType.setCode(configuration.getCassetteTypeId());
 		cassetteType.setType(cassetteTypeRead.getType());
+		if(configuration.getScanSingle() != null)
+			cassetteType.setLotNumber(configuration.getScanSingle().getLotNumber2());
 		
 		ReaderDataTO readerData = new ReaderDataTO();
 		readerData.setCassetteTime(configuration.getCassetteTime());
@@ -244,7 +248,6 @@ public class SimulatorServiceImpl implements SimulatorService {
 		resultCpl.setTestLineValue(configuration.getScanSingle().getTestLineValue());
 		resultCpl.setTestName(cassetteTypeRead.getType());
 		resultCpl.setScaledResult(configuration.getScanSingle().getScaledResult());
-		resultCpl.setLotNumber(configuration.getScanSingle().getLotNumber());
 		CoeficientsTO coeficients = new CoeficientsTO();
 		coeficients.setA(2);
 		coeficients.setB(1);
@@ -274,7 +277,6 @@ public class SimulatorServiceImpl implements SimulatorService {
 		resultCpl.setTestLineValue(configuration.getScanSingle().getTestLineValue2());
 		resultCpl.setTestName(cassetteTypeRead.getType());
 		resultCpl.setScaledResult(configuration.getScanSingle().getScaledResult2());
-		resultCpl.setLotNumber(configuration.getScanSingle().getLotNumber2());
 		CoeficientsTO coeficients = new CoeficientsTO();
 		coeficients.setA(2);
 		coeficients.setB(1);

@@ -194,6 +194,7 @@ public class SimulatorControllerTest extends BaseResourceDocumentedTest {
                         	fieldWithPath("Result.cassette_type").description("Cassette type information"),
                         	fieldWithPath("Result.cassette_type.description").description("Cassette type description"),
                         	fieldWithPath("Result.cassette_type.code").description("Cassette type code"),
+                        	fieldWithPath("Result.cassette_type.lotNumber").description("Result lot number"),      
                         	fieldWithPath("Result.error").description("Error information"),
                         	fieldWithPath("Result.error.code").description("Error code"),
                         	fieldWithPath("Result.error.description").description("Error description"),
@@ -217,8 +218,7 @@ public class SimulatorControllerTest extends BaseResourceDocumentedTest {
                         	fieldWithPath("Result.results[].position").description("Result position"),                        	
                         	fieldWithPath("Result.results[].test_line_value").description("Result test line value"),
                         	fieldWithPath("Result.results[].test_name").description("Result test name"),
-                        	fieldWithPath("Result.results[].scaledResult").description("Result scaled result"),
-                        	fieldWithPath("Result.results[].lotNumber").description("Result lot number"),                        	
+                        	fieldWithPath("Result.results[].scaledResult").description("Result scaled result"),                        	                  	
                         	fieldWithPath("Result.results[].coeficients.a").description("Result coeficients"),
                         	fieldWithPath("Result.results[].coeficients.b").description("Result coeficients"),
                         	fieldWithPath("Result.results[].coeficients.c").description("Result coeficients"),
@@ -248,6 +248,7 @@ public class SimulatorControllerTest extends BaseResourceDocumentedTest {
                         	fieldWithPath("Result.cassette_type").description("Cassette type information"),
                         	fieldWithPath("Result.cassette_type.description").description("Cassette type description"),
                         	fieldWithPath("Result.cassette_type.code").description("Cassette type code"),
+                        	fieldWithPath("Result.cassette_type.lotNumber").description("Result lot number"),
                         	fieldWithPath("Result.error").description("Error information"),
                         	fieldWithPath("Result.error.code").description("Error code"),
                         	fieldWithPath("Result.error.description").description("Error description"),
@@ -271,8 +272,7 @@ public class SimulatorControllerTest extends BaseResourceDocumentedTest {
                         	fieldWithPath("Result.results[].position").description("Result position"),                        	
                         	fieldWithPath("Result.results[].test_line_value").description("Result test line value"),
                         	fieldWithPath("Result.results[].test_name").description("Result test name"),
-                        	fieldWithPath("Result.results[].scaledResult").description("Result scaled result"),
-                        	fieldWithPath("Result.results[].lotNumber").description("Result lot number"),                        	
+                        	fieldWithPath("Result.results[].scaledResult").description("Result scaled result"),                	
                         	fieldWithPath("Result.results[].coeficients.a").description("Result coeficients"),
                         	fieldWithPath("Result.results[].coeficients.b").description("Result coeficients"),
                         	fieldWithPath("Result.results[].coeficients.c").description("Result coeficients"),
@@ -333,6 +333,7 @@ public class SimulatorControllerTest extends BaseResourceDocumentedTest {
 		CassetteTypeTO ct = CassetteTypeTO.builder()
 										  .code(1)
 										  .type("type")
+										  .lotNumber(123)
 										  .build();
 		CoeficientsTO coeficients = CoeficientsTO.builder()
 										.a(1)
@@ -348,7 +349,6 @@ public class SimulatorControllerTest extends BaseResourceDocumentedTest {
 											.control(1.0)
 											.error(ErrorTO.builder().code(1).description("description").build())
 											.initial('C')
-											.lotNumber(123)
 											.noise(1.0)
 											.position(1)
 											.positive(Boolean.TRUE)

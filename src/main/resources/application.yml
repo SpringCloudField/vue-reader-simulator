@@ -3,6 +3,5 @@ server:
 spring:
    data:
       mongodb:
-         database: vue-simulator-db
-         host: localhost
-         port: 27017
+        uri: mongodb://root:password@localhost:27017/admin
+        database: vue-simulator-db
