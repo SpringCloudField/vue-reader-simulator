@@ -13,16 +13,21 @@ services:
     depends_on:
       - mongodb
   mongodb:
-    image: mongo:4.2.15
+    image: mongo:4.4.1
     container_name: mongodb
     ports:
       - 27017:27017
     restart: always
     networks:
       - gateway
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongodata:/data/db
+      - mongodata:/var/log/mongodb
+      - mongodata:/docker-entrypoint-initdb.d/
 networks:
   gateway:
     driver: bridge
+volumes:
+  mongodata:
+  
+
