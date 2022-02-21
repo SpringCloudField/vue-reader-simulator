@@ -1012,8 +1012,6 @@ public class SimulatorServiceTest {
 		assertEquals(Boolean.TRUE, resultTO.getProcessResults().get(0).getReliable());
 		assertEquals(DefaultParams.DB_VERSION, resultTO.getReaderData().getDbVersion());
 		assertEquals(DefaultParams.BACKGROUND, resultTO.getProcessResults().get(resultIndex).getBackground());
-		assertEquals(DefaultParams.COLOR, resultTO.getProcessResults().get(resultIndex).getColor01());
-		assertEquals(DefaultParams.COLOR, resultTO.getProcessResults().get(resultIndex).getColor02());
 		
 	}
 

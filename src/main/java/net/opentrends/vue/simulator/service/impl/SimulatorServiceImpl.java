@@ -235,8 +235,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 	private void createCplProcessResult(ConfigurationTO configuration, List<ProcessResultTO> processResults, CassetteTypeTO cassetteTypeRead) {
 		ProcessResultTO resultCpl = new ProcessResultTO();
 		resultCpl.setBackground(DefaultParams.BACKGROUND);
-		resultCpl.setColor01(DefaultParams.COLOR);
-		resultCpl.setColor02(DefaultParams.COLOR);
+		resultCpl.setColor01(DefaultParams.CPL_COLOR);
+		resultCpl.setColor02(DefaultParams.CPL_COLOR);
 		resultCpl.setControl(configuration.getScanSingle().getControl());
 		ErrorTO errorCplTO = createErrorTo(configuration.getScanSingle().getTestErrorCode());
 		resultCpl.setError(errorCplTO);
@@ -264,8 +264,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 	private void createCplProcessResult2(ConfigurationTO configuration, List<ProcessResultTO> processResults, CassetteTypeTO cassetteTypeRead) {
 		ProcessResultTO resultCpl = new ProcessResultTO();
 		resultCpl.setBackground(DefaultParams.BACKGROUND);
-		resultCpl.setColor01(DefaultParams.COLOR);
-		resultCpl.setColor02(DefaultParams.COLOR);
+		resultCpl.setColor01(DefaultParams.CPL_COLOR);
+		resultCpl.setColor02(DefaultParams.CPL_COLOR);
 		resultCpl.setControl(configuration.getScanSingle().getControl2());
 		ErrorTO errorCplTO = createErrorTo(configuration.getScanSingle().getTestErrorCode2());
 		resultCpl.setError(errorCplTO);
@@ -293,8 +293,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 	private void createFlex4ProcessResult(ConfigurationTO configuration, List<ProcessResultTO> processResults, CassetteTypeTO cassetteTypeRead) {
 		ProcessResultTO resultAnaplasmaTO = new ProcessResultTO();
 		resultAnaplasmaTO.setBackground(DefaultParams.BACKGROUND);
-		resultAnaplasmaTO.setColor01(DefaultParams.COLOR);
-		resultAnaplasmaTO.setColor02(DefaultParams.COLOR);
+		resultAnaplasmaTO.setColor01(DefaultParams.FLEX4_COLOR);
+		resultAnaplasmaTO.setColor02(DefaultParams.FLEX4_COLOR);
 		resultAnaplasmaTO.setControl(configuration.getScanMultiple().getControlAnaplasma());
 		ErrorTO errorAnaplasmaTO = createErrorTo(configuration.getScanMultiple().getTestErrorCodeAnaplasma());
 		resultAnaplasmaTO.setError(errorAnaplasmaTO);
@@ -309,8 +309,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 		
 		ProcessResultTO resultEhrlichiaTO = new ProcessResultTO();
 		resultEhrlichiaTO.setBackground(DefaultParams.BACKGROUND);
-		resultEhrlichiaTO.setColor01(DefaultParams.COLOR);
-		resultEhrlichiaTO.setColor02(DefaultParams.COLOR);
+		resultEhrlichiaTO.setColor01(DefaultParams.FLEX4_COLOR);
+		resultEhrlichiaTO.setColor02(DefaultParams.FLEX4_COLOR);
 		resultEhrlichiaTO.setControl(configuration.getScanMultiple().getControlEhrlichia());		
 		ErrorTO errorEhrlichiaTO = createErrorTo(configuration.getScanMultiple().getTestErrorCodeEhrlichia());
 		resultEhrlichiaTO.setError(errorEhrlichiaTO);
@@ -325,8 +325,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 		
 		ProcessResultTO resultLymeTO = new ProcessResultTO();
 		resultLymeTO.setBackground(DefaultParams.BACKGROUND);
-		resultLymeTO.setColor01(DefaultParams.COLOR);
-		resultLymeTO.setColor02(DefaultParams.COLOR);
+		resultLymeTO.setColor01(DefaultParams.FLEX4_COLOR);
+		resultLymeTO.setColor02(DefaultParams.FLEX4_COLOR);
 		resultLymeTO.setControl(configuration.getScanMultiple().getControlLyme());
 		ErrorTO errorLymeTO = createErrorTo(configuration.getScanMultiple().getTestErrorCodeLyme());
 		resultLymeTO.setError(errorLymeTO);
@@ -341,8 +341,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 		
 		ProcessResultTO resultHeartwormTO = new ProcessResultTO();
 		resultHeartwormTO.setBackground(DefaultParams.BACKGROUND);
-		resultHeartwormTO.setColor01(DefaultParams.COLOR);
-		resultHeartwormTO.setColor02(DefaultParams.COLOR);
+		resultHeartwormTO.setColor01(DefaultParams.FLEX4_COLOR);
+		resultHeartwormTO.setColor02(DefaultParams.FLEX4_COLOR);
 		resultHeartwormTO.setControl(configuration.getScanMultiple().getControlHeartworm());
 		ErrorTO errorHeartwormTO = createErrorTo(configuration.getScanMultiple().getTestErrorCodeHeartworm());		
 		resultHeartwormTO.setError(errorHeartwormTO);
@@ -359,8 +359,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 	private void createFlex4ProcessResult2(ConfigurationTO configuration, List<ProcessResultTO> processResults, CassetteTypeTO cassetteTypeRead) {
 		ProcessResultTO resultAnaplasmaTO = new ProcessResultTO();
 		resultAnaplasmaTO.setBackground(DefaultParams.BACKGROUND);
-		resultAnaplasmaTO.setColor01(DefaultParams.COLOR);
-		resultAnaplasmaTO.setColor02(DefaultParams.COLOR);
+		resultAnaplasmaTO.setColor01(DefaultParams.FLEX4_COLOR);
+		resultAnaplasmaTO.setColor02(DefaultParams.FLEX4_COLOR);
 		resultAnaplasmaTO.setControl(configuration.getScanMultiple().getControlAnaplasma2());
 		ErrorTO errorAnaplasmaTO = createErrorTo(configuration.getScanMultiple().getTestErrorCodeAnaplasma2());
 		resultAnaplasmaTO.setError(errorAnaplasmaTO);
@@ -375,8 +375,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 		
 		ProcessResultTO resultEhrlichiaTO = new ProcessResultTO();
 		resultEhrlichiaTO.setBackground(DefaultParams.BACKGROUND);
-		resultEhrlichiaTO.setColor01(DefaultParams.COLOR);
-		resultEhrlichiaTO.setColor02(DefaultParams.COLOR);
+		resultEhrlichiaTO.setColor01(DefaultParams.FLEX4_COLOR);
+		resultEhrlichiaTO.setColor02(DefaultParams.FLEX4_COLOR);
 		resultEhrlichiaTO.setControl(configuration.getScanMultiple().getControlEhrlichia2());		
 		ErrorTO errorEhrlichiaTO = createErrorTo(configuration.getScanMultiple().getTestErrorCodeEhrlichia2());
 		resultEhrlichiaTO.setError(errorEhrlichiaTO);
@@ -391,8 +391,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 		
 		ProcessResultTO resultLymeTO = new ProcessResultTO();
 		resultLymeTO.setBackground(DefaultParams.BACKGROUND);
-		resultLymeTO.setColor01(DefaultParams.COLOR);
-		resultLymeTO.setColor02(DefaultParams.COLOR);
+		resultLymeTO.setColor01(DefaultParams.FLEX4_COLOR);
+		resultLymeTO.setColor02(DefaultParams.FLEX4_COLOR);
 		resultLymeTO.setControl(configuration.getScanMultiple().getControlLyme2());
 		ErrorTO errorLymeTO = createErrorTo(configuration.getScanMultiple().getTestErrorCodeLyme2());
 		resultLymeTO.setError(errorLymeTO);
@@ -407,8 +407,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 		
 		ProcessResultTO resultHeartwormTO = new ProcessResultTO();
 		resultHeartwormTO.setBackground(DefaultParams.BACKGROUND);
-		resultHeartwormTO.setColor01(DefaultParams.COLOR);
-		resultHeartwormTO.setColor02(DefaultParams.COLOR);
+		resultHeartwormTO.setColor01(DefaultParams.FLEX4_COLOR);
+		resultHeartwormTO.setColor02(DefaultParams.FLEX4_COLOR);
 		resultHeartwormTO.setControl(configuration.getScanMultiple().getControlHeartworm2());
 		ErrorTO errorHeartwormTO = createErrorTo(configuration.getScanMultiple().getTestErrorCodeHeartworm2());		
 		resultHeartwormTO.setError(errorHeartwormTO);
@@ -425,8 +425,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 	private void createFelvFivProcessResults(ConfigurationTO configuration, List<ProcessResultTO> processResults, CassetteTypeTO cassetteTypeRead) {
 		ProcessResultTO resultFelvTO = new ProcessResultTO();
 		resultFelvTO.setBackground(DefaultParams.BACKGROUND);
-		resultFelvTO.setColor01(DefaultParams.COLOR);
-		resultFelvTO.setColor02(DefaultParams.COLOR);
+		resultFelvTO.setColor01(DefaultParams.FELVFIV_COLOR);
+		resultFelvTO.setColor02(DefaultParams.FELVFIV_COLOR);
 		resultFelvTO.setControl(configuration.getScanDouble().getControlFelv());
 		ErrorTO errorFelvTO = createErrorTo(configuration.getScanDouble().getTestErrorCodeFelv());		
 		resultFelvTO.setError(errorFelvTO);
@@ -441,8 +441,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 
 		ProcessResultTO resultFivTO = new ProcessResultTO();
 		resultFivTO.setBackground(DefaultParams.BACKGROUND);
-		resultFivTO.setColor01(DefaultParams.COLOR);
-		resultFivTO.setColor02(DefaultParams.COLOR);
+		resultFivTO.setColor01(DefaultParams.FELVFIV_COLOR);
+		resultFivTO.setColor02(DefaultParams.FELVFIV_COLOR);
 		resultFivTO.setControl(configuration.getScanDouble().getControlFiv());
 		ErrorTO errorFivTO = createErrorTo(configuration.getScanDouble().getTestErrorCodeFiv());
 		resultFivTO.setError(errorFivTO);
@@ -459,8 +459,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 	private void createFelvFivProcessResults2(ConfigurationTO configuration, List<ProcessResultTO> processResults, CassetteTypeTO cassetteTypeRead) {
 		ProcessResultTO resultFelvTO = new ProcessResultTO();
 		resultFelvTO.setBackground(DefaultParams.BACKGROUND);
-		resultFelvTO.setColor01(DefaultParams.COLOR);
-		resultFelvTO.setColor02(DefaultParams.COLOR);
+		resultFelvTO.setColor01(DefaultParams.FELVFIV_COLOR);
+		resultFelvTO.setColor02(DefaultParams.FELVFIV_COLOR);
 		resultFelvTO.setControl(configuration.getScanDouble().getControlFelv2());
 		ErrorTO errorFelvTO = createErrorTo(configuration.getScanDouble().getTestErrorCodeFelv2());		
 		resultFelvTO.setError(errorFelvTO);
@@ -475,8 +475,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 
 		ProcessResultTO resultFivTO = new ProcessResultTO();
 		resultFivTO.setBackground(DefaultParams.BACKGROUND);
-		resultFivTO.setColor01(DefaultParams.COLOR);
-		resultFivTO.setColor02(DefaultParams.COLOR);
+		resultFivTO.setColor01(DefaultParams.FELVFIV_COLOR);
+		resultFivTO.setColor02(DefaultParams.FELVFIV_COLOR);
 		resultFivTO.setControl(configuration.getScanDouble().getControlFiv2());
 		ErrorTO errorFivTO = createErrorTo(configuration.getScanDouble().getTestErrorCodeFiv2());
 		resultFivTO.setError(errorFivTO);
@@ -493,8 +493,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 	private void createSingleProcessResults(ConfigurationTO configuration, List<ProcessResultTO> processResults, CassetteTypeTO cassetteTypeRead) {
 		ProcessResultTO result1 = new ProcessResultTO();
 		result1.setBackground(DefaultParams.BACKGROUND);
-		result1.setColor01(DefaultParams.COLOR);
-		result1.setColor02(DefaultParams.COLOR);
+		result1.setColor01(getColor(cassetteTypeRead));
+		result1.setColor02(getColor(cassetteTypeRead));
 		result1.setControl(configuration.getScanSingle().getControl());
 		ErrorTO errorTO = createErrorTo(configuration.getScanSingle().getTestErrorCode());
 		result1.setError(errorTO);
@@ -513,8 +513,8 @@ public class SimulatorServiceImpl implements SimulatorService {
 	private void createSingleProcessResults2(ConfigurationTO configuration, List<ProcessResultTO> processResults, CassetteTypeTO cassetteTypeRead) {
 		ProcessResultTO result1 = new ProcessResultTO();
 		result1.setBackground(DefaultParams.BACKGROUND);
-		result1.setColor01(DefaultParams.COLOR);
-		result1.setColor02(DefaultParams.COLOR);
+		result1.setColor01(getColor(cassetteTypeRead));
+		result1.setColor02(getColor(cassetteTypeRead));
 		result1.setControl(configuration.getScanSingle().getControl2());
 		ErrorTO errorTO = createErrorTo(configuration.getScanSingle().getTestErrorCode2());
 		result1.setError(errorTO);
@@ -540,6 +540,25 @@ public class SimulatorServiceImpl implements SimulatorService {
 			errorTO.setDescription(DefaultParams.SUCCESS);
 		}
 		return errorTO;
+	}
+	
+	private String getColor(CassetteTypeTO cassetteTypeRead ) {
+		switch (cassetteTypeRead.getCode()) {
+			case 1:
+				return DefaultParams.ANAPLASMA_COLOR;
+			case 3:
+				return DefaultParams.EHRLICHIA_COLOR;
+			case 4:
+				return DefaultParams.LYME_COLOR;
+			case 5:
+				return DefaultParams.PARVO_COLOR;
+			case 6:
+				return DefaultParams.GIARDIA_COLOR;
+			case 7:
+				return DefaultParams.HEARTWORM_COLOR;
+			default:
+				return DefaultParams.ANAPLASMA_COLOR;
+		}
 	}
 
 }
