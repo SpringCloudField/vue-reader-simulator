@@ -12,6 +12,8 @@ services:
       - mongodb
     depends_on:
       - mongodb
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://admin:password@mongodb:27017/admin
   mongodb:
     image: mongo:4.4.1
     container_name: mongodb
@@ -24,6 +26,9 @@ services:
       - mongodata:/data/db
       - mongodata:/var/log/mongodb
       - mongodata:/docker-entrypoint-initdb.d/
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
 networks:
   gateway:
     driver: bridge

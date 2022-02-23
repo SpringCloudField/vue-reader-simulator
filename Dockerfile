@@ -10,4 +10,4 @@ HEALTHCHECK --start-period=120s CMD curl -f http://localhost:8085/ || exit 1
 
 
 ENTRYPOINT ["sh", "-c"]
-CMD [ "java $JAVA_OPTS -Dspring.data.mongodb.host=mongodb -jar vue-reader-simulator-0.0.1-SNAPSHOT.jar" ]
+CMD [ "java $JAVA_OPTS -jar vue-reader-simulator-0.0.1-SNAPSHOT.jar" ]
