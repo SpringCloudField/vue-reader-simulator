@@ -7,8 +7,12 @@ pipeline {
   triggers {
     pollSCM('H * * * *')
   }*/
+  tools {
+    maven 'MiMaven 3.3.9'
+    jdk 'jdk1.8.121'
+  }
   environment {
-	CREDENTIALS_ID_ZOETIS_NEXUS_OT = 'zoetis_nexus_ot'	
+	CREDENTIALS_ID_VUE = 'credential_vue'
   }
   stages {
 	stage('Initialization') {
@@ -27,13 +31,17 @@ pipeline {
         sh "mvn test"
       }
     }
-    stage('Build Image') {		
-		sh "docker image build -t zoetis-docker.opentrends.net/vue-reader-simulator:latest ."      
+    stage('Build Image') {
+    	steps {	
+    		sh "mvn clean package"
+			sh "docker image build -t zoetis-docker.opentrends.net/vue-reader-simulator:latest ."
+		}      
     }
     stage('Push Image to NexusOT') {
       steps {
-		withCredentials([usernameColonPassword(credentialsId: "${CREDENTIALS_ID_ZOETIS_NEXUS_OT}", variable: 'USERPASS')]) {
+		withCredentials([usernamePassword(credentialsId: "${CREDENTIALS_ID_VUE}", usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
 			script {
+				sh(script: "docker login -u $NEXUS_USER -p $NEXUS_PASSWORD https://zoetis-docker.opentrends.net", returnStdout: true)
 				sh(script: "docker push zoetis-docker.opentrends.net/vue-reader-simulator:latest", returnStdout: true)
 			}
 		}
@@ -44,6 +52,7 @@ pipeline {
         SH_DEPLOY_DIR = './Jenkins'
       }
       steps {
+      	 sh 'chmod +x ./Jenkins/deploy_alm.sh'
 		 sh 'echo "Deploy Embedded..."'
          sh '$SH_DEPLOY_DIR/deploy_alm.sh $SH_DEPLOY_DIR'         
       }
