@@ -2,6 +2,7 @@ version: '3.7'
 services:
   vue-reader-simulator:
     image: vue-reader-simulator:latest
+    # image: ghcr.io/batro83/vue-reader-simulator:latest
     build: .
     restart: always
     networks:
