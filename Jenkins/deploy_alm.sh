@@ -7,4 +7,4 @@ DST_TARGET=${DST_HOST_USER}@${DST_HOST}
 
 echo "Deploying to $DST_TARGET"
 echo "Rebuilding image..."
-timeout 120 sshpass -f$PWLOC ssh -o StrictHostKeyChecking=no ${DST_TARGET} "docker ps -a && cd vue-reader-simulator/ && docker-compose pull vue-reader-simulator && docker-compose up -d --build vue-reader-simulator && docker image prune -f"
+#timeout 120 sshpass -f$PWLOC ssh -o StrictHostKeyChecking=no ${DST_TARGET} "docker ps -a && cd vue-reader-simulator/ && docker-compose pull vue-reader-simulator && docker-compose up -d --build vue-reader-simulator && docker image prune -f"
