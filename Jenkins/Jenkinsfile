@@ -1,0 +1,52 @@
+
+pipeline {
+  agent {
+    label 'linux'
+  }
+  /*
+  triggers {
+    pollSCM('H * * * *')
+  }*/
+  environment {
+	CREDENTIALS_ID_ZOETIS_NEXUS_OT = 'zoetis_nexus_ot'	
+  }
+  stages {
+	stage('Initialization') {
+		steps {
+			cleanWs()
+		}
+	}
+    stage('Checkout') {
+      steps {
+        git branch: 'develop', credentialsId: 'b4b5f0ac-73cc-4480-b905-f60238bb99ba',
+          url: 'https://github.com/SpringCloudField/vue-reader-simulator.git'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh "mvn test"
+      }
+    }
+    stage('Build Image') {		
+		sh "docker image build -t zoetis-docker.opentrends.net/vue-reader-simulator:latest ."      
+    }
+    stage('Push Image to NexusOT') {
+      steps {
+		withCredentials([usernameColonPassword(credentialsId: "${CREDENTIALS_ID_ZOETIS_NEXUS_OT}", variable: 'USERPASS')]) {
+			script {
+				sh(script: "docker push zoetis-docker.opentrends.net/vue-reader-simulator:latest", returnStdout: true)
+			}
+		}
+      }
+    }    
+    stage('Deploy Image') {
+      environment {
+        SH_DEPLOY_DIR = './Jenkins'
+      }
+      steps {
+		 sh 'echo "Deploy Embedded..."'
+         sh '$SH_DEPLOY_DIR/deploy_alm.sh $SH_DEPLOY_DIR'         
+      }
+    }
+  }
+}
