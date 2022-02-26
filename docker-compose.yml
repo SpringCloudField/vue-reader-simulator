@@ -1,25 +1,39 @@
 version: '3.7'
 services:
   vue-reader-simulator:
-    image: vuereadersimulator
+    image: vue-reader-simulator:latest
+    # image: ghcr.io/batro83/vue-reader-simulator:latest
     build: .
     restart: always
     networks:
-    - gateway
+      - gateway
     ports:
-    - 8085:8085
+      - 8085:8085
     links:
-    - mongodb
+      - mongodb
     depends_on:
-    - mongodb
+      - mongodb
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://admin:password@mongodb:27017/admin
   mongodb:
-    image: mongo
+    image: mongo:4.4.1
     container_name: mongodb
     ports:
-    - 27017:27017
+      - 27017:27017
     restart: always
     networks:
-    - gateway
+      - gateway
+    volumes:
+      - mongodata:/data/db
+      - mongodata:/var/log/mongodb
+      - mongodata:/docker-entrypoint-initdb.d/
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
 networks:
   gateway:
     driver: bridge
+volumes:
+  mongodata:
+  
+

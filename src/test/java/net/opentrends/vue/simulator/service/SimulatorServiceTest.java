@@ -407,6 +407,7 @@ public class SimulatorServiceTest {
 		assertEquals(0, resultTO.getError().getCode());
 		assertEquals("success", resultTO.getError().getDescription());
 		assertEquals(cassTO.getType(),resultTO.getCassetteType().getType());
+		assertEquals(confTO.getScanSingle().getLotNumber(), resultTO.getCassetteType().getLotNumber());
 		assertEquals(confTO.getCassetteTime(), resultTO.getReaderData().getCassetteTime());
 		assertNotNull(resultTO.getReaderData().getDateTime());
 		assertEquals(confTO.getReleaseVersion(), resultTO.getReaderData().getReleaseVersion());
@@ -417,7 +418,6 @@ public class SimulatorServiceTest {
 		assertEquals("success", resultTO.getProcessResults().get(0).getError().getDescription());
 		assertEquals(confTO.getScanSingle().getControl(), resultTO.getProcessResults().get(0).getControl());
 		assertEquals(confTO.getScanSingle().getNoise(), resultTO.getProcessResults().get(0).getNoise());
-		assertEquals(confTO.getScanSingle().getLotNumber(), resultTO.getProcessResults().get(0).getLotNumber());
 		assertEquals(confTO.getScanSingle().getScaledResult(), resultTO.getProcessResults().get(0).getScaledResult());
 		assertEquals(confTO.getScanSingle().getTestLineValue(), resultTO.getProcessResults().get(0).getTestLineValue());
 		assertEquals(1, resultTO.getProcessResults().get(0).getPosition());
@@ -444,6 +444,7 @@ public class SimulatorServiceTest {
 		assertEquals(0, resultTO.getError().getCode());
 		assertEquals("success", resultTO.getError().getDescription());
 		assertEquals(cassTO.getType(),resultTO.getCassetteType().getType());
+		assertEquals(confTO.getScanSingle().getLotNumber2(), resultTO.getCassetteType().getLotNumber());
 		assertEquals(confTO.getCassetteTime(), resultTO.getReaderData().getCassetteTime());
 		assertNotNull(resultTO.getReaderData().getDateTime());
 		assertEquals(confTO.getReleaseVersion(), resultTO.getReaderData().getReleaseVersion());
@@ -454,7 +455,6 @@ public class SimulatorServiceTest {
 		assertEquals("success", resultTO.getProcessResults().get(0).getError().getDescription());
 		assertEquals(confTO.getScanSingle().getControl2(), resultTO.getProcessResults().get(0).getControl());
 		assertEquals(confTO.getScanSingle().getNoise2(), resultTO.getProcessResults().get(0).getNoise());
-		assertEquals(confTO.getScanSingle().getLotNumber2(), resultTO.getProcessResults().get(0).getLotNumber());
 		assertEquals(confTO.getScanSingle().getScaledResult2(), resultTO.getProcessResults().get(0).getScaledResult());
 		assertEquals(confTO.getScanSingle().getTestLineValue2(), resultTO.getProcessResults().get(0).getTestLineValue());
 		assertEquals(1, resultTO.getProcessResults().get(0).getPosition());
@@ -481,6 +481,7 @@ public class SimulatorServiceTest {
 		assertEquals(120, resultTO.getError().getCode());
 		assertEquals("Error 120", resultTO.getError().getDescription());
 		assertEquals(cassTO.getType(),resultTO.getCassetteType().getType());
+		assertEquals(confTO.getScanSingle().getLotNumber(), resultTO.getCassetteType().getLotNumber());
 		assertEquals(confTO.getCassetteTime(), resultTO.getReaderData().getCassetteTime());
 		assertNotNull(resultTO.getReaderData().getDateTime());
 		assertEquals(confTO.getReleaseVersion(), resultTO.getReaderData().getReleaseVersion());
@@ -491,7 +492,6 @@ public class SimulatorServiceTest {
 		assertEquals("Error 150", resultTO.getProcessResults().get(0).getError().getDescription());
 		assertEquals(confTO.getScanSingle().getControl(), resultTO.getProcessResults().get(0).getControl());
 		assertEquals(confTO.getScanSingle().getNoise(), resultTO.getProcessResults().get(0).getNoise());
-		assertEquals(confTO.getScanSingle().getLotNumber(), resultTO.getProcessResults().get(0).getLotNumber());
 		assertEquals(confTO.getScanSingle().getScaledResult(), resultTO.getProcessResults().get(0).getScaledResult());
 		assertEquals(confTO.getScanSingle().getTestLineValue(), resultTO.getProcessResults().get(0).getTestLineValue());
 		assertEquals(1, resultTO.getProcessResults().get(0).getPosition());
@@ -518,6 +518,7 @@ public class SimulatorServiceTest {
 		assertEquals(120, resultTO.getError().getCode());
 		assertEquals("Error 120", resultTO.getError().getDescription());
 		assertEquals(cassTO.getType(),resultTO.getCassetteType().getType());
+		assertEquals(confTO.getScanSingle().getLotNumber2(), resultTO.getCassetteType().getLotNumber());
 		assertEquals(confTO.getCassetteTime(), resultTO.getReaderData().getCassetteTime());
 		assertNotNull(resultTO.getReaderData().getDateTime());
 		assertEquals(confTO.getReleaseVersion(), resultTO.getReaderData().getReleaseVersion());
@@ -528,7 +529,6 @@ public class SimulatorServiceTest {
 		assertEquals("Error 150", resultTO.getProcessResults().get(0).getError().getDescription());
 		assertEquals(confTO.getScanSingle().getControl2(), resultTO.getProcessResults().get(0).getControl());
 		assertEquals(confTO.getScanSingle().getNoise2(), resultTO.getProcessResults().get(0).getNoise());
-		assertEquals(confTO.getScanSingle().getLotNumber2(), resultTO.getProcessResults().get(0).getLotNumber());
 		assertEquals(confTO.getScanSingle().getScaledResult2(), resultTO.getProcessResults().get(0).getScaledResult());
 		assertEquals(confTO.getScanSingle().getTestLineValue2(), resultTO.getProcessResults().get(0).getTestLineValue());
 		assertEquals(1, resultTO.getProcessResults().get(0).getPosition());
@@ -1012,8 +1012,6 @@ public class SimulatorServiceTest {
 		assertEquals(Boolean.TRUE, resultTO.getProcessResults().get(0).getReliable());
 		assertEquals(DefaultParams.DB_VERSION, resultTO.getReaderData().getDbVersion());
 		assertEquals(DefaultParams.BACKGROUND, resultTO.getProcessResults().get(resultIndex).getBackground());
-		assertEquals(DefaultParams.COLOR, resultTO.getProcessResults().get(resultIndex).getColor01());
-		assertEquals(DefaultParams.COLOR, resultTO.getProcessResults().get(resultIndex).getColor02());
 		
 	}
 

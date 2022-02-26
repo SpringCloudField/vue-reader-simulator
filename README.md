@@ -13,7 +13,7 @@ In the root of the project run:
 ```
  ./mvn clean package
  
- docker-compose up 
+ docker-compose up -d
 ```
 
 This will build and start one container for the rest simulator and another container with a mongoDb image.

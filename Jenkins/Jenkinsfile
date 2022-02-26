@@ -1,0 +1,61 @@
+
+pipeline {
+  agent {
+    label 'linux'
+  }
+  /*
+  triggers {
+    pollSCM('H * * * *')
+  }*/
+  tools {
+    maven 'MiMaven 3.3.9'
+    jdk 'jdk1.8.121'
+  }
+  environment {
+	CREDENTIALS_ID_VUE = 'credential_vue'
+  }
+  stages {
+	stage('Initialization') {
+		steps {
+			cleanWs()
+		}
+	}
+    stage('Checkout') {
+      steps {
+        git branch: 'develop', credentialsId: 'd0e67db2-4dd0-48f1-9080-a6c6402102c4',
+          url: 'https://github.com/SpringCloudField/vue-reader-simulator.git'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh "mvn test"
+      }
+    }
+    stage('Build Image') {
+    	steps {	
+    		sh "mvn clean package"
+			sh "docker image build -t ghcr.io/batro83/vue-reader-simulator:latest ."
+		}      
+    }
+    stage('Push Image to NexusOT') {
+      steps {
+		withCredentials([usernamePassword(credentialsId: "${CREDENTIALS_ID_VUE}", usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
+			script {
+				sh(script: "docker login -u $NEXUS_USER -p $NEXUS_PASSWORD ghcr.io", returnStdout: true)
+				sh(script: "docker push ghcr.io/batro83/vue-reader-simulator:latest", returnStdout: true)
+			}
+		}
+      }
+    }    
+    stage('Deploy Image') {
+      environment {
+        SH_DEPLOY_DIR = './Jenkins'
+      }
+      steps {
+      	 sh 'chmod +x ./Jenkins/deploy_alm.sh'
+		 sh 'echo "Deploy Embedded..."'
+         sh '$SH_DEPLOY_DIR/deploy_alm.sh $SH_DEPLOY_DIR'         
+      }
+    }
+  }
+}
