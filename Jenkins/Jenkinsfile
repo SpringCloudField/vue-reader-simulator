@@ -34,15 +34,15 @@ pipeline {
     stage('Build Image') {
     	steps {	
     		sh "mvn clean package"
-			sh "docker image build -t zoetis-docker.opentrends.net/vue-reader-simulator:latest ."
+			sh "docker image build -t ghcr.io/batro83/vue-reader-simulator:latest ."
 		}      
     }
     stage('Push Image to NexusOT') {
       steps {
 		withCredentials([usernamePassword(credentialsId: "${CREDENTIALS_ID_VUE}", usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASSWORD')]) {
 			script {
-				sh(script: "docker login -u $NEXUS_USER -p $NEXUS_PASSWORD https://zoetis-docker.opentrends.net", returnStdout: true)
-				sh(script: "docker push zoetis-docker.opentrends.net/vue-reader-simulator:latest", returnStdout: true)
+				sh(script: "docker login -u $NEXUS_USER -p $NEXUS_PASSWORD ghcr.io", returnStdout: true)
+				sh(script: "docker push ghcr.io/batro83/vue-reader-simulator:latest", returnStdout: true)
 			}
 		}
       }
