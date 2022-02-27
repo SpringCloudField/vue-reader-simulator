@@ -1,6 +1,7 @@
 # TODO.md
 
 
-- [ ] Secure API
-- [ ] Certificats VUE
 - [ ] Tests
+- [ ] Integration Tests
+- [ ] Enum for Time Quick
+- [ ] Refactor Dto

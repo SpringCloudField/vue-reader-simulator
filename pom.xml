@@ -15,7 +15,7 @@
 	<name>vue-reader-simulator</name>
 	<description>Vue reader simulator</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>1.11</java.version>
         <spring-restdocs.version>2.0.5.RELEASE</spring-restdocs.version>
         <asciidoctorj-pdf.version>1.5.0-alpha.18</asciidoctorj-pdf.version>
         <snippetsDirectory>${project.build.directory}/generated-snippets</snippetsDirectory>

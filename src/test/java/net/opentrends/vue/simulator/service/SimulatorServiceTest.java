@@ -63,20 +63,20 @@ public class SimulatorServiceTest {
 		
 		ConfigReaderTO responseTO = simulatorService.getConfigReader("serial_number", "localhost");
 		assertNotNull(responseTO);
-		assertEquals("localhost", responseTO.getEthernetTO().getIp());
-		assertEquals(Boolean.TRUE, responseTO.getEthernetTO().getDhcp());
-		assertEquals(DefaultParams.GATEWAY, responseTO.getEthernetTO().getGateway());
-		assertEquals(DefaultParams.IP, responseTO.getWifiApTO().getIp());
-		assertEquals(DefaultParams.MASK, responseTO.getWifiApTO().getNetmask());
-		assertEquals(DefaultParams.PWD, responseTO.getWifiApTO().getPwd());
-		assertEquals(DefaultParams.SSID, responseTO.getWifiApTO().getSsid());
-		assertEquals(Boolean.TRUE, responseTO.getWifimodeTO().getWifiAp());
-		assertEquals(Boolean.TRUE, responseTO.getWifiStationTO().getDhcp());
-		assertEquals(DefaultParams.IP, responseTO.getWifiStationTO().getIp());
-		assertEquals(DefaultParams.GATEWAY, responseTO.getWifiStationTO().getGateway());
-		assertEquals(DefaultParams.MASK, responseTO.getWifiStationTO().getNetmask());
-		assertEquals(DefaultParams.PWD, responseTO.getWifiStationTO().getPwd());
-		assertEquals(DefaultParams.SSID, responseTO.getWifiStationTO().getSsid());
+		assertEquals("localhost", responseTO.getEthernet().getIp());
+		assertEquals(Boolean.TRUE, responseTO.getEthernet().getDhcp());
+		assertEquals(DefaultParams.GATEWAY, responseTO.getEthernet().getGateway());
+		assertEquals(DefaultParams.IP, responseTO.getWifiAp().getIp());
+		assertEquals(DefaultParams.MASK, responseTO.getWifiAp().getNetmask());
+		assertEquals(DefaultParams.PWD, responseTO.getWifiAp().getPwd());
+		assertEquals(DefaultParams.SSID, responseTO.getWifiAp().getSsid());
+		assertEquals(Boolean.TRUE, responseTO.getWifimode().getWifiAp());
+		assertEquals(Boolean.TRUE, responseTO.getWifiStation().getDhcp());
+		assertEquals(DefaultParams.IP, responseTO.getWifiStation().getIp());
+		assertEquals(DefaultParams.GATEWAY, responseTO.getWifiStation().getGateway());
+		assertEquals(DefaultParams.MASK, responseTO.getWifiStation().getNetmask());
+		assertEquals(DefaultParams.PWD, responseTO.getWifiStation().getPwd());
+		assertEquals(DefaultParams.SSID, responseTO.getWifiStation().getSsid());
 	}
 	
 	@Test

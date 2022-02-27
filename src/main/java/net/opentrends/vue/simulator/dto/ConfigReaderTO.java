@@ -20,13 +20,12 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 public class ConfigReaderTO {
 	
-	@JsonProperty("ethernet")
-	private EthernetTO ethernetTO;
+	private EthernetTO ethernet;
 	@JsonProperty("wifi_ap")
-	private WifiApTO wifiApTO;
+	private WifiApTO wifiAp;
 	@JsonProperty("wifi_mode")
-	private WifiModeTO wifimodeTO;
+	private WifiModeTO wifimode;
 	@JsonProperty("wifi_station")
-	private WifiStationTO wifiStationTO;
+	private WifiStationTO wifiStation;
 	
 }
