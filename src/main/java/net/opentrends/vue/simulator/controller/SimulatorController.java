@@ -29,7 +29,6 @@ import net.opentrends.vue.simulator.service.SimulatorService;
 public class SimulatorController {
 
 	private SimulatorService simulatorService;
-	
 
 	public SimulatorController(SimulatorService simulatorService) {
 		this.simulatorService = simulatorService;
