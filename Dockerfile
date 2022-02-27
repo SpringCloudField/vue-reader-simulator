@@ -1,4 +1,4 @@
-FROM java:8-jdk-alpine
+FROM java:11-jdk-alpine
  
 RUN mkdir -p /usr/src/app/
 WORKDIR /usr/src/app/
