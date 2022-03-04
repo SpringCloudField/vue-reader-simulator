@@ -1,4 +1,4 @@
-FROM java:11-jdk-alpine
+FROM openjdk:11.0.6-jre
  
 RUN mkdir -p /usr/src/app/
 WORKDIR /usr/src/app/
