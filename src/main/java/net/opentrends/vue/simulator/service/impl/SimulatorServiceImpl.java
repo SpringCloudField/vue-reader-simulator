@@ -78,10 +78,10 @@ public class SimulatorServiceImpl implements SimulatorService {
 		wifiStation.setSsid(DefaultParams.SSID);
 
 		ConfigReaderTO config = new ConfigReaderTO();
-		config.setEthernetTO(ethernet);
-		config.setWifiApTO(wifiAp);
-		config.setWifimodeTO(wifiMode);
-		config.setWifiStationTO(wifiStation);
+		config.setEthernet(ethernet);
+		config.setWifiAp(wifiAp);
+		config.setWifimode(wifiMode);
+		config.setWifiStation(wifiStation);
 
 		return config;
 	}
