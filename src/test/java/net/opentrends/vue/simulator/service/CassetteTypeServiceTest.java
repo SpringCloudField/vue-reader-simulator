@@ -41,14 +41,10 @@ public class CassetteTypeServiceTest {
 	private List<CassetteType> createCassetteTypeList() {
 		List<CassetteType> list = new ArrayList<>();
 		
-		CassetteType ct1 = new CassetteType();
-		ct1.setType("Anaplasma");
-		ct1.setCode(2);
+		CassetteType ct1 = CassetteType.builder().code(1).type("Anaplasma").build();
 		list.add(ct1);
 		
-		CassetteType ct2 = new CassetteType();
-		ct2.setType("FeLV_Fiv");
-		ct2.setCode(1);
+		CassetteType ct2 = CassetteType.builder().code(2).type("FeLV_Fiv").build();
 		list.add(ct2);
 		
 		return list;
