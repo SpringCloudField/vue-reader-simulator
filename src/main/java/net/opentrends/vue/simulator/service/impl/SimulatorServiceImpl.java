@@ -25,7 +25,6 @@ import net.opentrends.vue.simulator.dto.ProcessResultTO;
 import net.opentrends.vue.simulator.dto.ReaderDataTO;
 import net.opentrends.vue.simulator.dto.ResultTO;
 import net.opentrends.vue.simulator.dto.StatusTO;
-import net.opentrends.vue.simulator.dto.WarningTO;
 import net.opentrends.vue.simulator.dto.WifiApTO;
 import net.opentrends.vue.simulator.dto.WifiModeTO;
 import net.opentrends.vue.simulator.dto.WifiStationTO;
@@ -256,8 +255,7 @@ public class SimulatorServiceImpl implements SimulatorService {
 		coeficients.setF(1);
 		resultCpl.setCoeficients(coeficients);
 	
-		List<WarningTO> warningArrayCpl = new ArrayList<>();
-		resultCpl.setWarnings(warningArrayCpl);
+		resultCpl.setWarnings(new ArrayList<>());
 		processResults.add(resultCpl);
 	}
 	
@@ -285,8 +283,7 @@ public class SimulatorServiceImpl implements SimulatorService {
 		coeficients.setF(1);
 		resultCpl.setCoeficients(coeficients);
 	
-		List<WarningTO> warningArrayCpl = new ArrayList<>();
-		resultCpl.setWarnings(warningArrayCpl);
+		resultCpl.setWarnings(new ArrayList<>());
 		processResults.add(resultCpl);
 	}
 	
@@ -505,8 +502,7 @@ public class SimulatorServiceImpl implements SimulatorService {
 		result1.setPosition(1);
 		result1.setTestLineValue(configuration.getScanSingle().getTestLineValue());
 		result1.setTestName(cassetteTypeRead.getType());
-		List<WarningTO> warningArray = new ArrayList<>();
-		result1.setWarnings(warningArray);
+		result1.setWarnings(new ArrayList<>());
 		processResults.add(result1);
 	}
 	
@@ -525,8 +521,7 @@ public class SimulatorServiceImpl implements SimulatorService {
 		result1.setPosition(1);
 		result1.setTestLineValue(configuration.getScanSingle().getTestLineValue2());
 		result1.setTestName(cassetteTypeRead.getType());
-		List<WarningTO> warningArray = new ArrayList<>();
-		result1.setWarnings(warningArray);
+		result1.setWarnings(new ArrayList<>());
 		processResults.add(result1);
 	}
 	

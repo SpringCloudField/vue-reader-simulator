@@ -34,9 +34,9 @@ public class ConfigurationServiceImpl implements ConfigurationService {
 
 	@Override
 	public ConfigurationTO getConfigById(String configId) {
-		Optional<Configuration> conf = configRespository.findById(configId);
-		return conf.map(c -> mapper.map(c, ConfigurationTO.class))
-				   .orElse(null);
+		return configRespository.findById(configId)
+					.map(c -> mapper.map(c, ConfigurationTO.class))
+				    .orElse(null);
 	}
 
 	@Override

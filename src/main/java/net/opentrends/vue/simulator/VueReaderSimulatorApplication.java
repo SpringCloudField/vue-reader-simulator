@@ -1,7 +1,5 @@
 package net.opentrends.vue.simulator;
 
-import java.util.List;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -24,26 +22,22 @@ public class VueReaderSimulatorApplication {
 
 	    return args -> {
 
-	        Role adminRole = roleRepository.findByRole("ADMIN");
-	        if (adminRole == null) {
+	        if (roleRepository.findByRole("ADMIN") == null) {
 	            Role newAdminRole = Role.builder().role("ADMIN").build();
 	            roleRepository.save(newAdminRole);
 	        }
 
-	        Role userRole = roleRepository.findByRole("USER");
-	        if (userRole == null) {
+	        if (roleRepository.findByRole("USER") == null) {
 	            Role newUserRole = Role.builder().role("USER").build();
 	            roleRepository.save(newUserRole);
 			}
 	        
-	        Role apiRole = roleRepository.findByRole("API");
-	        if (apiRole == null) {
+	        if (roleRepository.findByRole("API") == null) {
 	            Role newApiRole = Role.builder().role("API").build();
 	            roleRepository.save(newApiRole);
 			}
 	        
-	        List<CassetteType> cassetteTypeList = cassetteTypeRepository.findAll();
-	        if (cassetteTypeList.isEmpty()) {
+	        if (cassetteTypeRepository.findAll().isEmpty()) {
 	        	CassetteType newCassetteType = CassetteType.builder().code(1).type("Anaplasma").build();
 	        	cassetteTypeRepository.save(newCassetteType);
 	            
